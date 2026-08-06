@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ابزارهای ارزیابی و مدیریت درد نوزادان</title>
+<style>
+  :root{
+    --primary:#1565c0;
+    --primary-dark:#0d47a1;
+    --primary-light:#e3f2fd;
+    --bg:#f4f9fd;
+    --card:#ffffff;
+    --text:#1a2733;
+    --muted:#5c7080;
+    --none:#2e7d32;
+    --mild:#f9a825;
+    --moderate:#ef6c00;
+    --severe:#c62828;
+    --border:#d3e3f0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Vazirmatn","Segoe UI","Tahoma",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.8;
+  }
+  header{
+    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+    color:#fff;
+    padding:24px 16px;
+    text-align:center;
+  }
+  header h1{margin:0 0 6px;font-size:1.6rem;}
+  header p{margin:0;font-size:.95rem;opacity:.9;}
+
+  main{max-width:960px;margin:0 auto;padding:20px 16px 60px;}
+
+  nav.tool-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  nav.tool-tabs button{
+    flex:1 1 120px;
+    padding:12px 10px;
+    border:2px solid var(--primary);
+    background:#fff;
+    color:var(--primary);
+    border-radius:10px;
+    font-weight:bold;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.2s;
+  }
+  nav.tool-tabs button.active{
+    background:var(--primary);
+    color:#fff;
+  }
+  nav.tool-tabs button:hover{opacity:.9;}
+
+  .tool-panel{display:none;}
+  .tool-panel.active{display:block;animation:fade .25s;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:0 2px 10px rgba(21,101,192,.08);
+    padding:20px;
+    margin-bottom:20px;
+    border:1px solid var(--border);
+  }
+  .card h2{margin-top:0;color:var(--primary-dark);font-size:1.25rem;}
+  .subnote{
+    background:var(--primary-light);
+    color:var(--primary-dark);
+    padding:8px 12px;
+    border-radius:8px;
+    font-size:.88rem;
+    margin-bottom:16px;
+    display:inline-block;
+  }
+
+  .indicator{
+    border-bottom:1px dashed var(--border);
+    padding:14px 0;
+  }
+  .indicator:last-of-type{border-bottom:none;}
+  .indicator > label.ind-title{
+    display:block;
+    font-weight:bold;
+    margin-bottom:10px;
+    color:var(--primary-dark);
+  }
+  .options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .options label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:var(--primary-light);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:8px 12px;
+    font-size:.9rem;
+    cursor:pointer;
+    transition:.15s;
+    flex:1 1 auto;
+    min-width:150px;
+  }
+  .options label:hover{background:#d2e9fb;}
+  .options label:has(input:checked){
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary-dark);
+  }
+  .options input{margin:0;accent-color:var(--primary-dark);}
+  .fixed-note{
+    font-size:.85rem;
+    color:var(--muted);
+    background:#f0f0f0;
+    padding:8px 12px;
+    border-radius:8px;
+    display:inline-block;
+  }
+
+  .result-box{
+    margin-top:10px;
+    padding:16px;
+    border-radius:12px;
+    background:var(--primary-light);
+    text-align:center;
+  }
+  .result-box .score-line{
+    font-size:1.3rem;
+    font-weight:bold;
+    margin-bottom:6px;
+  }
+  .level-badge{
+    display:inline-block;
+    padding:4px 14px;
+    border-radius:20px;
+    color:#fff;
+    font-weight:bold;
+    font-size:.95rem;
+  }
+  .level-none{background:var(--none);}
+  .level-mild{background:var(--mild);color:#3a2a00;}
+  .level-moderate{background:var(--moderate);}
+  .level-severe{background:var(--severe);}
+
+  .decision-box{
+    margin-top:14px;
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:12px;
+    padding:16px;
+  }
+  .decision-box h3{margin:0 0 8px;color:var(--primary-dark);font-size:1.05rem;}
+  .decision-box .follow-time{
+    display:inline-block;
+    margin-top:8px;
+    background:var(--primary-dark);
+    color:#fff;
+    padding:4px 10px;
+    border-radius:8px;
+    font-size:.85rem;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.9rem;
+  }
+  table caption{
+    text-align:right;
+    color:var(--muted);
+    margin-bottom:10px;
+    font-size:.85rem;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:8px 6px;
+    text-align:center;
+  }
+  th{background:var(--primary);color:#fff;font-weight:600;}
+  tbody tr:nth-child(even){background:var(--primary-light);}
+  td:first-child{text-align:right;font-weight:600;}
+  .check{color:var(--none);font-weight:bold;}
+  .dash{color:#bbb;}
+
+  @media (max-width:600px){
+    header h1{font-size:1.3rem;}
+    .options label{min-width:120px;font-size:.82rem;}
+    table{font-size:.78rem;}
+    th,td{padding:6px 4px;}
+  }
+
+  
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    .tool-panel.active, 
+    .tool-panel.active * {
+      visibility: visible;
+    }
+    .tool-panel.active {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      background: white !important;
+    }
+    .tool-panel.active .card {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .tool-panel.active .decision-box {
+      border: 1px solid #ccc !important;
+    }
+    .tool-panel.active button,
+    .tool-panel.active .subnote,
+    .tool-panel.active .fixed-note {
+      display: none !important;
+    }
+    .tab, nav, details, header p {
+      display: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ابزارهای ارزیابی و مدیریت درد نوزادان</h1>
+  <p>PIPP · NIPS · CRIES · MPAT — محاسبه‌گر شاخص‌محور + تصمیم‌یار بالینی</p>
+</header>
+
+<main>
+  <nav class="tool-tabs">
+    <button class="tab active" data-tool="pipp">PIPP</button>
+    <button class="tab" data-tool="nips">NIPS</button>
+    <button class="tab" data-tool="cries">CRIES</button>
+    <button class="tab" data-tool="mpat">MPAT</button>
+  </nav>
+
+  <!-- ================= PIPP ================= -->
+  <section id="pipp" class="tool-panel active">
+    <div class="card">
+      <h2>PIPP — Premature Infant Pain Profile</h2>
+      <span class="subnote">دامنه نمره: ۰ تا ۲۱ (۷ شاخص × ۰-۳)</span>
+
+      <div class="indicator">
+        <label class="ind-title">۱. سن حاملگی</label>
+        <div class="options">
+          <label><input type="radio" name="pipp1" value="0" checked>≥ ۳۶ هفته (۰)</label>
+          <label><input type="radio" name="pipp1" value="1">۳۲–۳۵ هفته (۱)</label>
+          <label><input type="radio" name="pipp1" value="2">۲۸–۳۱ هفته (۲)</label>
+          <label><input type="radio" name="pipp1" value="3">&lt; ۲۸ هفته (۳)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۲. وضعیت رفتاری</label>
+        <div class="options">
+           <label><input type="checkbox" name="pipp2_0a" value="0" onchange="updatePipp2(event)"> بیدار با حرکات صورت چشم باز (۰)</label>
+          <label><input type="checkbox" name="pipp2_0b" value="0" onchange="updatePipp2(event)"> فعال با حرکات صورت چشم باز (۰)</label>
+      
+           <label><input type="checkbox" name="pipp2_1a" value="1" onchange="updatePipp2(event)"> آرام بدون حرکات صورت چشم باز (۱)</label>
+          <label><input type="checkbox" name="pipp2_1b" value="1" onchange="updatePipp2(event)"> بیدار بدون حرکات صورت چشم باز (۱)</label>
+      
+           <label><input type="checkbox" name="pipp2_2a" value="2" onchange="updatePipp2(event)"> فعال با حرکات صورت چشم بسته (۲)</label>
+          <label><input type="checkbox" name="pipp2_2b" value="2" onchange="updatePipp2(event)"> خواب با حرکات صورت چشم بسته (۲)</label>
+      
+           <label><input type="checkbox" name="pipp2_3a" value="3" onchange="updatePipp2(event)"> آرام بدون حرکات صورت چشم بسته (۳)</label>
+          <label><input type="checkbox" name="pipp2_3b" value="3" onchange="updatePipp2(event)"> خواب بدون حرکات صورت چشم بسته (۳)</label>
+      
+          <input type="radio" name="pipp2" value="0" checked style="display:none;" id="pipp2_hidden_0">
+          <input type="radio" name="pipp2" value="1" style="display:none;" id="pipp2_hidden_1">
+          <input type="radio" name="pipp2" value="2" style="display:none;" id="pipp2_hidden_2">
+          <input type="radio" name="pipp2" value="3" style="display:none;" id="pipp2_hidden_3">
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۳. افزایش ضربان قلب</label>
+        <div class="options">
+          <label><input type="radio" name="pipp3" value="0" checked>۰–۴ ضربه (۰)</label>
+          <label><input type="radio" name="pipp3" value="1">۵–۱۴ ضربه (۱)</label>
+          <label><input type="radio" name="pipp3" value="2">۱۵–۲۴ ضربه (۲)</label>
+          <label><input type="radio" name="pipp3" value="3">≥ ۲۵ ضربه (۳)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۴. کاهش اشباع اکسیژن</label>
+        <div class="options">
+          <label><input type="radio" name="pipp4" value="0" checked>۰–۲.۴٪ (۰)</label>
+          <label><input type="radio" name="pipp4" value="1">۲.۵–۴.۹٪ (۱)</label>
+          <label><input type="radio" name="pipp4" value="2">۵–۷.۴٪ (۲)</label>
+          <label><input type="radio" name="pipp4" value="3">≥ ۷.۵٪ (۳)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۵. درهم‌کشیدن ابرو</label>
+        <div class="options">
+          <label><input type="radio" name="pipp5" value="0" checked>۰–۹٪ زمان (۰)</label>
+          <label><input type="radio" name="pipp5" value="1">۱۰–۳۹٪ زمان (۱)</label>
+          <label><input type="radio" name="pipp5" value="2">۴۰–۶۹٪ زمان (۲)</label>
+          <label><input type="radio" name="pipp5" value="3">≥ ۷۰٪ زمان (۳)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۶. فشردن چشم‌ها</label>
+        <div class="options">
+          <label><input type="radio" name="pipp6" value="0" checked>۰–۹٪ زمان (۰)</label>
+          <label><input type="radio" name="pipp6" value="1">۱۰–۳۹٪ زمان (۱)</label>
+          <label><input type="radio" name="pipp6" value="2">۴۰–۶۹٪ زمان (۲)</label>
+          <label><input type="radio" name="pipp6" value="3">≥ ۷۰٪ زمان (۳)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۷. خط کنار پره‌های بینی (چین نازولبیال)</label>
+        <div class="options">
+          <label><input type="radio" name="pipp7" value="0" checked>۰–۹٪ زمان (۰)</label>
+          <label><input type="radio" name="pipp7" value="1">۱۰–۳۹٪ زمان (۱)</label>
+          <label><input type="radio" name="pipp7" value="2">۴۰–۶۹٪ زمان (۲)</label>
+          <label><input type="radio" name="pipp7" value="3">≥ ۷۰٪ زمان (۳)</label>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="score-line">نمره کل: <span id="pipp-score">0</span> / 21</div>
+        <span id="pipp-level" class="level-badge level-none">بدون درد</span>
+      </div>
+
+      <div class="decision-box">
+        <h3>تصمیم‌یار بالینی</h3>
+        <div id="pipp-decision"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NIPS ================= -->
+  <section id="nips" class="tool-panel">
+    <div class="card">
+      <h2>NIPS — Neonatal Infant Pain Scale</h2>
+      <span class="subnote">دامنه نمره: ۰ تا ۷ (۶ شاخص)</span>
+
+      <div class="indicator">
+        <label class="ind-title">۱. حالت چهره</label>
+        <div class="options">
+          <label><input type="radio" name="nips1" value="0" checked>آرامش (۰)</label>
+          <label><input type="radio" name="nips1" value="1">عضلات صورت سفت و کشیده و اخم‌آلود (۱)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۲. گریه</label>
+        <div class="options">
+          <!-- گزینه‌های ۰ و ۱ (رادیو) -->
+          <label><input type="radio" name="nips2" value="0" checked onchange="clearNips2Checkboxes()">آرام، بدون گریه (۰)</label>
+          <label><input type="radio" name="nips2" value="1" onchange="clearNips2Checkboxes()">ناله ملایم، گریه متناوب (۱)</label>
+      
+          <!-- دو چک‌باکس برای مقدار ۲ -->
+          <label><input type="checkbox" name="nips2_2a" value="2" onchange="updateNips2FromCheckbox(event)">جیغ زدن و فریاد کشیدن (۲)</label>
+          <label><input type="checkbox" name="nips2_2b" value="2" onchange="updateNips2FromCheckbox(event)">گریه بدون صدا به نحوی که با حرکات صورت مشخص باشد (۲)</label>
+      
+          <!-- رادیوی مخفی برای مقدار ۲ (برای جاوااسکریپت اصلی) -->
+          <input type="radio" name="nips2" value="2" style="display:none;" id="nips2_hidden_2">
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۳. الگوی تنفس</label>
+        <div class="options">
+          <label><input type="radio" name="nips3" value="0" checked>آرام / معمول (۰)</label>
+          <label><input type="radio" name="nips3" value="1">تنفس نامنظم، سریع، نگهداشتن تنفس (۱)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۴. وضعیت دست‌ها</label>
+        <div class="options">
+          <label><input type="radio" name="nips4" value="0" checked>آرام_شل، بدون انقباض عضالت، حرکات معمولی (۰)</label>
+          <label><input type="radio" name="nips4" value="1">انقباض دست ها، حرکات سریع باز و بسته شدن دست ها (۱)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۵. وضعیت پاها</label>
+        <div class="options">
+          <!-- گزینهٔ ۰ (رادیو) -->
+          <label><input type="radio" name="nips5" value="0" checked onchange="clearNips5Checkboxes()">آرام_شل، بدون انقباض عضالت، گاهی پاها را حرکت میدهد (۰)</label>
+      
+          <!-- سه چک‌باکس برای مقدار ۱ -->
+          <label><input type="checkbox" name="nips5_1a" value="1" onchange="updateNips5FromCheckbox(event)">پاها حالت سفت دارد و به سختی باز و بسته میشوند (۱)</label>
+          <label><input type="checkbox" name="nips5_1b" value="1" onchange="updateNips5FromCheckbox(event)">پاها حالت سفت دارد و به سختی باز و بست کشیدن پا (۱)</label>
+          <label><input type="checkbox" name="nips5_1c" value="1" onchange="updateNips5FromCheckbox(event)">پاها سریع باز و بسته میشوند (۱)</label>
+      
+          <!-- رادیوی مخفی برای مقدار ۱ (برای جاوااسکریپت اصلی) -->
+          <input type="radio" name="nips5" value="1" style="display:none;" id="nips5_hidden_1">
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۶. وضعیت بیداری / تحریک‌پذیری</label>
+        <div class="options">
+          <label><input type="radio" name="nips6" value="0" checked>خواب / بیدار است، در حالت خواب / بیداری آرامش دارد (۰)</label>
+          <label><input type="radio" name="nips6" value="1">تحریک پذیر است، بیقرار است و
+            میغلتد. (۱)</label>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="score-line">نمره کل: <span id="nips-score">0</span> / 7</div>
+        <span id="nips-level" class="level-badge level-none">بدون درد</span>
+      </div>
+
+      <div class="decision-box">
+        <h3>تصمیم‌یار بالینی</h3>
+        <div id="nips-decision"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CRIES ================= -->
+  <section id="cries" class="tool-panel">
+    <div class="card">
+      <h2>CRIES — Crying, Requires O2, Increased vitals, Expression, Sleeplessness</h2>
+      <span class="subnote">دامنه نمره: ۰ تا ۱۰ (۵ شاخص × ۰-۲)</span>
+
+      <div class="indicator">
+        <label class="ind-title">۱. گریه</label>
+        <div class="options">
+          <label><input type="radio" name="cries1" value="0" checked>گریه نمیکند یا صدای گریه بلند نیست (۰)</label>
+          <label><input type="radio" name="cries1" value="1">گریه بلند (به راحتی ساکت میشود) (۱)</label>
+          <label><input type="radio" name="cries1" value="2">گریه خیلی بلند (با آرام کردن وی، ساکت نمی شود) (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۲. نیاز به اکسیژن (برای حفظ اشباع &gt; ۹۵٪)</label>
+        <div class="options">
+          <label><input type="radio" name="cries2" value="0" checked>اکسیژن مورد نیاز نیست (۰)</label>
+          <label><input type="radio" name="cries2" value="1">اکسیژن کمتر از %30 مورد نیاز است (۱)</label>
+          <label><input type="radio" name="cries2" value="2">اکسیژن بیشتر از %30 مورد نیاز است (۱)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۳. علائم حیاتی (ضربان قلب / فشار خون)</label>
+        <div class="options">
+          <label><input type="radio" name="cries3" value="0" checked>طبیعی_ضربان قلب و فشارخون برابر، یا کمتر از قبل عمل است (۰)</label>
+          <label><input type="radio" name="cries3" value="1">افزایش ضربان قلب یا فشارخون کمتر از %20 قبل از عمل است (۱)</label>
+          <label><input type="radio" name="cries3" value="2">افزایش ضربان قلب یا فشار خون بیشتر از %20 قبل از عمل است (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۴. حالت صورت</label>
+        <div class="options">
+          <label><input type="radio" name="cries4" value="0" checked>حالت طبیعی (۰)</label>
+          <label><input type="radio" name="cries4" value="1">حالت شکلک درآوردن (۱)</label>
+          <label><input type="radio" name="cries4" value="2">حالت شکلک درآوردن و نالیدن (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۵. بی‌خوابی</label>
+        <div class="options">
+          <label><input type="radio" name="cries5" value="0" checked>خواب مداوم (۰)</label>
+          <label><input type="radio" name="cries5" value="1">مرتب از خواب بیدار میشود. مدت زمان زیادی بیدار است. (۱)</label>
+          <label><input type="radio" name="cries5" value="2">همیشه و بطور مداوم بیدار است (۲)</label>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="score-line">نمره کل: <span id="cries-score">0</span> / 10</div>
+        <span id="cries-level" class="level-badge level-none">بدون درد</span>
+      </div>
+
+      <div class="decision-box">
+        <h3>تصمیم‌یار بالینی</h3>
+        <div id="cries-decision"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MPAT ================= -->
+  <section id="mpat" class="tool-panel">
+    <div class="card">
+      <h2>MPAT — Multidimensional Pain Assessment Tool</h2>
+      <span class="subnote">دامنه نمره: ۰ تا ۲۰ (۱۰ شاخص × ۰-۲)</span><br>
+      <span class="subnote">مناسب برای نوزادان تحت ونتیلاتور، درد مزمن یا بستری در PICU</span>
+
+      <div class="indicator">
+        <label class="ind-title">۱. تونیسیته</label>
+        <div class="options">
+          <label><input type="radio" name="mpat1" value="0" checked>ریلکس نرمال بدون فلکسیون (۰)</label>
+          <label><input type="radio" name="mpat1" value="1">اندام‌ها کاملاً باز، بدن سفت، شانه‌ها افتاده روی تخت (۱)</label>
+          <label><input type="radio" name="mpat1" value="2">فلکسیون شدید، گارد اندام‌ها، شانه و گردن مقاوم به تغییر پوزیشن (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۲. الگوی خواب</label>
+        <div class="options">
+          <label><input type="radio" name="mpat2" value="0" checked>ریلکس (۰)</label>
+          <label><input type="radio" name="mpat2" value="1">به‌راحتی بیدار می‌شود (۱)</label>
+          <label><input type="radio" name="mpat2" value="2">با کوچک‌ترین محرک آژیته و وحشت‌زده می‌شود (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۳. گریه</label>
+        <div class="options">
+          <label><input type="radio" name="mpat3" value="0" checked>ندارد (۰)</label>
+          <label><input type="radio" name="mpat3" value="1">دارد، قابل کنترل (۱)</label>
+          <label><input type="radio" name="mpat3" value="2">دارد، غیرقابل کنترل، به سادگی بعد از دستکاری آرام نمیشود؛ بلند گریه میکند (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۴. حالات صورت</label>
+        <div class="options">
+          <label><input type="radio" name="mpat4" value="0" checked>ریلکس / آرام (۰)</label>
+          <label><input type="radio" name="mpat4" value="1">اخمو / چین کم‌عمق/چشم ها نیمه بسته (۱)</label>
+          <label><input type="radio" name="mpat4" value="2">چشم محکم فشرده / چین عمیق (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۵. رنگ پوست</label>
+        <div class="options">
+          <label><input type="radio" name="mpat5" value="0" checked>صورتی / پرفیوژن عالی (۰)</label>
+          <label><input type="radio" name="mpat5" value="1">موتلینگ / رنگ‌پریده (۱)</label>
+          <label><input type="radio" name="mpat5" value="2">خیلی رنگ‌پریده / برافروخته / عرق کف دست (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۶. تنفس</label>
+        <div class="options">
+          <label><input type="radio" name="mpat6" value="0" checked>نرمال (۰)</label>
+          <label><input type="radio" name="mpat6" value="1">تاکی‌پنه هنگام استراحت (۱)</label>
+          <label><input type="radio" name="mpat6" value="2">آپنه (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۷. ضربان قلب</label>
+        <div class="options">
+          <label><input type="radio" name="mpat7" value="0" checked>نرمال (۰)</label>
+          <label><input type="radio" name="mpat7" value="1">تاکی‌کاردی هنگام استراحت (۱)</label>
+          <label><input type="radio" name="mpat7" value="2">نوسان چه هنگام استراحت و چه هنگام دستکاری (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۸. اشباع اکسیژن</label>
+        <div class="options">
+          <label><input type="radio" name="mpat8" value="0" checked onchange="clearMpat8Checkboxes()">نرمال (۰)</label>
+          <label><input type="radio" name="mpat8" value="1" onchange="clearMpat8Checkboxes()">کاهش اشباع گذرا (۱)</label>
+          <!-- دو چک‌باکس برای مقدار ۲ -->
+          <label><input type="checkbox" name="mpat8_2a" value="2" onchange="updateMpat8FromCheckbox(event)">کاهش اشباع با دستکاری (۲)</label>
+          <label><input type="checkbox" name="mpat8_2b" value="2" onchange="updateMpat8FromCheckbox(event)">کاهش اشباع بدون دستکاری (۲)</label>
+          <!-- رادیوی مخفی برای مقدار ۲ (برای جاوااسکریپت اصلی) -->
+          <input type="radio" name="mpat8" value="2" style="display:none;" id="mpat8_hidden_2">
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۹. فشار خون</label>
+        <div class="options">
+          <label><input type="radio" name="mpat9" value="0" checked>نرمال (۰)</label>
+          <label><input type="radio" name="mpat9" value="1">نوسان با دستکاری (۱)</label>
+          <label><input type="radio" name="mpat9" value="2">افزایش / کاهش فشار، هنگام استراحت (۲)</label>
+        </div>
+      </div>
+
+      <div class="indicator">
+        <label class="ind-title">۱۰. قضاوت بالینی کادر درمان (Nurse's Perception)</label>
+        <div class="options">
+          <label><input type="radio" name="mpat10" value="0" checked>نوزاد آرام است و دردی ندارد (۰)</label>
+          <label><input type="radio" name="mpat10" value="1">شیرخوار فقط هنگام دستکاری درد دارد (۱)</label>
+          <label><input type="radio" name="mpat10" value="2">شیرخوار دچار درد است (۲)</label>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="score-line">نمره کل: <span id="mpat-score">0</span> / 20</div>
+        <span id="mpat-level" class="level-badge level-none">بدون درد</span>
+      </div>
+
+      <div class="decision-box">
+        <h3>تصمیم‌یار بالینی</h3>
+        <div id="mpat-decision"></div>
+      </div>
+    </div>
+  </section>
+
+  <div style="display:flex;gap:10px;margin-top:15px;margin-bottom:15px;flex-wrap:wrap;">
+    <button onclick="saveResultAsPDF()" style="background:var(--primary);color:#fff;border:none;padding:8px 24px;border-radius:8px;font-family:inherit;font-size:16px;cursor:pointer;transition:0.2s;flex:1;min-width:120px;font-weight:bold;">
+      🖨️ ذخیره PDF
+    </button>
+  </div>
+
+  <!-- ================= SECTION 5 TABLE ================= -->
+  <details class="card">
+    <summary style="cursor:pointer;font-size:1.25rem;font-weight:bold;color:var(--primary-dark);list-style:none;display:flex;align-items:center;gap:8px;">
+      📋 جدول رویه‌های دردناک و مداخلات پیشنهادی
+      <span style="font-size:0.8rem;color:var(--muted);font-weight:normal;">(جهت مشاهده کلیک کنید)</span>
+    </summary>
+    <table>
+      <caption>✔ = توصیه‌شده | — = ثبت نشده / مناسب نیست</caption>
+      <thead>
+        <tr>
+          <th>رویه</th>
+          <th>شیر مادر / مکیدن</th>
+          <th>سوکروز</th>
+          <th>روش دارویی</th>
+          <th>مراقبت کانگورویی</th>
+        </tr>
+      </thead>
+      <tbody id="procedures-table"></tbody>
+    </table>
+  </details>
+</main>
+
+<script>
+/* ---------- Tab switching ---------- */
+document.querySelectorAll('.tool-tabs .tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tool-tabs .tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tool-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tool).classList.add('active');
+  });
+});
+
+/* ---------- Decision engine ---------- */
+const RECS = {
+  none:{
+    title:'بدون درد',
+    text:'مراقبت معمول نوزاد ادامه یابد؛ نیاز به مداخله خاص نیست.',
+    follow:'بازبینی هر ۴ ساعت',
+    cls:'level-none'
+  },
+  mild:{
+    title:'درد خفیف',
+    text:'روش‌های غیردارویی: سوکروز (۲ سی‌سی برای نوزاد ترم / ۰.۵ تا ۱ سی‌سی برای نوزاد پره‌ترم)، تشویق شیر مادر، مراقبت کانگورویی، ماساژ ۵ دقیقه‌ای.',
+    follow:'بازبینی هر ۲ ساعت',
+    cls:'level-mild'
+  },
+  moderate:{
+    title:'درد متوسط',
+    text: 'ترکیب روش‌های غیردارویی (سوکروز، شیرمادر، مراقبت کانگورویی، ماساژ ۵ دقیقه‌ای) + پاراستامول (۱۰ تا ۱۵ mg/kg).',
+    follow:'بازبینی ۳۰ دقیقه تا ۴ ساعت بعد؛ در صورت تداوم درد، اطلاع به پزشک',
+    cls:'level-moderate'
+  },
+  severe:{
+    title:'درد شدید',
+    text: 'ترکیب روش‌های غیردارویی (سوکروز، شیرمادر، مراقبت کانگورویی، ماساژ ۵ دقیقه‌ای) + مورفین (۱۰ mcg/kg/hr) یا فنتانیل (۱ تا ۴ mcg/kg).',
+    follow:'بازبینی ۳۰ دقیقه تا ۴ ساعت بعد؛ در صورت تداوم درد، اطلاع به پزشک',
+    cls:'level-severe'
+  }
+};
+
+function renderResult(prefix, score, levelKey, levelLabel){
+  document.getElementById(prefix+'-score').textContent = score;
+  const badge = document.getElementById(prefix+'-level');
+  badge.textContent = levelLabel;
+  badge.className = 'level-badge ' + RECS[levelKey].cls;
+
+  const r = RECS[levelKey];
+  document.getElementById(prefix+'-decision').innerHTML =
+    `<strong>${r.title}</strong><br>${r.text}<br><span class="follow-time">${r.follow}</span>`;
+}
+
+function sumIndicators(prefix, count){
+  let total = 0;
+  for(let i=1;i<=count;i++){
+    const sel = document.querySelector(`input[name="${prefix}${i}"]:checked`);
+    if(sel) total += parseInt(sel.value,10);
+  }
+  return total;
+}
+
+/* ---------- PIPP ---------- */
+function calcPIPP(){
+  const score = sumIndicators('pipp', 7);
+  let levelKey, label;
+  if(score <= 6){ levelKey='none'; label='بدون درد'; }
+  else if(score <= 12){ levelKey='moderate'; label='خفیف تا متوسط'; }
+  else { levelKey='severe'; label='شدید'; }
+  renderResult('pipp', score, levelKey, label);
+}
+
+/* ---------- NIPS ---------- */
+function calcNIPS(){
+  const score = sumIndicators('nips', 6);
+  let levelKey, label;
+  if(score === 0){ levelKey='none'; label='بدون درد'; }
+  else if(score <= 3){ levelKey='mild'; label='خفیف'; }
+  else if(score <= 5){ levelKey='moderate'; label='متوسط'; }
+  else { levelKey='severe'; label='شدید'; }
+  renderResult('nips', score, levelKey, label);
+}
+
+/* ---------- CRIES ---------- */
+function calcCRIES(){
+  const crying = parseInt(document.querySelector('input[name="cries1"]:checked').value,10);
+  const o2 = parseInt(document.querySelector('input[name="cries2"]:checked').value,10);
+  const vitals = parseInt(document.querySelector('input[name="cries3"]:checked').value,10);
+  const facial = parseInt(document.querySelector('input[name="cries4"]:checked').value,10);;
+  const sleep = parseInt(document.querySelector('input[name="cries5"]:checked').value,10);
+  const score = crying + o2 + vitals + facial + sleep;
+
+  let levelKey, label;
+  if(score === 0){ levelKey='none'; label='بدون درد'; }
+  else if(score <= 3){ levelKey='mild'; label='خفیف'; }
+  else if(score <= 6){ levelKey='moderate'; label='متوسط'; }
+  else { levelKey='severe'; label='شدید'; }
+  renderResult('cries', score, levelKey, label);
+}
+
+/* ---------- MPAT ---------- */
+function calcMPAT(){
+  const score = sumIndicators('mpat', 10);
+  let levelKey, label;
+
+  // فقط یک نسخه مطابق با گایدلاین PDF (صفحه ۹):
+  // ۴-۶ = خفیف, ۷-۱۲ = متوسط, >۱۲ = شدید
+  if(score <= 3){ levelKey='none'; label='بدون درد'; }
+  else if(score <= 6){ levelKey='mild'; label='خفیف'; }
+  else if(score <= 12){ levelKey='moderate'; label='متوسط'; }
+  else { levelKey='severe'; label='شدید'; }
+
+  renderResult('mpat', score, levelKey, label);
+}
+
+/* ---------- Event bindings ---------- */
+document.querySelectorAll('#pipp input[type=radio]').forEach(el=>el.addEventListener('change', calcPIPP));
+document.querySelectorAll('#nips input[type=radio]').forEach(el=>el.addEventListener('change', calcNIPS));
+document.querySelectorAll('#cries input[type=radio]').forEach(el=>el.addEventListener('change', calcCRIES));
+document.querySelectorAll('#mpat input[type=radio]').forEach(el=>el.addEventListener('change', calcMPAT));
+
+/* ---------- Section 5 table ---------- */
+const procedures = [
+  ['خونگیری از پاشنه پا (هیل استیک)', true, true, true, false],
+  ['خونگیری وریدی', true, true, false, false],
+  ['تزریق عضلانی / زیرجلدی', true, true, true, false],
+  ['تعبیه کاتتر ورید محیطی', true, true, true, false],
+  ['خونگیری شریانی / کاتتر شریانی', true, true, false, false],
+  ['گذاشتن کاتتر نافی', true, true, false, false],
+  ['گرفتن مایع مغزی نخاعی (LP)', true, true, true, false],
+  ['تعبیه کاتتر ورید مرکزی', true, true, true, false],
+  ['تعبیه لوله بینی‌معدنی (NG)', true, true, false, false],
+  ['جدا کردن چسب‌ها', true, true, true, false],
+  ['ساکشن لوله تراشه', false, false, true, false],
+  ['کاتتر مثانه / سوپراپوبیک', true, true, false, false],
+];
+
+const tbody = document.getElementById('procedures-table');
+procedures.forEach(row=>{
+  const tr = document.createElement('tr');
+  const cellMark = v => `<td class="${v?'check':'dash'}">${v?'✔':'—'}</td>`;
+  tr.innerHTML = `<td>${row[0]}</td>${cellMark(row[1])}${cellMark(row[2])}${cellMark(row[3])}${cellMark(row[4])}`;
+  tbody.appendChild(tr);
+});
+
+/* ---------- Initial calculation ---------- */
+calcPIPP();
+calcNIPS();
+calcCRIES();
+calcMPAT();
+
+ 
+/* ---------- ذخیره به صورت PDF (از طریق چاپ) ---------- */
+function saveResultAsPDF() {
+
+  const printHeader = document.createElement('div');
+  printHeader.id = 'print-header';
+  printHeader.style.cssText = `
+    text-align: center;
+    font-family: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+    padding: 20px 0 15px;
+    border-bottom: 2px solid var(--primary-dark, #0d47a1);
+    margin-bottom: 20px;
+  `;
+  printHeader.innerHTML = `
+    <h1 style="margin:0;font-size:1.8rem;color:var(--primary-dark, #0d47a1);">ابزارهای ارزیابی و مدیریت درد نوزادان</h1>
+    <p style="margin:5px 0 0;font-size:1rem;color:var(--muted, #555);">محاسبه‌گر شاخص‌محور + تصمیم‌یار بالینی</p>
+    <p style="margin:5px 0 0;font-size:0.9rem;color:var(--muted, #777);">
+      تاریخ: ${new Date().toLocaleDateString('fa-IR')} - ${new Date().toLocaleTimeString('fa-IR')}
+    </p>
+  `;
+
+  const activePanel = document.querySelector('.tool-panel.active');
+  if (activePanel) {
+    activePanel.insertBefore(printHeader, activePanel.firstChild);
+  }
+
+
+  document.body.classList.add('printing');
+
+  window.print();
+
+  setTimeout(() => {
+    document.body.classList.remove('printing');
+    if (printHeader.parentNode) {
+      printHeader.remove();
+    }
+  }, 500);
+}
+</script>
+
+<script>
+  let lastPipp2Value = 0;  
+
+  function updatePipp2(event) {
+    const changedCheckbox = event.target;
+    const changedValue = parseInt(changedCheckbox.value, 10);
+    const isChecked = changedCheckbox.checked;
+
+    const allCheckboxes = document.querySelectorAll('#pipp .indicator:nth-of-type(2) input[type="checkbox"]');
+
+    if (isChecked) {
+       allCheckboxes.forEach(cb => {
+        if (parseInt(cb.value, 10) !== changedValue) {
+          cb.checked = false;
+        }
+      });
+      lastPipp2Value = changedValue;
+    } else {
+       const anySameValueChecked = Array.from(allCheckboxes).some(
+        cb => parseInt(cb.value, 10) === changedValue && cb.checked
+      );
+      if (!anySameValueChecked) {
+         allCheckboxes.forEach(cb => cb.checked = false);
+        lastPipp2Value = 0;
+      } else {
+         const checkedValues = new Set();
+        allCheckboxes.forEach(cb => { if (cb.checked) checkedValues.add(parseInt(cb.value, 10)); });
+        if (checkedValues.size === 1) {
+          lastPipp2Value = Array.from(checkedValues)[0];
+        } else {
+           lastPipp2Value = 0;
+        }
+      }
+    }
+
+     const hiddenRadios = document.querySelectorAll('#pipp .indicator:nth-of-type(2) input[type="radio"][name="pipp2"]');
+    hiddenRadios.forEach(radio => {
+      if (parseInt(radio.value, 10) === lastPipp2Value) {
+        radio.checked = true;
+      } else {
+        radio.checked = false;
+      }
+    });
+
+     if (typeof calcPIPP === 'function') {
+      calcPIPP();
+    }
+  }
+</script>
+<script>
+   function clearMpat8Checkboxes() {
+     document.querySelectorAll('#mpat .indicator:nth-of-type(8) input[type="checkbox"]').forEach(cb => cb.checked = false);
+     document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="2"]').checked = false;
+     if (typeof calcMPAT === 'function') calcMPAT();
+  }
+
+   function updateMpat8FromCheckbox(event) {
+    const checkboxes = document.querySelectorAll('#mpat .indicator:nth-of-type(8) input[type="checkbox"]');
+    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+    if (anyChecked) {
+       document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="0"]').checked = false;
+      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="1"]').checked = false;
+      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="2"]').checked = true;
+    } else {
+       document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="0"]').checked = true;
+      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="1"]').checked = false;
+      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="2"]').checked = false;
+    }
+     if (typeof calcMPAT === 'function') calcMPAT();
+  }
+</script>
+<script>
+   function clearNips5Checkboxes() {
+     document.querySelectorAll('#nips .indicator:nth-of-type(5) input[type="checkbox"]').forEach(cb => cb.checked = false);
+     document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="1"]').checked = false;
+     if (typeof calcNIPS === 'function') calcNIPS();
+  }
+
+  
+  function updateNips5FromCheckbox(event) {
+    const checkboxes = document.querySelectorAll('#nips .indicator:nth-of-type(5) input[type="checkbox"]');
+    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+    if (anyChecked) {
+       
+      document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="0"]').checked = false;
+      document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="1"]').checked = true;
+    } else {
+       document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="0"]').checked = true;
+      document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="1"]').checked = false;
+    }
+     if (typeof calcNIPS === 'function') calcNIPS();
+  }
+</script>
+<script>
+   function clearNips2Checkboxes() {
+     document.querySelectorAll('#nips .indicator:nth-of-type(2) input[type="checkbox"]').forEach(cb => cb.checked = false);
+     document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="2"]').checked = false;
+     if (typeof calcNIPS === 'function') calcNIPS();
+  }
+
+   function updateNips2FromCheckbox(event) {
+    const checkboxes = document.querySelectorAll('#nips .indicator:nth-of-type(2) input[type="checkbox"]');
+    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+    if (anyChecked) {
+       document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="0"]').checked = false;
+      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="1"]').checked = false;
+      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="2"]').checked = true;
+    } else {
+       document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="0"]').checked = true;
+      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="1"]').checked = false;
+      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="2"]').checked = false;
+    }
+     if (typeof calcNIPS === 'function') calcNIPS();
+  }
+</script>
+
+</body>
+</html>
