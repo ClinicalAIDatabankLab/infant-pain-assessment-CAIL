@@ -12,7 +12,7 @@ This package contains the redesigned neonatal pain-management decision-support i
 
 The interface expects the local Vazir font file to be placed in the same folder as `index.html` with this exact filename:
 
-`Vazir-Regular(1).ttf`
+`Vazir-Regular.ttf`
 
 The font file is intentionally not bundled in this ZIP. Place your provided font beside the HTML file before opening the page.
 
