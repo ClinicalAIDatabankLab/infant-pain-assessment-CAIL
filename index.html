@@ -3,946 +3,1101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ابزارهای ارزیابی و مدیریت درد نوزادان</title>
+<meta name="color-scheme" content="light">
+<title>مدیریت درد نوزادان | تصمیم‌یار بالینی</title>
 <style>
-  :root{
-    --primary:#1565c0;
-    --primary-dark:#0d47a1;
-    --primary-light:#e3f2fd;
-    --bg:#f4f9fd;
-    --card:#ffffff;
-    --text:#1a2733;
-    --muted:#5c7080;
-    --none:#2e7d32;
-    --mild:#f9a825;
-    --moderate:#ef6c00;
-    --severe:#c62828;
-    --border:#d3e3f0;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:"Vazirmatn","Segoe UI","Tahoma",sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.8;
-  }
-  header{
-    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
-    color:#fff;
-    padding:24px 16px;
-    text-align:center;
-  }
-  header h1{margin:0 0 6px;font-size:1.6rem;}
-  header p{margin:0;font-size:.95rem;opacity:.9;}
+@font-face{
+  font-family:'VaziriLocal';
+  src:url('./Vazir-Regular(1).ttf') format('truetype');
+  font-style:normal;
+  font-weight:100 900;
+  font-display:swap;
+}
+:root{
+  --navy:#07364f;
+  --navy-2:#0b4f6c;
+  --teal:#087f83;
+  --teal-2:#0b9891;
+  --teal-soft:#e9f7f5;
+  --blue:#1769aa;
+  --blue-soft:#edf6ff;
+  --bg:#f4f8fb;
+  --surface:#ffffff;
+  --surface-2:#f8fbfd;
+  --text:#172b3a;
+  --muted:#607385;
+  --border:#d7e3eb;
+  --border-strong:#b8ccd8;
+  --success:#18855b;
+  --success-soft:#e9f7ef;
+  --mild:#b98500;
+  --mild-soft:#fff7dc;
+  --moderate:#d06400;
+  --moderate-soft:#fff0df;
+  --severe:#c9362b;
+  --severe-soft:#fff0ef;
+  --purple:#7251b5;
+  --purple-soft:#f2edff;
+  --warning:#966e00;
+  --shadow-sm:0 2px 8px rgba(7,54,79,.07);
+  --shadow-md:0 12px 34px rgba(7,54,79,.10);
+  --radius-sm:10px;
+  --radius:16px;
+  --radius-lg:22px;
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-8:32px;
+  --space-10:40px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-width:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'VaziriLocal','Vazirmatn','Tahoma','Segoe UI',sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+button,input,select,textarea{font:inherit}
+button,select,input[type="text"],input[type="number"],textarea{
+  min-height:44px;
+}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid rgba(23,105,170,.30);
+  outline-offset:2px;
+}
+svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.app-header{
+  background:linear-gradient(115deg,var(--navy),#064766 58%,#0b6880);
+  color:#fff;
+  box-shadow:0 8px 24px rgba(6,54,79,.16);
+}
+.header-inner{
+  max-width:1440px;
+  margin:0 auto;
+  padding:18px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.brand{display:flex;align-items:center;gap:13px;min-width:0}
+.brand-mark{width:48px;height:48px;border:1px solid rgba(255,255,255,.55);border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.brand-mark svg{width:29px;height:29px}
+.brand-copy{min-width:0}
+.brand-copy h1{font-size:1.23rem;line-height:1.35;margin:0;font-weight:850;letter-spacing:-.02em}
+.brand-copy p{font-size:.8rem;margin:3px 0 0;color:rgba(255,255,255,.78);direction:ltr;text-align:right}
+.header-actions{display:flex;gap:10px;align-items:center}
+.header-btn{
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  border-radius:11px;
+  padding:8px 14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:background .2s ease,transform .2s ease;
+}
+.header-btn:hover{background:rgba(255,255,255,.16)}
+.primary-nav-wrap{background:#fff;border-bottom:1px solid var(--border)}
+.primary-nav{max-width:1440px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.nav-btn{
+  min-height:72px;
+  border:0;
+  border-bottom:3px solid transparent;
+  background:transparent;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:10px 14px;
+  position:relative;
+  transition:color .2s ease,background .2s ease,border-color .2s ease;
+}
+.nav-btn:hover{background:#f7fbfd;color:var(--navy)}
+.nav-btn.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:800}
+.nav-copy{display:flex;flex-direction:column;line-height:1.4;text-align:right}
+.nav-copy small{font-size:.68rem;color:var(--muted);font-weight:500;direction:ltr;text-align:right}
+.app-shell{max-width:1440px;margin:0 auto;padding:26px 24px 64px;min-width:0}
+.view{display:none}
+.view.active{display:block;animation:viewIn .22s ease both}
+@keyframes viewIn{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:none}}
+.page-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:0 0 20px}
+.page-heading h2{margin:0;font-size:1.35rem;color:var(--navy)}
+.page-heading p{margin:5px 0 0;color:var(--muted);font-size:.92rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+.card-pad{padding:22px}
+.clinical-stepper{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  padding:18px 22px;
+  margin-bottom:18px;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:0;
+}
+.step-chip{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;color:var(--muted);min-width:0}
+.step-chip:not(:last-child)::after{content:"";position:absolute;top:17px;left:0;width:calc(50% - 17px);height:2px;background:var(--border-strong)}
+.step-chip:not(:first-child)::before{content:"";position:absolute;top:17px;right:0;width:calc(50% - 17px);height:2px;background:var(--border-strong)}
+.step-chip.done::after,.step-chip.done::before,.step-chip.current::before{background:var(--teal)}
+.step-dot{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#e7edf1;color:#435667;font-weight:850;z-index:2;border:2px solid #fff;box-shadow:0 0 0 1px var(--border)}
+.step-chip.current .step-dot,.step-chip.done .step-dot{background:var(--teal);color:#fff;box-shadow:0 0 0 1px var(--teal)}
+.step-chip.current{color:var(--navy);font-weight:800}
+.step-label{margin-top:7px;font-size:.83rem;line-height:1.45}
+.step-label small{display:block;font-size:.64rem;font-weight:500;direction:ltr;color:var(--muted)}
+.clinical-layout{direction:ltr;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
+.clinical-main{min-width:0;direction:rtl}
+.summary-card{direction:rtl}
+.workflow-step{display:none}
+.workflow-step.active{display:block}
+.section-card{padding:24px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;color:var(--navy);margin:0 0 4px;font-size:1.08rem}
+.section-subtitle{margin:0 0 20px;color:var(--muted);font-size:.88rem}
+.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.form-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.field-label{font-size:.82rem;font-weight:750;color:#385062}
+.input,.select,.textarea{
+  width:100%;
+  border:1px solid var(--border-strong);
+  border-radius:10px;
+  background:#fff;
+  color:var(--text);
+  padding:9px 12px;
+  transition:border-color .18s ease,box-shadow .18s ease;
+}
+.input:hover,.select:hover,.textarea:hover{border-color:#8eacbc}
+.textarea{min-height:110px;resize:vertical}
+.segmented{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.choice-card{position:relative;display:flex;align-items:flex-start;gap:9px;border:1px solid var(--border);border-radius:11px;padding:10px 12px;background:var(--surface-2);cursor:pointer;min-height:48px;transition:border-color .18s ease,background .18s ease,box-shadow .18s ease}
+.choice-card:hover{border-color:#9ab8c7;background:#f5fbfc}
+.choice-card:has(input:checked){border-color:var(--teal);background:var(--teal-soft);box-shadow:0 0 0 1px rgba(8,127,131,.12)}
+.choice-card input{margin:5px 0 0;accent-color:var(--teal);flex:0 0 auto}
+.choice-card span{font-size:.86rem;line-height:1.65}
+.context-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;margin-top:16px}
+.context-block{border-top:1px solid var(--border);padding-top:18px}
+.recommend-card{display:none;margin-top:18px;border:1px solid #b9ddcd;background:linear-gradient(135deg,#f5fbf3,#eefaf5);border-radius:14px;padding:18px}
+.recommend-card.visible{display:block;animation:viewIn .2s ease}
+.recommend-main{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.recommend-tool{font-size:1.65rem;line-height:1.1;color:var(--success);font-weight:900;direction:ltr}
+.recommend-desc{margin:5px 0 0;color:#466451;font-size:.88rem}
+.override-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid #cfe5d9}
+.text-btn{border:0;background:transparent;color:var(--blue);padding:5px 8px;border-radius:7px;min-height:44px;text-decoration:underline;text-underline-offset:3px}
+.info-strip,.warning-strip,.physician-strip{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-top:16px;
+  padding:11px 13px;
+  border-radius:10px;
+  font-size:.82rem;
+}
+.info-strip{background:var(--blue-soft);border:1px solid #c8e0f5;color:#28536f}
+.warning-strip{background:#fff9e8;border:1px solid #f0ddb0;color:#755c16}
+.physician-strip{background:var(--purple-soft);border:1px solid #d7c9fa;color:#51388a}
+.actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:9px 17px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-weight:800;
+  transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,var(--teal),#07959a);color:#fff;box-shadow:0 6px 14px rgba(8,127,131,.16)}
+.btn-primary:hover{box-shadow:0 8px 18px rgba(8,127,131,.22)}
+.btn-secondary{background:#fff;color:var(--navy);border-color:var(--border-strong)}
+.btn-danger{background:#fff;color:var(--severe);border-color:#e6b1ac}
+.btn:disabled{cursor:not-allowed;opacity:.48;transform:none;box-shadow:none}
+.summary-card{position:sticky;top:16px;padding:20px;overflow:hidden}
+.summary-title{display:flex;align-items:center;gap:9px;margin:0 0 17px;color:var(--navy);font-size:1rem}
+.summary-group{padding:13px 0;border-top:1px solid var(--border)}
+.summary-group:first-of-type{border-top:0;padding-top:0}
+.summary-label{font-size:.72rem;color:var(--muted);margin-bottom:3px}
+.summary-value{font-weight:850;color:var(--navy)}
+.summary-tool{font-size:1.15rem;direction:ltr;text-align:right}
+.summary-score-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.score-big{font-size:1.7rem;line-height:1;font-weight:900;direction:ltr}
+.progress-ring{--progress:0deg;width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--teal) var(--progress),#e4edf1 0);position:relative;display:grid;place-items:center;flex:0 0 auto}
+.progress-ring::after{content:"";width:50px;height:50px;border-radius:50%;background:#fff;position:absolute}
+.progress-ring span{position:relative;z-index:1;font-size:.72rem;font-weight:800;color:var(--navy);direction:ltr}
+.level-badge{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:850;border:1px solid transparent}
+.level-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.level-none{color:var(--success);background:var(--success-soft);border-color:#ccebdc}
+.level-observe{color:var(--blue);background:var(--blue-soft);border-color:#c9dff3}
+.level-mild{color:var(--mild);background:var(--mild-soft);border-color:#f1dfa6}
+.level-moderate{color:var(--moderate);background:var(--moderate-soft);border-color:#f3cfab}
+.level-severe{color:var(--severe);background:var(--severe-soft);border-color:#efc2bf}
+.mini-next{font-size:.8rem;color:var(--muted);margin-top:4px}
+.assessment-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:15px}
+.assessment-head h3{margin:0;color:var(--navy);font-size:1.13rem}
+.assessment-head p{margin:4px 0 0;color:var(--muted);font-size:.83rem}
+.scale-tag{border:1px solid var(--border);background:var(--surface-2);border-radius:999px;padding:5px 10px;font-size:.72rem;font-weight:800;color:var(--navy);white-space:nowrap}
+.assessment-item{border:1px solid var(--border);border-radius:13px;padding:16px;margin-bottom:12px;background:#fff;transition:border-color .18s ease,box-shadow .18s ease}
+.assessment-item.answered{border-color:#a8d6cf;box-shadow:0 0 0 1px rgba(8,127,131,.08)}
+.item-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:11px}
+.item-title{font-weight:850;color:#244559;font-size:.93rem}
+.item-number{width:28px;height:28px;border-radius:8px;background:#edf5f7;color:var(--teal);display:grid;place-items:center;font-size:.76rem;font-weight:900;flex:0 0 auto}
+.item-help{font-size:.75rem;color:var(--muted);margin-top:2px}
+.option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.option-card{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--border);background:var(--surface-2);border-radius:10px;padding:10px 11px;cursor:pointer;min-height:48px;transition:border-color .16s ease,background .16s ease}
+.option-card:hover{border-color:#9eb9c8}
+.option-card:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
+.option-card input{margin-top:5px;accent-color:var(--teal)}
+.option-copy{display:flex;justify-content:space-between;gap:8px;width:100%;font-size:.82rem;line-height:1.55}
+.option-score{color:var(--muted);font-weight:800;white-space:nowrap}
+.assessment-result{margin-top:16px;border:1px solid var(--border);border-radius:14px;padding:16px;background:linear-gradient(180deg,#fff,#f8fbfd)}
+.result-top{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.result-score{font-size:1.38rem;font-weight:900;color:var(--navy);direction:ltr;text-align:right}
+.result-score small{font-size:.78rem;color:var(--muted);font-weight:600;direction:rtl}
+.linear-progress{height:7px;background:#e5edf2;border-radius:999px;overflow:hidden;margin:11px 0 7px}
+.linear-progress > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),#36aca5);border-radius:inherit;transition:width .22s ease}
+.progress-copy{font-size:.75rem;color:var(--muted)}
 
-  main{max-width:960px;margin:0 auto;padding:20px 16px 60px;}
+.pipp-stage{border:1px solid var(--border);border-radius:15px;background:#fff;margin-bottom:14px;overflow:hidden;transition:opacity .2s ease,border-color .2s ease}
+.pipp-stage.locked{opacity:.58;background:#f7fafc}
+.pipp-stage.locked .pipp-stage-body{pointer-events:none;user-select:none}
+.pipp-stage-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:linear-gradient(90deg,#f2fbfa,#f8fbfd);border-bottom:1px solid var(--border)}
+.pipp-stage-title{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:900}
+.pipp-stage-num{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;background:var(--teal);color:#fff;font-weight:900;flex:0 0 auto}
+.pipp-stage-status{font-size:.74rem;font-weight:800;color:var(--muted);border:1px solid var(--border);background:#fff;border-radius:999px;padding:4px 9px;white-space:nowrap}
+.pipp-stage-body{padding:16px}
+.pipp-instruction{display:flex;gap:9px;align-items:flex-start;background:var(--blue-soft);border:1px solid #c9dff3;color:#365b77;border-radius:11px;padding:11px 12px;font-size:.82rem;margin-bottom:14px}
+.pipp-metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+.pipp-metric{border:1px solid var(--border);border-radius:12px;background:var(--surface-2);padding:12px}
+.pipp-metric label{display:block;font-size:.78rem;font-weight:800;color:#385062;margin-bottom:6px}
+.pipp-input-wrap{display:flex;align-items:center;gap:8px;direction:ltr}
+.pipp-input-wrap .input{text-align:center;font-weight:850;font-variant-numeric:tabular-nums}
+.pipp-unit{font-size:.75rem;font-weight:800;color:var(--muted);white-space:nowrap}
+.pipp-timer-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px dashed #a9c9d8;background:#f8fcfe;border-radius:12px;padding:12px;margin:12px 0}
+.pipp-timer-copy{font-size:.79rem;color:var(--muted)}
+.pipp-timer-display{font-size:1.45rem;font-weight:950;color:var(--navy);font-variant-numeric:tabular-nums;direction:ltr}
+.pipp-computed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:13px 0}
+.pipp-computed{border:1px solid var(--border);border-radius:11px;padding:11px;background:#fff}
+.pipp-computed span{display:block;font-size:.72rem;color:var(--muted)}
+.pipp-computed strong{display:block;margin-top:3px;color:var(--navy);font-size:1.04rem;direction:ltr;text-align:right}
+.pipp-score-chip{display:inline-flex;align-items:center;gap:5px;margin-top:5px;border-radius:999px;background:var(--teal-soft);color:var(--teal);padding:3px 8px;font-size:.7rem;font-weight:900;direction:rtl}
+.pipp-gate-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:13px;flex-wrap:wrap}
+.pipp-stage-complete{border-color:#9bcfc5}
+.pipp-stage-complete .pipp-stage-status{color:var(--success);border-color:#ccebdc;background:var(--success-soft)}
+@media (max-width:700px){.pipp-metric-grid,.pipp-computed-grid{grid-template-columns:1fr}.pipp-stage-head,.pipp-timer-panel{align-items:flex-start;flex-direction:column}.pipp-gate-actions .btn{width:100%}}
 
-  nav.tool-tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:20px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  nav.tool-tabs button{
-    flex:1 1 120px;
-    padding:12px 10px;
-    border:2px solid var(--primary);
-    background:#fff;
-    color:var(--primary);
-    border-radius:10px;
-    font-weight:bold;
-    font-size:1rem;
-    cursor:pointer;
-    transition:.2s;
-  }
-  nav.tool-tabs button.active{
-    background:var(--primary);
-    color:#fff;
-  }
-  nav.tool-tabs button:hover{opacity:.9;}
-
-  .tool-panel{display:none;}
-  .tool-panel.active{display:block;animation:fade .25s;}
-  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-
-  .card{
-    background:var(--card);
-    border-radius:14px;
-    box-shadow:0 2px 10px rgba(21,101,192,.08);
-    padding:20px;
-    margin-bottom:20px;
-    border:1px solid var(--border);
-  }
-  .card h2{margin-top:0;color:var(--primary-dark);font-size:1.25rem;}
-  .subnote{
-    background:var(--primary-light);
-    color:var(--primary-dark);
-    padding:8px 12px;
-    border-radius:8px;
-    font-size:.88rem;
-    margin-bottom:16px;
-    display:inline-block;
-  }
-
-  .indicator{
-    border-bottom:1px dashed var(--border);
-    padding:14px 0;
-  }
-  .indicator:last-of-type{border-bottom:none;}
-  .indicator > label.ind-title{
-    display:block;
-    font-weight:bold;
-    margin-bottom:10px;
-    color:var(--primary-dark);
-  }
-  .options{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-  }
-  .options label{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    background:var(--primary-light);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:8px 12px;
-    font-size:.9rem;
-    cursor:pointer;
-    transition:.15s;
-    flex:1 1 auto;
-    min-width:150px;
-  }
-  .options label:hover{background:#d2e9fb;}
-  .options label:has(input:checked){
-    background:var(--primary);
-    color:#fff;
-    border-color:var(--primary-dark);
-  }
-  .options input{margin:0;accent-color:var(--primary-dark);}
-  .fixed-note{
-    font-size:.85rem;
-    color:var(--muted);
-    background:#f0f0f0;
-    padding:8px 12px;
-    border-radius:8px;
-    display:inline-block;
-  }
-
-  .result-box{
-    margin-top:10px;
-    padding:16px;
-    border-radius:12px;
-    background:var(--primary-light);
-    text-align:center;
-  }
-  .result-box .score-line{
-    font-size:1.3rem;
-    font-weight:bold;
-    margin-bottom:6px;
-  }
-  .level-badge{
-    display:inline-block;
-    padding:4px 14px;
-    border-radius:20px;
-    color:#fff;
-    font-weight:bold;
-    font-size:.95rem;
-  }
-  .level-none{background:var(--none);}
-  .level-mild{background:var(--mild);color:#3a2a00;}
-  .level-moderate{background:var(--moderate);}
-  .level-severe{background:var(--severe);}
-
-  .decision-box{
-    margin-top:14px;
-    background:#fff;
-    border:2px solid var(--primary);
-    border-radius:12px;
-    padding:16px;
-  }
-  .decision-box h3{margin:0 0 8px;color:var(--primary-dark);font-size:1.05rem;}
-  .decision-box .follow-time{
-    display:inline-block;
-    margin-top:8px;
-    background:var(--primary-dark);
-    color:#fff;
-    padding:4px 10px;
-    border-radius:8px;
-    font-size:.85rem;
-  }
-
-  table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:.9rem;
-  }
-  table caption{
-    text-align:right;
-    color:var(--muted);
-    margin-bottom:10px;
-    font-size:.85rem;
-  }
-  th,td{
-    border:1px solid var(--border);
-    padding:8px 6px;
-    text-align:center;
-  }
-  th{background:var(--primary);color:#fff;font-weight:600;}
-  tbody tr:nth-child(even){background:var(--primary-light);}
-  td:first-child{text-align:right;font-weight:600;}
-  .check{color:var(--none);font-weight:bold;}
-  .dash{color:#bbb;}
-
-  @media (max-width:600px){
-    header h1{font-size:1.3rem;}
-    .options label{min-width:120px;font-size:.82rem;}
-    table{font-size:.78rem;}
-    th,td{padding:6px 4px;}
-  }
-
-  
-  @media print {
-    body * {
-      visibility: hidden;
-    }
-    .tool-panel.active, 
-    .tool-panel.active * {
-      visibility: visible;
-    }
-    .tool-panel.active {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      background: white !important;
-    }
-    .tool-panel.active .card {
-      border: none !important;
-      box-shadow: none !important;
-    }
-    .tool-panel.active .decision-box {
-      border: 1px solid #ccc !important;
-    }
-    .tool-panel.active button,
-    .tool-panel.active .subnote,
-    .tool-panel.active .fixed-note {
-      display: none !important;
-    }
-    .tab, nav, details, header p {
-      display: none !important;
-    }
-  }
+.intervention-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.intervention-card{border:1px solid var(--border);border-radius:13px;padding:16px;background:var(--surface-2)}
+.intervention-card h4{margin:0 0 9px;color:var(--navy);font-size:.95rem}
+.intervention-list{display:grid;grid-template-columns:1fr;gap:8px}
+.check-row{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--border);background:#fff;border-radius:9px;padding:9px 10px;cursor:pointer;font-size:.82rem}
+.check-row:has(input:checked){border-color:#9ccfc5;background:#f1fbf8}
+.check-row input{margin-top:5px;accent-color:var(--teal)}
+.med-card{border-right:4px solid var(--purple);background:var(--purple-soft)}
+.med-dose{font-size:.82rem;color:#59458c;margin:7px 0}
+.reassess-banner{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;border:1px solid #c6dde9;background:#f4fbff;border-radius:14px;padding:18px;margin-bottom:16px}
+.time-value{font-size:1.75rem;line-height:1;font-weight:900;color:var(--teal);direction:ltr;white-space:nowrap}
+.timer-box{display:flex;align-items:center;gap:10px}
+.timer-display{font-size:1.55rem;font-weight:900;color:var(--navy);direction:ltr;font-variant-numeric:tabular-nums}
+.doc-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.doc-tile{border:1px solid var(--border);background:var(--surface-2);border-radius:11px;padding:12px}
+.doc-tile span{display:block;font-size:.72rem;color:var(--muted)}
+.doc-tile strong{display:block;margin-top:3px;color:var(--navy)}
+.quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.quick-card{position:relative;overflow:hidden;padding:20px;text-align:center;min-height:215px;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.quick-icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;margin:0 auto 8px}
+.quick-card h3{font-size:1.28rem;margin:2px 0;direction:ltr}
+.quick-card p{font-size:.79rem;color:var(--muted);margin:4px 0 14px;min-height:44px}
+.quick-card[data-scale="PIPP"] .quick-icon{background:#f2ecff;color:#7251b5}.quick-card[data-scale="PIPP"] h3{color:#7251b5}
+.quick-card[data-scale="NIPS"] .quick-icon{background:#e8f9f1;color:#18855b}.quick-card[data-scale="NIPS"] h3{color:#18855b}
+.quick-card[data-scale="CRIES"] .quick-icon{background:#fff1e5;color:#d06400}.quick-card[data-scale="CRIES"] h3{color:#d06400}
+.quick-card[data-scale="MPAT"] .quick-icon{background:#edf6ff;color:#1769aa}.quick-card[data-scale="MPAT"] h3{color:#1769aa}
+.quick-host-empty{padding:32px;text-align:center;color:var(--muted)}
+.procedure-controls{display:grid;grid-template-columns:minmax(260px,520px) 1fr;gap:16px;align-items:end;margin-bottom:18px}
+.procedure-summary{min-height:44px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rec-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:.76rem;font-weight:800;background:var(--success-soft);color:var(--success);border:1px solid #cce9da}
+.rec-pill.no{background:#f3f6f8;color:#788896;border-color:#dde5ea}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:13px;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:780px;font-size:.82rem}
+th,td{padding:11px 9px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);text-align:center;vertical-align:middle}
+th:last-child,td:last-child{border-left:0}
+thead th{background:#eaf3f6;color:var(--navy);font-weight:850;position:sticky;top:0}
+thead th:first-child{background:var(--teal);color:#fff;min-width:245px}
+tbody td:first-child{text-align:right;font-weight:750;color:#27475a}
+tbody tr:nth-child(even){background:#f8fbfd}
+.table-check{color:var(--success);font-weight:950;font-size:1rem}.table-dash{color:#a7b4bd}
+.guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.phase-card{padding:20px;position:relative;overflow:hidden}
+.phase-num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:900;margin-bottom:10px}
+.phase-card:nth-child(1) .phase-num{background:#e6f6fb;color:#167197}.phase-card:nth-child(2) .phase-num{background:#fdeefd;color:#a14389}.phase-card:nth-child(3) .phase-num{background:#f1edff;color:#6a4ba7}
+.phase-card h3{margin:0 0 7px;color:var(--navy);font-size:1rem}.phase-card ul{margin:0;padding-right:18px;color:#4e6372;font-size:.82rem}
+.scale-guide-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.scale-guide{padding:16px}.scale-guide h3{margin:0 0 4px;direction:ltr;text-align:right;color:var(--navy)}.scale-guide p{font-size:.78rem;color:var(--muted);margin:0 0 9px}.scale-guide .thresholds{font-size:.76rem;background:var(--surface-2);border-radius:9px;padding:9px;color:#435b6b}
+.mobile-summary-bar{display:none}
+.footer-note{max-width:1440px;margin:0 auto;padding:0 24px 28px;color:#718492;font-size:.73rem;text-align:center}
+.print-only{display:none}
+@media (max-width:1100px){
+  .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .clinical-layout{grid-template-columns:minmax(0,1fr) 285px}
+  .quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .scale-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:800px){
+  .header-inner{padding:14px 16px}.header-actions .header-btn span{display:none}.header-btn{padding:8px 11px}
+  .primary-nav{padding:0 10px;grid-template-columns:repeat(4,minmax(0,1fr))}.nav-btn{min-height:62px;padding:8px 4px;gap:4px;flex-direction:column}.nav-copy{align-items:center}.nav-copy small{display:none}.nav-btn .icon{width:19px;height:19px}
+  .app-shell{padding:18px 14px 100px}
+  .clinical-stepper{padding:14px 7px}.step-label{font-size:.7rem}.step-label small{display:none}.step-dot{width:31px;height:31px}.step-chip:not(:last-child)::after,.step-chip:not(:first-child)::before{top:15px}
+  .clinical-layout{display:block}.summary-card{display:none}
+  .mobile-summary-bar{position:fixed;display:flex;bottom:0;right:0;left:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--border);box-shadow:0 -8px 24px rgba(7,54,79,.10);padding:9px 14px calc(9px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:10px}
+  .mobile-summary-main{min-width:0}.mobile-summary-label{font-size:.68rem;color:var(--muted)}.mobile-summary-value{font-size:.88rem;font-weight:850;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mobile-summary-score{font-weight:900;color:var(--teal);direction:ltr;white-space:nowrap}
+  .context-grid,.intervention-grid{grid-template-columns:1fr}
+  .guide-grid{grid-template-columns:1fr}
+  .procedure-controls{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .brand-mark{width:42px;height:42px}.brand-copy h1{font-size:1rem}.brand-copy p{font-size:.66rem}
+  .primary-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 4px}.nav-btn{min-height:54px;flex-direction:row}.nav-copy{align-items:flex-start}.nav-btn.active{background:#f4fbfb}
+  .page-heading{display:block}.page-heading h2{font-size:1.18rem}
+  .clinical-stepper{overflow:hidden}.step-label{font-size:.62rem}.step-dot{width:29px;height:29px;font-size:.72rem}
+  .section-card{padding:17px}.form-grid,.form-grid.two,.choice-grid,.option-grid,.doc-summary{grid-template-columns:1fr}
+  .quick-grid,.scale-guide-grid{grid-template-columns:1fr}
+  .quick-card{min-height:178px}.quick-card p{min-height:0}
+  .recommend-main,.assessment-head,.result-top,.reassess-banner{display:block}.recommend-tool{margin-top:6px}.scale-tag{display:inline-block;margin-top:8px}.time-value{margin-top:8px}.timer-box{margin-top:12px;flex-wrap:wrap}
+  .actions{justify-content:stretch}.actions .btn{flex:1 1 150px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff;font-size:11pt}
+  .app-header,.primary-nav-wrap,.clinical-stepper,.header-actions,.actions,.mobile-summary-bar,.quick-grid,.procedure-controls,.footer-note{display:none!important}
+  .app-shell{max-width:none;padding:0}.view{display:none!important}.view.active{display:block!important}
+  .clinical-layout{display:block}.summary-card{position:static;display:block;box-shadow:none;margin-bottom:12px}.card,.section-card{box-shadow:none;break-inside:avoid}
+  .workflow-step{display:none!important}.workflow-step.active{display:block!important}
+  .print-only{display:block}.textarea{min-height:60px}.table-wrap{overflow:visible}table{min-width:0;font-size:8pt}
+}
 </style>
 </head>
 <body>
+<svg aria-hidden="true" width="0" height="0" style="position:absolute">
+  <symbol id="i-baby" viewBox="0 0 24 24"><path d="M9 4.5c0-1.4 1.1-2.5 2.5-2.5S14 3.1 14 4.5 12.9 7 11.5 7H9.8"/><circle cx="12" cy="13" r="7"/><path d="M8.8 12.3h.1M15.1 12.3h.1M9.5 15.5c1.4 1.1 3.6 1.1 5 0"/><path d="M4.7 9.7 2.8 8.2M19.3 9.7l1.9-1.5"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/><path d="M6.5 9v5.5h11V15M17.5 12.5V15"/><path d="m15.5 12.8 2 2.2 2-2.2"/></symbol>
+  <symbol id="i-speed" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="m12 17 4-5"/><path d="M7 17h10"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16M15 4v16"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22zM20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22z"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="7" rx="1"/><path d="M17 11h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.4 5.4 0 0 0-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 0 0 0-7.6z"/></symbol>
+</svg>
 
-<header>
-  <h1>ابزارهای ارزیابی و مدیریت درد نوزادان</h1>
-  <p>PIPP · NIPS · CRIES · MPAT — محاسبه‌گر شاخص‌محور + تصمیم‌یار بالینی</p>
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark"><svg class="icon"><use href="#i-baby"></use></svg></div>
+      <div class="brand-copy">
+        <h1>مدیریت درد نوزادان</h1>
+        <p>Neonatal Pain Clinical Decision Support</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" type="button" data-go-view="guide" aria-label="باز کردن راهنما"><svg class="icon"><use href="#i-book"></use></svg><span>راهنما</span></button>
+      <button class="header-btn" type="button" id="print-btn" aria-label="چاپ یا ذخیره خروجی PDF"><svg class="icon"><use href="#i-print"></use></svg><span>چاپ / خروجی</span></button>
+    </div>
+  </div>
 </header>
 
-<main>
-  <nav class="tool-tabs">
-    <button class="tab active" data-tool="pipp">PIPP</button>
-    <button class="tab" data-tool="nips">NIPS</button>
-    <button class="tab" data-tool="cries">CRIES</button>
-    <button class="tab" data-tool="mpat">MPAT</button>
+<div class="primary-nav-wrap">
+  <nav class="primary-nav" aria-label="بخش‌های سامانه" role="tablist">
+    <button class="nav-btn active" type="button" role="tab" aria-selected="true" data-view="clinical"><svg class="icon"><use href="#i-flow"></use></svg><span class="nav-copy">مسیر بالینی<small>Clinical Flow</small></span></button>
+    <button class="nav-btn" type="button" role="tab" aria-selected="false" data-view="quick"><svg class="icon"><use href="#i-speed"></use></svg><span class="nav-copy">ارزیابی سریع<small>Quick Assessment</small></span></button>
+    <button class="nav-btn" type="button" role="tab" aria-selected="false" data-view="procedures"><svg class="icon"><use href="#i-table"></use></svg><span class="nav-copy">جدول رویه‌ها<small>Procedures</small></span></button>
+    <button class="nav-btn" type="button" role="tab" aria-selected="false" data-view="guide"><svg class="icon"><use href="#i-book"></use></svg><span class="nav-copy">راهنما و منابع<small>Guide</small></span></button>
   </nav>
+</div>
 
-  <!-- ================= PIPP ================= -->
-  <section id="pipp" class="tool-panel active">
-    <div class="card">
-      <h2>PIPP — Premature Infant Pain Profile</h2>
-      <span class="subnote">دامنه نمره: ۰ تا ۲۱ (۷ شاخص × ۰-۳)</span>
+<main class="app-shell">
+  <section class="view active" data-view-panel="clinical" id="view-clinical">
+    <div class="page-heading">
+      <div><h2>مسیر بالینی مدیریت درد</h2><p>زمینه بالینی را ثبت کنید؛ سامانه ابزار مناسب را پیشنهاد می‌کند و سپس مسیر ارزیابی، مداخله، ارزیابی مجدد و مستندسازی را هدایت می‌کند.</p></div>
+    </div>
 
-      <div class="indicator">
-        <label class="ind-title">۱. سن حاملگی</label>
-        <div class="options">
-          <label><input type="radio" name="pipp1" value="0" checked>≥ ۳۶ هفته (۰)</label>
-          <label><input type="radio" name="pipp1" value="1">۳۲–۳۵ هفته (۱)</label>
-          <label><input type="radio" name="pipp1" value="2">۲۸–۳۱ هفته (۲)</label>
-          <label><input type="radio" name="pipp1" value="3">&lt; ۲۸ هفته (۳)</label>
-        </div>
+    <div class="clinical-stepper" aria-label="مراحل مسیر بالینی">
+      <div class="step-chip current" data-step-chip="1"><span class="step-dot">۱</span><span class="step-label">زمینه بالینی<small>Patient Context</small></span></div>
+      <div class="step-chip" data-step-chip="2"><span class="step-dot">۲</span><span class="step-label">ارزیابی درد<small>Pain Assessment</small></span></div>
+      <div class="step-chip" data-step-chip="3"><span class="step-dot">۳</span><span class="step-label">مداخله<small>Intervention</small></span></div>
+      <div class="step-chip" data-step-chip="4"><span class="step-dot">۴</span><span class="step-label">ارزیابی مجدد<small>Reassessment</small></span></div>
+      <div class="step-chip" data-step-chip="5"><span class="step-dot">۵</span><span class="step-label">ثبت و گزارش<small>Documentation</small></span></div>
+    </div>
+
+    <div class="clinical-layout">
+      <div class="clinical-main">
+        <section class="workflow-step active" data-workflow-step="1" id="step-context">
+          <form id="clinicalContextForm" novalidate>
+            <div class="section-card">
+              <h3 class="section-title"><svg class="icon"><use href="#i-file"></use></svg>۱. اطلاعات نوزاد</h3>
+              <p class="section-subtitle">اطلاعات شناسایی اختیاری است و فقط در همین صفحه برای گزارش چاپی نگه داشته می‌شود.</p>
+              <div class="form-grid">
+                <div class="field"><label for="record-id">شماره پرونده</label><input class="input" id="record-id" name="recordId" type="text" autocomplete="off" placeholder="اختیاری"></div>
+                <div class="field"><label for="age-days">سن (روز)</label><input class="input" id="age-days" name="ageDays" type="number" min="0" max="180" inputmode="numeric" placeholder="مثلاً 5"></div>
+                <div class="field"><label for="weight-grams">وزن (گرم)</label><input class="input" id="weight-grams" name="weightGrams" type="number" min="300" max="10000" inputmode="numeric" placeholder="مثلاً 2850"></div>
+                <div class="field"><span class="field-label">جنسیت</span><div class="segmented"><label class="choice-card"><input type="radio" name="sex" value="female"><span>دختر</span></label><label class="choice-card"><input type="radio" name="sex" value="male"><span>پسر</span></label></div></div>
+              </div>
+            </div>
+
+            <div class="section-card">
+              <h3 class="section-title"><svg class="icon"><use href="#i-heart"></use></svg>۲. وضعیت و هدف ارزیابی</h3>
+              <p class="section-subtitle">بر اساس گایدلاین، نوع ابزار باید با سن، وضعیت نوزاد و نوع درد متناسب باشد.</p>
+              <div class="context-grid">
+                <div class="context-block">
+                  <span class="field-label">وضعیت بالینی</span>
+                  <div class="choice-grid" style="margin-top:8px">
+                    <label class="choice-card"><input type="checkbox" name="preterm" value="1"><span>نارس / پره‌ترم</span></label>
+                    <label class="choice-card"><input type="checkbox" name="ventilated" value="1"><span>تحت تهویه مکانیکی</span></label>
+                    <label class="choice-card"><input type="checkbox" name="chronicPain" value="1"><span>درد مزمن</span></label>
+                    <label class="choice-card"><input type="checkbox" name="postoperative" value="1"><span>پس از عمل جراحی</span></label>
+                  </div>
+                </div>
+                <div class="context-block">
+                  <span class="field-label">نوع ارزیابی</span>
+                  <div class="choice-grid" style="margin-top:8px">
+                    <label class="choice-card"><input type="radio" name="assessmentType" value="acute" checked><span>درد حاد ناشی از اقدام تشخیصی / درمانی</span></label>
+                    <label class="choice-card"><input type="radio" name="assessmentType" value="postop"><span>درد پس از جراحی</span></label>
+                    <label class="choice-card"><input type="radio" name="assessmentType" value="routine"><span>پایش عمومی / دوره‌ای</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <div id="scale-recommendation" class="recommend-card" aria-live="polite">
+                <div class="recommend-main">
+                  <div><div class="field-label">ابزار پیشنهادی</div><div class="recommend-tool" id="recommend-tool">NIPS</div><p class="recommend-desc" id="recommend-desc"></p></div>
+                  <button class="btn btn-primary" type="button" id="start-recommended"><svg class="icon"><use href="#i-chevron"></use></svg>شروع ارزیابی</button>
+                </div>
+                <div class="override-tools"><span class="field-label">یا ابزار دیگری را انتخاب کنید:</span><button type="button" class="text-btn scale-override" data-scale="PIPP">PIPP</button><button type="button" class="text-btn scale-override" data-scale="NIPS">NIPS</button><button type="button" class="text-btn scale-override" data-scale="CRIES">CRIES</button><button type="button" class="text-btn scale-override" data-scale="MPAT">MPAT</button></div>
+              </div>
+              <div class="info-strip"><svg class="icon"><use href="#i-info"></use></svg><div>پیشنهاد ابزار، راهنمای تصمیم‌گیری است و جایگزین قضاوت بالینی یا دستور پزشک نیست. در صورت ناسازگاری با شرایط نوزاد، ابزار مناسب را به‌صورت دستی انتخاب کنید.</div></div>
+            </div>
+          </form>
+        </section>
+
+        <section class="workflow-step" data-workflow-step="2" id="step-assessment">
+          <div class="section-card">
+            <div id="clinical-assessment-host"></div>
+          </div>
+        </section>
+
+        <section class="workflow-step" data-workflow-step="3" id="step-intervention">
+          <div class="section-card">
+            <h3 class="section-title"><svg class="icon"><use href="#i-heart"></use></svg>مداخله بر اساس شدت درد</h3>
+            <p class="section-subtitle">مداخلات غیردارویی را متناسب با شرایط نوزاد انتخاب و ثبت کنید. هر مداخله دارویی فقط طبق تجویز پزشک انجام شود.</p>
+            <div id="intervention-host"></div>
+            <div class="actions"><button class="btn btn-secondary" type="button" data-back-step="2">بازگشت به ارزیابی</button><button class="btn btn-primary" type="button" id="save-intervention">ثبت مداخله و ادامه<svg class="icon"><use href="#i-chevron"></use></svg></button></div>
+          </div>
+        </section>
+
+        <section class="workflow-step" data-workflow-step="4" id="step-reassessment">
+          <div class="section-card">
+            <h3 class="section-title"><svg class="icon"><use href="#i-clock"></use></svg>ارزیابی مجدد</h3>
+            <p class="section-subtitle">فاصله ارزیابی مجدد بر اساس شدت درد کوتاه‌تر می‌شود. در درد متوسط تا شدید، پایش مطابق الگوریتم هر ۳۰ دقیقه تا ۴ ساعت ادامه یابد.</p>
+            <div id="reassess-banner"></div>
+            <div id="reassessment-host" class="quick-host-empty">برای شروع ارزیابی مجدد، دکمه زیر را انتخاب کنید.</div>
+            <div class="actions"><button class="btn btn-secondary" type="button" data-back-step="3">بازگشت</button><button class="btn btn-primary" type="button" id="start-reassessment">شروع ارزیابی مجدد</button><button class="btn btn-primary" type="button" id="to-documentation" disabled>ادامه به ثبت و گزارش<svg class="icon"><use href="#i-chevron"></use></svg></button></div>
+          </div>
+        </section>
+
+        <section class="workflow-step" data-workflow-step="5" id="step-documentation">
+          <div class="section-card">
+            <h3 class="section-title"><svg class="icon"><use href="#i-file"></use></svg>ثبت و گزارش</h3>
+            <p class="section-subtitle">نتیجه ارزیابی، مداخله و ارزیابی مجدد را پیش از چاپ مرور کنید.</p>
+            <div id="documentation-summary"></div>
+            <div class="form-grid two">
+              <label class="choice-card"><input type="checkbox" id="physician-notified"><span>نتیجه ارزیابی مجدد به پزشک مربوطه اطلاع داده شد.</span></label>
+              <label class="choice-card"><input type="checkbox" id="continue-analgesic"><span>تصمیم ادامه / قطع مسکن مطابق نظر پزشک ثبت شد.</span></label>
+            </div>
+            <div class="field" style="margin-top:14px"><label for="clinical-note">یادداشت بالینی</label><textarea class="textarea" id="clinical-note" placeholder="یادداشت اختیاری..."></textarea></div>
+            <div class="actions"><button class="btn btn-secondary" type="button" data-back-step="4">بازگشت</button><button class="btn btn-secondary" type="button" id="reset-clinical">شروع پرونده جدید</button><button class="btn btn-primary" type="button" id="print-document"><svg class="icon"><use href="#i-print"></use></svg>چاپ / ذخیره PDF</button></div>
+          </div>
+        </section>
       </div>
 
-      <div class="indicator">
-        <label class="ind-title">۲. وضعیت رفتاری</label>
-        <div class="options">
-           <label><input type="checkbox" name="pipp2_0a" value="0" onchange="updatePipp2(event)"> بیدار با حرکات صورت چشم باز (۰)</label>
-          <label><input type="checkbox" name="pipp2_0b" value="0" onchange="updatePipp2(event)"> فعال با حرکات صورت چشم باز (۰)</label>
-      
-           <label><input type="checkbox" name="pipp2_1a" value="1" onchange="updatePipp2(event)"> آرام بدون حرکات صورت چشم باز (۱)</label>
-          <label><input type="checkbox" name="pipp2_1b" value="1" onchange="updatePipp2(event)"> بیدار بدون حرکات صورت چشم باز (۱)</label>
-      
-           <label><input type="checkbox" name="pipp2_2a" value="2" onchange="updatePipp2(event)"> فعال با حرکات صورت چشم بسته (۲)</label>
-          <label><input type="checkbox" name="pipp2_2b" value="2" onchange="updatePipp2(event)"> خواب با حرکات صورت چشم بسته (۲)</label>
-      
-           <label><input type="checkbox" name="pipp2_3a" value="3" onchange="updatePipp2(event)"> آرام بدون حرکات صورت چشم بسته (۳)</label>
-          <label><input type="checkbox" name="pipp2_3b" value="3" onchange="updatePipp2(event)"> خواب بدون حرکات صورت چشم بسته (۳)</label>
-      
-          <input type="radio" name="pipp2" value="0" checked style="display:none;" id="pipp2_hidden_0">
-          <input type="radio" name="pipp2" value="1" style="display:none;" id="pipp2_hidden_1">
-          <input type="radio" name="pipp2" value="2" style="display:none;" id="pipp2_hidden_2">
-          <input type="radio" name="pipp2" value="3" style="display:none;" id="pipp2_hidden_3">
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۳. افزایش ضربان قلب</label>
-        <div class="options">
-          <label><input type="radio" name="pipp3" value="0" checked>۰–۴ ضربه (۰)</label>
-          <label><input type="radio" name="pipp3" value="1">۵–۱۴ ضربه (۱)</label>
-          <label><input type="radio" name="pipp3" value="2">۱۵–۲۴ ضربه (۲)</label>
-          <label><input type="radio" name="pipp3" value="3">≥ ۲۵ ضربه (۳)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۴. کاهش اشباع اکسیژن</label>
-        <div class="options">
-          <label><input type="radio" name="pipp4" value="0" checked>۰–۲.۴٪ (۰)</label>
-          <label><input type="radio" name="pipp4" value="1">۲.۵–۴.۹٪ (۱)</label>
-          <label><input type="radio" name="pipp4" value="2">۵–۷.۴٪ (۲)</label>
-          <label><input type="radio" name="pipp4" value="3">≥ ۷.۵٪ (۳)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۵. درهم‌کشیدن ابرو</label>
-        <div class="options">
-          <label><input type="radio" name="pipp5" value="0" checked>۰–۹٪ زمان (۰)</label>
-          <label><input type="radio" name="pipp5" value="1">۱۰–۳۹٪ زمان (۱)</label>
-          <label><input type="radio" name="pipp5" value="2">۴۰–۶۹٪ زمان (۲)</label>
-          <label><input type="radio" name="pipp5" value="3">≥ ۷۰٪ زمان (۳)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۶. فشردن چشم‌ها</label>
-        <div class="options">
-          <label><input type="radio" name="pipp6" value="0" checked>۰–۹٪ زمان (۰)</label>
-          <label><input type="radio" name="pipp6" value="1">۱۰–۳۹٪ زمان (۱)</label>
-          <label><input type="radio" name="pipp6" value="2">۴۰–۶۹٪ زمان (۲)</label>
-          <label><input type="radio" name="pipp6" value="3">≥ ۷۰٪ زمان (۳)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۷. خط کنار پره‌های بینی (چین نازولبیال)</label>
-        <div class="options">
-          <label><input type="radio" name="pipp7" value="0" checked>۰–۹٪ زمان (۰)</label>
-          <label><input type="radio" name="pipp7" value="1">۱۰–۳۹٪ زمان (۱)</label>
-          <label><input type="radio" name="pipp7" value="2">۴۰–۶۹٪ زمان (۲)</label>
-          <label><input type="radio" name="pipp7" value="3">≥ ۷۰٪ زمان (۳)</label>
-        </div>
-      </div>
-
-      <div class="result-box">
-        <div class="score-line">نمره کل: <span id="pipp-score">0</span> / 21</div>
-        <span id="pipp-level" class="level-badge level-none">بدون درد</span>
-      </div>
-
-      <div class="decision-box">
-        <h3>تصمیم‌یار بالینی</h3>
-        <div id="pipp-decision"></div>
-      </div>
+      <aside class="card summary-card" id="clinical-summary" aria-live="polite">
+        <h3 class="summary-title"><svg class="icon"><use href="#i-baby"></use></svg>خلاصه بالینی</h3>
+        <div class="summary-group"><div class="summary-label">ابزار انتخابی</div><div class="summary-value summary-tool" id="summary-tool">—</div></div>
+        <div class="summary-group"><div class="summary-score-row"><div><div class="summary-label">نمره فعلی</div><div class="score-big" id="summary-score">—</div></div><div class="progress-ring" id="summary-progress" style="--progress:0deg"><span id="summary-progress-copy">0/0</span></div></div></div>
+        <div class="summary-group"><div class="summary-label">شدت درد</div><div id="summary-level"><span class="level-badge level-observe">در انتظار تکمیل ارزیابی</span></div></div>
+        <div class="summary-group"><div class="summary-label">اقدام بعدی</div><div class="summary-value" id="summary-next">ثبت زمینه بالینی</div><div class="mini-next" id="summary-reassess">—</div></div>
+      </aside>
     </div>
   </section>
 
-  <!-- ================= NIPS ================= -->
-  <section id="nips" class="tool-panel">
-    <div class="card">
-      <h2>NIPS — Neonatal Infant Pain Scale</h2>
-      <span class="subnote">دامنه نمره: ۰ تا ۷ (۶ شاخص)</span>
+  <section class="view" data-view-panel="quick" id="view-quick">
+    <div class="page-heading"><div><h2>ارزیابی سریع</h2><p>اگر ابزار مناسب را از قبل می‌دانید، مستقیماً یکی از چهار مقیاس را شروع کنید. همان موتور امتیازدهی مسیر بالینی استفاده می‌شود.</p></div></div>
+    <div class="quick-grid" id="quick-scale-grid">
+      <article class="card quick-card" data-scale="PIPP"><div><div class="quick-icon"><svg class="icon" style="width:30px;height:30px"><use href="#i-baby"></use></svg></div><h3>PIPP</h3><p>پروفایل درد شیرخواران پره‌ترم؛ برای درد حاد و نوزادان نارس.</p></div><button class="btn btn-secondary quick-start" type="button" data-scale="PIPP">شروع</button></article>
+      <article class="card quick-card" data-scale="NIPS"><div><div class="quick-icon"><svg class="icon" style="width:30px;height:30px"><use href="#i-heart"></use></svg></div><h3>NIPS</h3><p>ارزیابی درد حاد ناشی از اقدامات تشخیصی و درمانی در نوزادان.</p></div><button class="btn btn-secondary quick-start" type="button" data-scale="NIPS">شروع</button></article>
+      <article class="card quick-card" data-scale="CRIES"><div><div class="quick-icon"><svg class="icon" style="width:30px;height:30px"><use href="#i-alert"></use></svg></div><h3>CRIES</h3><p>ارزیابی درد پس از عمل جراحی در نوزادان نارس و ترم.</p></div><button class="btn btn-secondary quick-start" type="button" data-scale="CRIES">شروع</button></article>
+      <article class="card quick-card" data-scale="MPAT"><div><div class="quick-icon"><svg class="icon" style="width:30px;height:30px"><use href="#i-speed"></use></svg></div><h3>MPAT</h3><p>ابزار چندبعدی برای نوزادان بستری، تهویه مکانیکی یا درد مزمن.</p></div><button class="btn btn-secondary quick-start" type="button" data-scale="MPAT">شروع</button></article>
+    </div>
+    <div class="card card-pad" id="quick-assessment-host"><div class="quick-host-empty"><svg class="icon" style="width:32px;height:32px;margin-bottom:8px"><use href="#i-speed"></use></svg><div>برای شروع، یک ابزار را از بالا انتخاب کنید.</div></div></div>
+  </section>
 
-      <div class="indicator">
-        <label class="ind-title">۱. حالت چهره</label>
-        <div class="options">
-          <label><input type="radio" name="nips1" value="0" checked>آرامش (۰)</label>
-          <label><input type="radio" name="nips1" value="1">عضلات صورت سفت و کشیده و اخم‌آلود (۱)</label>
-        </div>
+  <section class="view" data-view-panel="procedures" id="view-procedures">
+    <div class="page-heading"><div><h2>رویه‌های دردناک و روش‌های تسکین</h2><p>این جدول از جدول ۱ گایدلاین ارسالی بازسازی شده است. یک رویه را انتخاب کنید تا توصیه‌های همان ردیف برجسته شود.</p></div></div>
+    <div class="card card-pad">
+      <div class="procedure-controls">
+        <div class="field"><label for="procedure-select">جستجو / انتخاب رویه</label><select class="select" id="procedure-select"><option value="">یک رویه را انتخاب کنید</option></select></div>
+        <div id="procedure-summary" class="procedure-summary" aria-live="polite"><span class="mini-next">پس از انتخاب رویه، روش‌های علامت‌گذاری‌شده نمایش داده می‌شوند.</span></div>
       </div>
-
-      <div class="indicator">
-        <label class="ind-title">۲. گریه</label>
-        <div class="options">
-          <!-- گزینه‌های ۰ و ۱ (رادیو) -->
-          <label><input type="radio" name="nips2" value="0" checked onchange="clearNips2Checkboxes()">آرام، بدون گریه (۰)</label>
-          <label><input type="radio" name="nips2" value="1" onchange="clearNips2Checkboxes()">ناله ملایم، گریه متناوب (۱)</label>
-      
-          <!-- دو چک‌باکس برای مقدار ۲ -->
-          <label><input type="checkbox" name="nips2_2a" value="2" onchange="updateNips2FromCheckbox(event)">جیغ زدن و فریاد کشیدن (۲)</label>
-          <label><input type="checkbox" name="nips2_2b" value="2" onchange="updateNips2FromCheckbox(event)">گریه بدون صدا به نحوی که با حرکات صورت مشخص باشد (۲)</label>
-      
-          <!-- رادیوی مخفی برای مقدار ۲ (برای جاوااسکریپت اصلی) -->
-          <input type="radio" name="nips2" value="2" style="display:none;" id="nips2_hidden_2">
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۳. الگوی تنفس</label>
-        <div class="options">
-          <label><input type="radio" name="nips3" value="0" checked>آرام / معمول (۰)</label>
-          <label><input type="radio" name="nips3" value="1">تنفس نامنظم، سریع، نگهداشتن تنفس (۱)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۴. وضعیت دست‌ها</label>
-        <div class="options">
-          <label><input type="radio" name="nips4" value="0" checked>آرام_شل، بدون انقباض عضالت، حرکات معمولی (۰)</label>
-          <label><input type="radio" name="nips4" value="1">انقباض دست ها، حرکات سریع باز و بسته شدن دست ها (۱)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۵. وضعیت پاها</label>
-        <div class="options">
-          <!-- گزینهٔ ۰ (رادیو) -->
-          <label><input type="radio" name="nips5" value="0" checked onchange="clearNips5Checkboxes()">آرام_شل، بدون انقباض عضالت، گاهی پاها را حرکت میدهد (۰)</label>
-      
-          <!-- سه چک‌باکس برای مقدار ۱ -->
-          <label><input type="checkbox" name="nips5_1a" value="1" onchange="updateNips5FromCheckbox(event)">پاها حالت سفت دارد و به سختی باز و بسته میشوند (۱)</label>
-          <label><input type="checkbox" name="nips5_1b" value="1" onchange="updateNips5FromCheckbox(event)">پاها حالت سفت دارد و به سختی باز و بست کشیدن پا (۱)</label>
-          <label><input type="checkbox" name="nips5_1c" value="1" onchange="updateNips5FromCheckbox(event)">پاها سریع باز و بسته میشوند (۱)</label>
-      
-          <!-- رادیوی مخفی برای مقدار ۱ (برای جاوااسکریپت اصلی) -->
-          <input type="radio" name="nips5" value="1" style="display:none;" id="nips5_hidden_1">
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۶. وضعیت بیداری / تحریک‌پذیری</label>
-        <div class="options">
-          <label><input type="radio" name="nips6" value="0" checked>خواب / بیدار است، در حالت خواب / بیداری آرامش دارد (۰)</label>
-          <label><input type="radio" name="nips6" value="1">تحریک پذیر است، بیقرار است و
-            میغلتد. (۱)</label>
-        </div>
-      </div>
-
-      <div class="result-box">
-        <div class="score-line">نمره کل: <span id="nips-score">0</span> / 7</div>
-        <span id="nips-level" class="level-badge level-none">بدون درد</span>
-      </div>
-
-      <div class="decision-box">
-        <h3>تصمیم‌یار بالینی</h3>
-        <div id="nips-decision"></div>
-      </div>
+      <div class="table-wrap"><table><thead><tr><th>رویه دردناک</th><th>شیر مادر / مکیدن غیرمغذی</th><th>سوکروز</th><th>روش دارویی</th><th>مراقبت کانگورویی</th></tr></thead><tbody id="procedure-table-body"></tbody></table></div>
+      <div class="physician-strip"><svg class="icon"><use href="#i-info"></use></svg><div><strong>نکته:</strong> علامت «روش دارویی» فقط بیانگر توصیه موجود در جدول گایدلاین است؛ انتخاب دارو، دوز و اجرا صرفاً طبق تجویز پزشک انجام شود.</div></div>
     </div>
   </section>
 
-  <!-- ================= CRIES ================= -->
-  <section id="cries" class="tool-panel">
-    <div class="card">
-      <h2>CRIES — Crying, Requires O2, Increased vitals, Expression, Sleeplessness</h2>
-      <span class="subnote">دامنه نمره: ۰ تا ۱۰ (۵ شاخص × ۰-۲)</span>
-
-      <div class="indicator">
-        <label class="ind-title">۱. گریه</label>
-        <div class="options">
-          <label><input type="radio" name="cries1" value="0" checked>گریه نمیکند یا صدای گریه بلند نیست (۰)</label>
-          <label><input type="radio" name="cries1" value="1">گریه بلند (به راحتی ساکت میشود) (۱)</label>
-          <label><input type="radio" name="cries1" value="2">گریه خیلی بلند (با آرام کردن وی، ساکت نمی شود) (۲)</label>
-        </div>
+  <section class="view" data-view-panel="guide" id="view-guide">
+    <div class="page-heading"><div><h2>راهنمای بالینی فشرده</h2><p>خلاصه ساختاریافته از فرایند اجرایی و ابزارهای ذکرشده در گایدلاین «مراقبت‌های پرستاری در مدیریت درد نوزادان بستری در بیمارستان».</p></div></div>
+    <div class="guide-grid">
+      <article class="card phase-card"><div class="phase-num">۱</div><h3>تشخیص و اندازه‌گیری شدت درد</h3><ul><li>درد همراه علائم حیاتی و به عنوان علامت حیاتی پنجم ارزیابی شود.</li><li>ابزار متناسب با سن، وضعیت نوزاد و نوع درد انتخاب شود.</li><li>شدت درد بر اساس امتیاز ابزار ارزیابی و ثبت شود.</li></ul></article>
+      <article class="card phase-card"><div class="phase-num">۲</div><h3>درمان یا تسکین درد</h3><ul><li>رویکرد چندرشته‌ای با مشارکت تیم درمان و خانواده.</li><li>استفاده از روش‌های غیردارویی متناسب با وضعیت.</li><li>تمام روش‌های دارویی صرفاً طبق تجویز پزشک.</li></ul></article>
+      <article class="card phase-card"><div class="phase-num">۳</div><h3>ارزیابی مجدد و مستندسازی</h3><ul><li>پایش بر اساس شدت درد از هر ۳۰ دقیقه تا ۴ ساعت.</li><li>در درد متوسط/شدید فواصل ارزیابی کوتاه‌تر باشد.</li><li>نتایج به پزشک گزارش و تمام مراحل مستندسازی شود.</li></ul></article>
+    </div>
+    <div class="card card-pad">
+      <h3 class="section-title">انتخاب ابزار</h3>
+      <div class="scale-guide-grid">
+        <article class="card scale-guide"><h3>PIPP</h3><p>درد حاد، به‌ویژه نوزادان پره‌ترم؛ ۷ شاخص.</p><div class="thresholds">۰–۶: بدون درد/محدوده قابل قبول در نسخه پایه · ۷–۱۲: خفیف تا متوسط · بیش از ۱۲: شدید</div></article>
+        <article class="card scale-guide"><h3>NIPS</h3><p>درد حاد ناشی از اقدامات؛ نوزاد نارس/ترم تا شش هفته.</p><div class="thresholds">۰: بدون درد · ۱–۲: خفیف · ۳–۵: متوسط · ۶ و بیشتر: شدید در این رابط*</div></article>
+        <article class="card scale-guide"><h3>CRIES</h3><p>درد پس از عمل جراحی؛ ۵ شاخص.</p><div class="thresholds">۰: بدون درد · ۱–۳: زیر آستانه متوسط/خفیف در این رابط* · ۴–۶: متوسط · بیش از ۶: شدید</div></article>
+        <article class="card scale-guide"><h3>MPAT</h3><p>تهویه مکانیکی، درد مزمن و ارزیابی چندبعدی.</p><div class="thresholds">۰: بدون درد · ۱–۳: زیر آستانه خفیف · ۴–۶: خفیف · ۷–۱۲: متوسط · بیش از ۱۲: شدید</div></article>
       </div>
-
-      <div class="indicator">
-        <label class="ind-title">۲. نیاز به اکسیژن (برای حفظ اشباع &gt; ۹۵٪)</label>
-        <div class="options">
-          <label><input type="radio" name="cries2" value="0" checked>اکسیژن مورد نیاز نیست (۰)</label>
-          <label><input type="radio" name="cries2" value="1">اکسیژن کمتر از %30 مورد نیاز است (۱)</label>
-          <label><input type="radio" name="cries2" value="2">اکسیژن بیشتر از %30 مورد نیاز است (۱)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۳. علائم حیاتی (ضربان قلب / فشار خون)</label>
-        <div class="options">
-          <label><input type="radio" name="cries3" value="0" checked>طبیعی_ضربان قلب و فشارخون برابر، یا کمتر از قبل عمل است (۰)</label>
-          <label><input type="radio" name="cries3" value="1">افزایش ضربان قلب یا فشارخون کمتر از %20 قبل از عمل است (۱)</label>
-          <label><input type="radio" name="cries3" value="2">افزایش ضربان قلب یا فشار خون بیشتر از %20 قبل از عمل است (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۴. حالت صورت</label>
-        <div class="options">
-          <label><input type="radio" name="cries4" value="0" checked>حالت طبیعی (۰)</label>
-          <label><input type="radio" name="cries4" value="1">حالت شکلک درآوردن (۱)</label>
-          <label><input type="radio" name="cries4" value="2">حالت شکلک درآوردن و نالیدن (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۵. بی‌خوابی</label>
-        <div class="options">
-          <label><input type="radio" name="cries5" value="0" checked>خواب مداوم (۰)</label>
-          <label><input type="radio" name="cries5" value="1">مرتب از خواب بیدار میشود. مدت زمان زیادی بیدار است. (۱)</label>
-          <label><input type="radio" name="cries5" value="2">همیشه و بطور مداوم بیدار است (۲)</label>
-        </div>
-      </div>
-
-      <div class="result-box">
-        <div class="score-line">نمره کل: <span id="cries-score">0</span> / 10</div>
-        <span id="cries-level" class="level-badge level-none">بدون درد</span>
-      </div>
-
-      <div class="decision-box">
-        <h3>تصمیم‌یار بالینی</h3>
-        <div id="cries-decision"></div>
-      </div>
+      <div class="warning-strip"><svg class="icon"><use href="#i-alert"></use></svg><div>* در متن PDF برای برخی امتیازهای مرزی (برای نمونه NIPS=6 و بازه 1–3 در CRIES) طبقه‌بندی صریح ارائه نشده است. رابط برای جلوگیری از حالت بدون طبقه، این مرزها را به‌صورت محافظه‌کارانه نمایش می‌دهد؛ قضاوت بالینی مقدم است.</div></div>
     </div>
   </section>
-
-  <!-- ================= MPAT ================= -->
-  <section id="mpat" class="tool-panel">
-    <div class="card">
-      <h2>MPAT — Multidimensional Pain Assessment Tool</h2>
-      <span class="subnote">دامنه نمره: ۰ تا ۲۰ (۱۰ شاخص × ۰-۲)</span><br>
-      <span class="subnote">مناسب برای نوزادان تحت ونتیلاتور، درد مزمن یا بستری در PICU</span>
-
-      <div class="indicator">
-        <label class="ind-title">۱. تونیسیته</label>
-        <div class="options">
-          <label><input type="radio" name="mpat1" value="0" checked>ریلکس نرمال بدون فلکسیون (۰)</label>
-          <label><input type="radio" name="mpat1" value="1">اندام‌ها کاملاً باز، بدن سفت، شانه‌ها افتاده روی تخت (۱)</label>
-          <label><input type="radio" name="mpat1" value="2">فلکسیون شدید، گارد اندام‌ها، شانه و گردن مقاوم به تغییر پوزیشن (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۲. الگوی خواب</label>
-        <div class="options">
-          <label><input type="radio" name="mpat2" value="0" checked>ریلکس (۰)</label>
-          <label><input type="radio" name="mpat2" value="1">به‌راحتی بیدار می‌شود (۱)</label>
-          <label><input type="radio" name="mpat2" value="2">با کوچک‌ترین محرک آژیته و وحشت‌زده می‌شود (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۳. گریه</label>
-        <div class="options">
-          <label><input type="radio" name="mpat3" value="0" checked>ندارد (۰)</label>
-          <label><input type="radio" name="mpat3" value="1">دارد، قابل کنترل (۱)</label>
-          <label><input type="radio" name="mpat3" value="2">دارد، غیرقابل کنترل، به سادگی بعد از دستکاری آرام نمیشود؛ بلند گریه میکند (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۴. حالات صورت</label>
-        <div class="options">
-          <label><input type="radio" name="mpat4" value="0" checked>ریلکس / آرام (۰)</label>
-          <label><input type="radio" name="mpat4" value="1">اخمو / چین کم‌عمق/چشم ها نیمه بسته (۱)</label>
-          <label><input type="radio" name="mpat4" value="2">چشم محکم فشرده / چین عمیق (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۵. رنگ پوست</label>
-        <div class="options">
-          <label><input type="radio" name="mpat5" value="0" checked>صورتی / پرفیوژن عالی (۰)</label>
-          <label><input type="radio" name="mpat5" value="1">موتلینگ / رنگ‌پریده (۱)</label>
-          <label><input type="radio" name="mpat5" value="2">خیلی رنگ‌پریده / برافروخته / عرق کف دست (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۶. تنفس</label>
-        <div class="options">
-          <label><input type="radio" name="mpat6" value="0" checked>نرمال (۰)</label>
-          <label><input type="radio" name="mpat6" value="1">تاکی‌پنه هنگام استراحت (۱)</label>
-          <label><input type="radio" name="mpat6" value="2">آپنه (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۷. ضربان قلب</label>
-        <div class="options">
-          <label><input type="radio" name="mpat7" value="0" checked>نرمال (۰)</label>
-          <label><input type="radio" name="mpat7" value="1">تاکی‌کاردی هنگام استراحت (۱)</label>
-          <label><input type="radio" name="mpat7" value="2">نوسان چه هنگام استراحت و چه هنگام دستکاری (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۸. اشباع اکسیژن</label>
-        <div class="options">
-          <label><input type="radio" name="mpat8" value="0" checked onchange="clearMpat8Checkboxes()">نرمال (۰)</label>
-          <label><input type="radio" name="mpat8" value="1" onchange="clearMpat8Checkboxes()">کاهش اشباع گذرا (۱)</label>
-          <!-- دو چک‌باکس برای مقدار ۲ -->
-          <label><input type="checkbox" name="mpat8_2a" value="2" onchange="updateMpat8FromCheckbox(event)">کاهش اشباع با دستکاری (۲)</label>
-          <label><input type="checkbox" name="mpat8_2b" value="2" onchange="updateMpat8FromCheckbox(event)">کاهش اشباع بدون دستکاری (۲)</label>
-          <!-- رادیوی مخفی برای مقدار ۲ (برای جاوااسکریپت اصلی) -->
-          <input type="radio" name="mpat8" value="2" style="display:none;" id="mpat8_hidden_2">
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۹. فشار خون</label>
-        <div class="options">
-          <label><input type="radio" name="mpat9" value="0" checked>نرمال (۰)</label>
-          <label><input type="radio" name="mpat9" value="1">نوسان با دستکاری (۱)</label>
-          <label><input type="radio" name="mpat9" value="2">افزایش / کاهش فشار، هنگام استراحت (۲)</label>
-        </div>
-      </div>
-
-      <div class="indicator">
-        <label class="ind-title">۱۰. قضاوت بالینی کادر درمان (Nurse's Perception)</label>
-        <div class="options">
-          <label><input type="radio" name="mpat10" value="0" checked>نوزاد آرام است و دردی ندارد (۰)</label>
-          <label><input type="radio" name="mpat10" value="1">شیرخوار فقط هنگام دستکاری درد دارد (۱)</label>
-          <label><input type="radio" name="mpat10" value="2">شیرخوار دچار درد است (۲)</label>
-        </div>
-      </div>
-
-      <div class="result-box">
-        <div class="score-line">نمره کل: <span id="mpat-score">0</span> / 20</div>
-        <span id="mpat-level" class="level-badge level-none">بدون درد</span>
-      </div>
-
-      <div class="decision-box">
-        <h3>تصمیم‌یار بالینی</h3>
-        <div id="mpat-decision"></div>
-      </div>
-    </div>
-  </section>
-
-  <div style="display:flex;gap:10px;margin-top:15px;margin-bottom:15px;flex-wrap:wrap;">
-    <button onclick="saveResultAsPDF()" style="background:var(--primary);color:#fff;border:none;padding:8px 24px;border-radius:8px;font-family:inherit;font-size:16px;cursor:pointer;transition:0.2s;flex:1;min-width:120px;font-weight:bold;">
-      🖨️ ذخیره PDF
-    </button>
-  </div>
-
-  <!-- ================= SECTION 5 TABLE ================= -->
-  <details class="card">
-    <summary style="cursor:pointer;font-size:1.25rem;font-weight:bold;color:var(--primary-dark);list-style:none;display:flex;align-items:center;gap:8px;">
-      📋 جدول رویه‌های دردناک و مداخلات پیشنهادی
-      <span style="font-size:0.8rem;color:var(--muted);font-weight:normal;">(جهت مشاهده کلیک کنید)</span>
-    </summary>
-    <table>
-      <caption>✔ = توصیه‌شده | — = ثبت نشده / مناسب نیست</caption>
-      <thead>
-        <tr>
-          <th>رویه</th>
-          <th>شیر مادر / مکیدن</th>
-          <th>سوکروز</th>
-          <th>روش دارویی</th>
-          <th>مراقبت کانگورویی</th>
-        </tr>
-      </thead>
-      <tbody id="procedures-table"></tbody>
-    </table>
-  </details>
 </main>
 
-<script>
-/* ---------- Tab switching ---------- */
-document.querySelectorAll('.tool-tabs .tab').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.tool-tabs .tab').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tool-panel').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.tool).classList.add('active');
-  });
-});
+<div class="mobile-summary-bar" id="mobile-summary-bar" aria-live="polite">
+  <div class="mobile-summary-main"><div class="mobile-summary-label">مسیر بالینی</div><div class="mobile-summary-value" id="mobile-summary-value">زمینه بالینی را تکمیل کنید</div></div>
+  <div class="mobile-summary-score" id="mobile-summary-score">—</div>
+</div>
+<footer class="footer-note">این ابزار یک تصمیم‌یار بالینی مبتنی بر گایدلاین ارسالی است و جایگزین قضاوت بالینی، پایش بیمار یا دستور پزشک نیست.</footer>
 
-/* ---------- Decision engine ---------- */
-const RECS = {
-  none:{
-    title:'بدون درد',
-    text:'مراقبت معمول نوزاد ادامه یابد؛ نیاز به مداخله خاص نیست.',
-    follow:'بازبینی هر ۴ ساعت',
-    cls:'level-none'
+<script id="app-core">
+(function(){
+const SCALES = {
+  PIPP: {
+    key:'PIPP', title:'PIPP — Premature Infant Pain Profile', max:21,
+    context:'مناسب برای ارزیابی درد حاد، به‌ویژه در نوزادان پره‌ترم. پیش از اقدام ۱۵ ثانیه خط پایه و پس از اقدام ۳۰ ثانیه ارزیابی شود.',
+    items:[
+      {id:'ga',label:'سن حاملگی',options:[{value:0,label:'۳۶ هفته یا بیشتر'},{value:1,label:'۳۲ تا ۳۵ هفته و ۶ روز'},{value:2,label:'۲۸ تا ۳۱ هفته و ۶ روز'},{value:3,label:'کمتر از ۲۸ هفته'}]},
+      {id:'behavior',label:'وضعیت رفتاری',help:'مشاهده ۱۵ ثانیه‌ای خط پایه',options:[{value:0,label:'فعال یا بیدار؛ چشم باز؛ حرکات صورت'},{value:1,label:'آرام یا بیدار؛ چشم باز؛ بدون حرکات صورت'},{value:2,label:'فعال یا خواب؛ چشم بسته؛ حرکات صورت'},{value:3,label:'خواب یا آرام؛ چشم بسته؛ بدون حرکات صورت'}]},
+      {id:'hr',label:'افزایش ضربان قلب',help:'حداکثر تغییر طی مشاهده ۳۰ ثانیه‌ای',options:[{value:0,label:'۰–۴ ضربه در دقیقه'},{value:1,label:'۵–۱۴ ضربه در دقیقه'},{value:2,label:'۱۵–۲۴ ضربه در دقیقه'},{value:3,label:'۲۵ ضربه یا بیشتر در دقیقه'}]},
+      {id:'spo2',label:'کاهش اشباع اکسیژن',help:'حداقل اشباع طی مشاهده ۳۰ ثانیه‌ای',options:[{value:0,label:'۰–۲.۴٪ کاهش'},{value:1,label:'۲.۵–۴.۹٪ کاهش'},{value:2,label:'۵–۷.۴٪ کاهش'},{value:3,label:'۷.۵٪ یا بیشتر کاهش'}]},
+      {id:'brow',label:'درهم کشیدن ابروها',options:[{value:0,label:'۰–۹٪ زمان'},{value:1,label:'۱۰–۳۹٪ زمان'},{value:2,label:'۴۰–۶۹٪ زمان'},{value:3,label:'۷۰٪ یا بیشتر از زمان'}]},
+      {id:'eye',label:'فشردن چشم‌ها',options:[{value:0,label:'۰–۹٪ زمان'},{value:1,label:'۱۰–۳۹٪ زمان'},{value:2,label:'۴۰–۶۹٪ زمان'},{value:3,label:'۷۰٪ یا بیشتر از زمان'}]},
+      {id:'nasolabial',label:'خط کنار پره‌های بینی',options:[{value:0,label:'۰–۹٪ زمان'},{value:1,label:'۱۰–۳۹٪ زمان'},{value:2,label:'۴۰–۶۹٪ زمان'},{value:3,label:'۷۰٪ یا بیشتر از زمان'}]}
+    ]
   },
-  mild:{
-    title:'درد خفیف',
-    text:'روش‌های غیردارویی: سوکروز (۲ سی‌سی برای نوزاد ترم / ۰.۵ تا ۱ سی‌سی برای نوزاد پره‌ترم)، تشویق شیر مادر، مراقبت کانگورویی، ماساژ ۵ دقیقه‌ای.',
-    follow:'بازبینی هر ۲ ساعت',
-    cls:'level-mild'
+  NIPS: {
+    key:'NIPS', title:'NIPS — Neonatal Infant Pain Scale', max:7,
+    context:'برای دردهای حاد ناشی از اقدامات تشخیصی/درمانی در نوزادان نارس و ترم تا شش هفته؛ قبل و بعد از اقدام دردناک استفاده شود.',
+    items:[
+      {id:'face',label:'حالت صورت',options:[{value:0,label:'حالت آرامش'},{value:1,label:'عضلات صورت سفت و کشیده و اخم‌آلود'}]},
+      {id:'cry',label:'گریه',options:[{value:0,label:'آرام، بدون گریه'},{value:1,label:'ناله ملایم، گریه متناوب'},{value:2,label:'جیغ/فریاد یا گریه بی‌صدا که با حرکات صورت مشخص است'}]},
+      {id:'breathing',label:'الگوی تنفس',options:[{value:0,label:'آرام و طبیعی'},{value:1,label:'نامنظم، سریع یا نگه‌داشتن تنفس'}]},
+      {id:'arms',label:'دست‌ها',options:[{value:0,label:'شل، بدون انقباض عضلات، حرکات معمولی'},{value:1,label:'انقباض دست‌ها یا حرکات سریع باز و بسته شدن'}]},
+      {id:'legs',label:'پاها',options:[{value:0,label:'شل، بدون انقباض؛ گاهی حرکت پاها'},{value:1,label:'سفتی، دشواری باز/بسته شدن، کشیدن پا یا حرکات سریع'}]},
+      {id:'arousal',label:'وضعیت تحریک‌پذیری',options:[{value:0,label:'خواب/بیدار و آرام'},{value:1,label:'تحریک‌پذیر، بی‌قرار و غلت‌زن'}]}
+    ]
   },
-  moderate:{
-    title:'درد متوسط',
-    text: 'ترکیب روش‌های غیردارویی (سوکروز، شیرمادر، مراقبت کانگورویی، ماساژ ۵ دقیقه‌ای) + پاراستامول (۱۰ تا ۱۵ mg/kg).',
-    follow:'بازبینی ۳۰ دقیقه تا ۴ ساعت بعد؛ در صورت تداوم درد، اطلاع به پزشک',
-    cls:'level-moderate'
+  CRIES: {
+    key:'CRIES', title:'CRIES — Postoperative Neonatal Pain', max:10,
+    context:'برای ارزیابی درد پس از عمل جراحی در نوزادان نارس و ترم؛ هر شاخص ۰ تا ۲ امتیاز دارد.',
+    items:[
+      {id:'cry',label:'گریه',options:[{value:0,label:'گریه نمی‌کند یا صدای گریه بلند نیست'},{value:1,label:'گریه بلند؛ به راحتی ساکت می‌شود'},{value:2,label:'گریه خیلی بلند؛ با آرام کردن ساکت نمی‌شود'}]},
+      {id:'oxygen',label:'نیاز به اکسیژن برای حفظ اشباع بالاتر از ۹۵٪',options:[{value:0,label:'اکسیژن مورد نیاز نیست'},{value:1,label:'کمتر از ۳۰٪ اکسیژن مورد نیاز است'},{value:2,label:'بیشتر از ۳۰٪ اکسیژن مورد نیاز است'}]},
+      {id:'vitals',label:'علائم حیاتی (ضربان قلب / فشار خون)',options:[{value:0,label:'برابر یا کمتر از قبل عمل'},{value:1,label:'افزایش کمتر از ۲۰٪ نسبت به قبل عمل'},{value:2,label:'افزایش بیشتر از ۲۰٪ نسبت به قبل عمل'}]},
+      {id:'face',label:'حالت‌های صورت',options:[{value:0,label:'حالت طبیعی'},{value:1,label:'شکلک درآوردن'},{value:2,label:'شکلک درآوردن همراه با نالیدن'}]},
+      {id:'sleep',label:'بی‌خوابی',options:[{value:0,label:'خواب مداوم'},{value:1,label:'مرتب بیدار می‌شود و مدت زیادی بیدار است'},{value:2,label:'همیشه و به‌طور مداوم بیدار است'}]}
+    ]
   },
-  severe:{
-    title:'درد شدید',
-    text: 'ترکیب روش‌های غیردارویی (سوکروز، شیرمادر، مراقبت کانگورویی، ماساژ ۵ دقیقه‌ای) + مورفین (۱۰ mcg/kg/hr) یا فنتانیل (۱ تا ۴ mcg/kg).',
-    follow:'بازبینی ۳۰ دقیقه تا ۴ ساعت بعد؛ در صورت تداوم درد، اطلاع به پزشک',
-    cls:'level-severe'
+  MPAT: {
+    key:'MPAT', title:'MPAT — Modified Pain Assessment Tool', max:20,
+    context:'ابزار چندبعدی رفتاری/فیزیولوژیک برای نوزادان بستری؛ مناسب تهویه مکانیکی یا درد مزمن.',
+    items:[
+      {id:'tone',label:'تونیسیته',options:[{value:0,label:'ریلکس، نرمال، بدون فلکسیون'},{value:1,label:'اندام‌ها کاملاً باز، بدن سفت، شانه‌ها افتاده روی تخت'},{value:2,label:'فلکسیون شدید، گارد اندام‌ها، مقاومت شانه/گردن به تغییر پوزیشن'}]},
+      {id:'sleep',label:'الگوی خواب',options:[{value:0,label:'ریلکس'},{value:1,label:'به راحتی بیدار می‌شود'},{value:2,label:'با کوچک‌ترین محرک آژیته و وحشت‌زده می‌شود'}]},
+      {id:'cry',label:'گریه',options:[{value:0,label:'ندارد'},{value:1,label:'دارد ولی قابل کنترل است'},{value:2,label:'پس از دستکاری به سادگی آرام نمی‌شود و بلند گریه می‌کند'}]},
+      {id:'face',label:'حالات صورت',options:[{value:0,label:'ریلکس / آرام'},{value:1,label:'اخمو، چین کم‌عمق یا چشم‌های نیمه‌بسته'},{value:2,label:'چشم‌های محکم فشرده یا چین‌های عمیق'}]},
+      {id:'skin',label:'رنگ پوست',options:[{value:0,label:'صورتی / پرفیوژن عالی'},{value:1,label:'موتلینگ / رنگ‌پریده'},{value:2,label:'خیلی رنگ‌پریده یا برافروخته / عرق کف دست'}]},
+      {id:'breathing',label:'تنفس',options:[{value:0,label:'نرمال'},{value:1,label:'تاکی‌پنه هنگام استراحت'},{value:2,label:'آپنه'}]},
+      {id:'heart',label:'ضربان قلب',options:[{value:0,label:'نرمال'},{value:1,label:'تاکی‌کاردی هنگام استراحت'},{value:2,label:'نوسان هنگام استراحت و دستکاری'}]},
+      {id:'spo2',label:'میزان اشباع اکسیژن خون شریانی',options:[{value:0,label:'نرمال'},{value:1,label:'کاهش اشباع گذرا'},{value:2,label:'کاهش اشباع با یا بدون دستکاری'}]},
+      {id:'bp',label:'فشار خون',options:[{value:0,label:'نرمال'},{value:1,label:'نوسان با دستکاری'},{value:2,label:'افزایش یا کاهش فشار هنگام استراحت'}]},
+      {id:'clinical',label:'تصمیم / قضاوت کادر درمان',options:[{value:0,label:'درد ندارد'},{value:1,label:'فقط هنگام دستکاری درد دارد'},{value:2,label:'شیرخوار دچار درد است'}]}
+    ]
   }
 };
 
-function renderResult(prefix, score, levelKey, levelLabel){
-  document.getElementById(prefix+'-score').textContent = score;
-  const badge = document.getElementById(prefix+'-level');
-  badge.textContent = levelLabel;
-  badge.className = 'level-badge ' + RECS[levelKey].cls;
-
-  const r = RECS[levelKey];
-  document.getElementById(prefix+'-decision').innerHTML =
-    `<strong>${r.title}</strong><br>${r.text}<br><span class="follow-time">${r.follow}</span>`;
+function recommendScale(context={}){
+  if(context.postoperative || context.assessmentType === 'postop') return 'CRIES';
+  if(context.ventilated || context.chronicPain) return 'MPAT';
+  if(context.preterm && context.assessmentType === 'acute') return 'PIPP';
+  if(context.assessmentType === 'acute') return 'NIPS';
+  return 'MPAT';
 }
 
-function sumIndicators(prefix, count){
-  let total = 0;
-  for(let i=1;i<=count;i++){
-    const sel = document.querySelector(`input[name="${prefix}${i}"]:checked`);
-    if(sel) total += parseInt(sel.value,10);
+
+function pippHrScore(baselineHr,maxHr){
+  const delta=Math.max(0,Number(maxHr)-Number(baselineHr));
+  if(delta<=4)return 0;
+  if(delta<=14)return 1;
+  if(delta<=24)return 2;
+  return 3;
+}
+function pippSpo2Score(baselineSpo2,minSpo2){
+  const drop=Math.max(0,Number(baselineSpo2)-Number(minSpo2));
+  if(drop<=2.4)return 0;
+  if(drop<=4.9)return 1;
+  if(drop<=7.4)return 2;
+  return 3;
+}
+
+function classifyScore(scaleKey, score){
+  if(scaleKey === 'PIPP'){
+    if(score <= 6) return {key:'none',label:'بدون درد'};
+    if(score <= 12) return {key:'moderate',label:'درد خفیف تا متوسط'};
+    return {key:'severe',label:'درد شدید'};
   }
-  return total;
+  if(scaleKey === 'NIPS'){
+    if(score === 0) return {key:'none',label:'بدون درد'};
+    if(score <= 2) return {key:'mild',label:'درد خفیف'};
+    if(score <= 5) return {key:'moderate',label:'درد متوسط'};
+    return {key:'severe',label:'درد شدید'};
+  }
+  if(scaleKey === 'CRIES'){
+    if(score === 0) return {key:'none',label:'بدون درد'};
+    if(score <= 3) return {key:'mild',label:'درد خفیف / زیر آستانه متوسط'};
+    if(score <= 6) return {key:'moderate',label:'درد متوسط'};
+    return {key:'severe',label:'درد شدید'};
+  }
+  if(scaleKey === 'MPAT'){
+    if(score === 0) return {key:'none',label:'بدون درد'};
+    if(score <= 3) return {key:'observe',label:'زیر آستانه درد خفیف'};
+    if(score <= 6) return {key:'mild',label:'درد خفیف'};
+    if(score <= 12) return {key:'moderate',label:'درد متوسط'};
+    return {key:'severe',label:'درد شدید'};
+  }
+  return {key:'observe',label:'نیازمند بررسی'};
 }
 
-/* ---------- PIPP ---------- */
-function calcPIPP(){
-  const score = sumIndicators('pipp', 7);
-  let levelKey, label;
-  if(score <= 6){ levelKey='none'; label='بدون درد'; }
-  else if(score <= 12){ levelKey='moderate'; label='خفیف تا متوسط'; }
-  else { levelKey='severe'; label='شدید'; }
-  renderResult('pipp', score, levelKey, label);
-}
+window.AppCore = { SCALES, recommendScale, classifyScore, pippHrScore, pippSpo2Score };
+})();
+</script>
 
-/* ---------- NIPS ---------- */
-function calcNIPS(){
-  const score = sumIndicators('nips', 6);
-  let levelKey, label;
-  if(score === 0){ levelKey='none'; label='بدون درد'; }
-  else if(score <= 3){ levelKey='mild'; label='خفیف'; }
-  else if(score <= 5){ levelKey='moderate'; label='متوسط'; }
-  else { levelKey='severe'; label='شدید'; }
-  renderResult('nips', score, levelKey, label);
-}
+<script>
+const { SCALES, recommendScale, classifyScore, pippHrScore, pippSpo2Score } = window.AppCore;
+const state = {
+  view:'clinical', step:1, context:{}, recommendedScale:'NIPS', clinicalScale:null,
+  clinicalResult:null, reassessmentResult:null, interventions:[], quickScale:null, timer:null, timerSeconds:0
+};
+const $ = (sel,root=document)=>root.querySelector(sel);
+const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
+const icon = id => `<svg class="icon"><use href="#${id}"></use></svg>`;
 
-/* ---------- CRIES ---------- */
-function calcCRIES(){
-  const crying = parseInt(document.querySelector('input[name="cries1"]:checked').value,10);
-  const o2 = parseInt(document.querySelector('input[name="cries2"]:checked').value,10);
-  const vitals = parseInt(document.querySelector('input[name="cries3"]:checked').value,10);
-  const facial = parseInt(document.querySelector('input[name="cries4"]:checked').value,10);;
-  const sleep = parseInt(document.querySelector('input[name="cries5"]:checked').value,10);
-  const score = crying + o2 + vitals + facial + sleep;
+const SCALE_DESCRIPTIONS = {
+  PIPP:'پروفایل درد شیرخواران پره‌ترم؛ مناسب درد حاد و نوزادان نارس.',
+  NIPS:'مقیاس درد نوزاد؛ مناسب درد حاد ناشی از اقدامات تشخیصی/درمانی.',
+  CRIES:'ابزار ارزیابی درد پس از عمل جراحی.',
+  MPAT:'ابزار چندبعدی؛ مناسب تهویه مکانیکی، درد مزمن یا پایش بستری.'
+};
 
-  let levelKey, label;
-  if(score === 0){ levelKey='none'; label='بدون درد'; }
-  else if(score <= 3){ levelKey='mild'; label='خفیف'; }
-  else if(score <= 6){ levelKey='moderate'; label='متوسط'; }
-  else { levelKey='severe'; label='شدید'; }
-  renderResult('cries', score, levelKey, label);
-}
-
-/* ---------- MPAT ---------- */
-function calcMPAT(){
-  const score = sumIndicators('mpat', 10);
-  let levelKey, label;
-
-  // فقط یک نسخه مطابق با گایدلاین PDF (صفحه ۹):
-  // ۴-۶ = خفیف, ۷-۱۲ = متوسط, >۱۲ = شدید
-  if(score <= 3){ levelKey='none'; label='بدون درد'; }
-  else if(score <= 6){ levelKey='mild'; label='خفیف'; }
-  else if(score <= 12){ levelKey='moderate'; label='متوسط'; }
-  else { levelKey='severe'; label='شدید'; }
-
-  renderResult('mpat', score, levelKey, label);
-}
-
-/* ---------- Event bindings ---------- */
-document.querySelectorAll('#pipp input[type=radio]').forEach(el=>el.addEventListener('change', calcPIPP));
-document.querySelectorAll('#nips input[type=radio]').forEach(el=>el.addEventListener('change', calcNIPS));
-document.querySelectorAll('#cries input[type=radio]').forEach(el=>el.addEventListener('change', calcCRIES));
-document.querySelectorAll('#mpat input[type=radio]').forEach(el=>el.addEventListener('change', calcMPAT));
-
-/* ---------- Section 5 table ---------- */
-const procedures = [
-  ['خونگیری از پاشنه پا (هیل استیک)', true, true, true, false],
-  ['خونگیری وریدی', true, true, false, false],
-  ['تزریق عضلانی / زیرجلدی', true, true, true, false],
-  ['تعبیه کاتتر ورید محیطی', true, true, true, false],
-  ['خونگیری شریانی / کاتتر شریانی', true, true, false, false],
-  ['گذاشتن کاتتر نافی', true, true, false, false],
-  ['گرفتن مایع مغزی نخاعی (LP)', true, true, true, false],
-  ['تعبیه کاتتر ورید مرکزی', true, true, true, false],
-  ['تعبیه لوله بینی‌معدنی (NG)', true, true, false, false],
-  ['جدا کردن چسب‌ها', true, true, true, false],
-  ['ساکشن لوله تراشه', false, false, true, false],
-  ['کاتتر مثانه / سوپراپوبیک', true, true, false, false],
+const PROCEDURES = [
+  {name:'گرفتن خون از پاشنه پا',milk:true,sucrose:true,drug:false,kmc:true},
+  {name:'گرفتن خون از ورید',milk:true,sucrose:true,drug:false,kmc:false},
+  {name:'تزریق عضلانی / زیرجلدی (واکسیناسیون)',milk:true,sucrose:true,drug:false,kmc:true},
+  {name:'تعبیه کاتتر ورید محیطی',milk:true,sucrose:true,drug:true,kmc:false},
+  {name:'گرفتن خون شریانی یا گذاشتن کاتتر شریانی',milk:true,sucrose:true,drug:false,kmc:false},
+  {name:'گذاشتن کاتتر نافی',milk:true,sucrose:true,drug:false,kmc:false},
+  {name:'گرفتن مایع مغزی نخاعی',milk:true,sucrose:true,drug:true,kmc:false},
+  {name:'تعبیه کاتتر ورید مرکزی',milk:true,sucrose:true,drug:true,kmc:false},
+  {name:'تعبیه لوله بینی‌معده‌ای',milk:true,sucrose:true,drug:false,kmc:false},
+  {name:'جدا کردن چسب‌ها',milk:true,sucrose:true,drug:false,kmc:true},
+  {name:'ساکشن لوله تراشه',milk:false,sucrose:false,drug:true,kmc:false},
+  {name:'وارد کردن کاتتر مثانه یا انجام سوپراپوبیک',milk:true,sucrose:true,drug:false,kmc:false}
 ];
 
-const tbody = document.getElementById('procedures-table');
-procedures.forEach(row=>{
-  const tr = document.createElement('tr');
-  const cellMark = v => `<td class="${v?'check':'dash'}">${v?'✔':'—'}</td>`;
-  tr.innerHTML = `<td>${row[0]}</td>${cellMark(row[1])}${cellMark(row[2])}${cellMark(row[3])}${cellMark(row[4])}`;
-  tbody.appendChild(tr);
+function setView(view){
+  state.view = view;
+  $$('.nav-btn').forEach(btn=>{const active=btn.dataset.view===view;btn.classList.toggle('active',active);btn.setAttribute('aria-selected',String(active));});
+  $$('[data-view-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.viewPanel===view));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('.nav-btn').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.view)));
+$$('[data-go-view]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.goView)));
+
+function readContext(){
+  const form = $('#clinicalContextForm');
+  const fd = new FormData(form);
+  return {
+    recordId:(fd.get('recordId')||'').trim(), ageDays:fd.get('ageDays')||'', weightGrams:fd.get('weightGrams')||'', sex:fd.get('sex')||'',
+    preterm:fd.has('preterm'), ventilated:fd.has('ventilated'), chronicPain:fd.has('chronicPain'), postoperative:fd.has('postoperative'),
+    assessmentType:fd.get('assessmentType')||'acute'
+  };
+}
+function updateRecommendation(){
+  state.context = readContext();
+  state.recommendedScale = recommendScale(state.context);
+  $('#recommend-tool').textContent = state.recommendedScale;
+  $('#recommend-desc').textContent = SCALE_DESCRIPTIONS[state.recommendedScale];
+  $('#scale-recommendation').classList.add('visible');
+  updateSummary();
+}
+$('#clinicalContextForm').addEventListener('change',updateRecommendation);
+$('#clinicalContextForm').addEventListener('input',e=>{if(['recordId','ageDays','weightGrams'].includes(e.target.name)){state.context=readContext();}});
+$('#start-recommended').addEventListener('click',()=>startClinicalAssessment(state.recommendedScale));
+$$('.scale-override').forEach(btn=>btn.addEventListener('click',()=>startClinicalAssessment(btn.dataset.scale)));
+
+function setStep(step){
+  state.step = step;
+  $$('[data-workflow-step]').forEach(el=>el.classList.toggle('active',Number(el.dataset.workflowStep)===step));
+  $$('[data-step-chip]').forEach(el=>{const n=Number(el.dataset.stepChip);el.classList.toggle('current',n===step);el.classList.toggle('done',n<step);});
+  updateSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('[data-back-step]').forEach(btn=>btn.addEventListener('click',()=>setStep(Number(btn.dataset.backStep))));
+
+function startClinicalAssessment(scaleKey){
+  state.context = readContext();
+  state.clinicalScale = scaleKey;
+  state.clinicalResult = null;
+  state.reassessmentResult = null;
+  renderAssessment(scaleKey,'clinical-assessment-host','clinical');
+  setStep(2);
+}
+
+function clearPippTimers(host){
+  (host._pippIntervals||[]).forEach(clearInterval);
+  host._pippIntervals=[];
+}
+function pippOptionCards(mode,item){
+  const name=`${mode}-PIPP-${item.id}`;
+  return `<fieldset class="assessment-item" data-assessment-item="${item.id}"><legend class="sr-only">${item.label}</legend><div class="item-title-row"><div><div class="item-title">${item.label}</div>${item.help?`<div class="item-help">${item.help}</div>`:''}</div></div><div class="option-grid">${item.options.map(opt=>`<label class="option-card"><input type="radio" name="${name}" value="${opt.value}"><span class="option-copy"><span>${opt.label}</span><span class="option-score">${opt.value}</span></span></label>`).join('')}</div></fieldset>`;
+}
+function renderPippAssessment(hostId,mode){
+  const scale=SCALES.PIPP;
+  const host=document.getElementById(hostId);
+  clearPippTimers(host);
+  host.classList.remove('quick-host-empty');
+  host.dataset.mode=mode;host.dataset.scale='PIPP';host.dataset.pippBaselineDone='false';host.dataset.pippPostDone='false';host.dataset.pippBaselineConfirmed='false';
+  const ga=scale.items.find(i=>i.id==='ga'),behavior=scale.items.find(i=>i.id==='behavior');
+  const faceItems=['brow','eye','nasolabial'].map(id=>scale.items.find(i=>i.id===id));
+  host.innerHTML=`
+    <div class="assessment-head"><div><h3>${scale.title}</h3><p>${scale.context}</p></div><span class="scale-tag">۳ مرحله · ۷ شاخص · حداکثر ${scale.max}</span></div>
+    <section class="pipp-stage" data-pipp-stage="baseline">
+      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۱</span><span>ساخت خط پایه — ۱۵ ثانیه قبل از اقدام</span></div><span class="pipp-stage-status" data-pipp-stage-status="baseline">در انتظار مشاهده</span></div>
+      <div class="pipp-stage-body">
+        <div class="pipp-instruction">${icon('i-info')}<div><strong>طبق گایدلاین:</strong> پیش از اقدام درمانی/دردناک، نوزاد ۱۵ ثانیه مشاهده شود و ضربان قلب و اشباع اکسیژن به‌عنوان خط پایه ثبت شوند. وضعیت رفتاری نیز در همین مشاهده ثبت می‌شود.</div></div>
+        ${pippOptionCards(mode,ga)}
+        ${pippOptionCards(mode,behavior)}
+        <div class="pipp-metric-grid">
+          <div class="pipp-metric"><label for="${mode}-pipp-baseline-hr">ضربان قلب خط پایه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-baseline-hr" data-pipp-field="pipp-baseline-hr" type="number" inputmode="decimal" min="0" step="1" placeholder="مثلاً ۱۴۲"><span class="pipp-unit">bpm</span></div></div>
+          <div class="pipp-metric"><label for="${mode}-pipp-baseline-spo2">SpO₂ خط پایه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-baseline-spo2" data-pipp-field="pipp-baseline-spo2" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="مثلاً ۹۸"><span class="pipp-unit">%</span></div></div>
+        </div>
+        <div class="pipp-timer-panel"><div><div class="field-label">زمان مشاهده خط پایه</div><div class="pipp-timer-copy">HR، SpO₂ و وضعیت رفتاری را در این بازه مشاهده و ثبت کنید.</div></div><div class="timer-box"><span class="pipp-timer-display" data-pipp-display="pipp-baseline-timer">00:15</span><button class="btn btn-secondary" type="button" data-pipp-timer="pipp-baseline-timer">شروع ۱۵ ثانیه</button></div></div>
+        <div class="pipp-gate-actions"><button class="btn btn-primary" type="button" data-pipp-confirm-baseline disabled>تأیید خط پایه و ادامه${icon('i-chevron')}</button></div>
+      </div>
+    </section>
+    <section class="pipp-stage locked" data-pipp-stage="procedure" aria-disabled="true">
+      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۲</span><span>ثبت انجام اقدام دردناک / درمانی</span></div><span class="pipp-stage-status" data-pipp-stage-status="procedure">قفل تا ثبت خط پایه</span></div>
+      <div class="pipp-stage-body"><div class="pipp-instruction">${icon('i-alert')}<div>مرحله ۳۰ ثانیه‌ای باید بلافاصله پس از اقدام آغاز شود. انجام اقدام را تأیید کنید و سپس مشاهده پس از اقدام را شروع کنید.</div></div><label class="check-row"><input type="checkbox" data-pipp-procedure-confirm><span>اقدام دردناک / درمانی انجام شد.</span></label><div class="pipp-gate-actions"><button class="btn btn-primary" type="button" data-pipp-start-post disabled>شروع مشاهده ۳۰ ثانیه‌ای${icon('i-chevron')}</button></div></div>
+    </section>
+    <section class="pipp-stage locked" data-pipp-stage="post" aria-disabled="true">
+      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۳</span><span>مشاهده ۳۰ ثانیه‌ای بلافاصله پس از اقدام</span></div><span class="pipp-stage-status" data-pipp-stage-status="post">در انتظار اقدام</span></div>
+      <div class="pipp-stage-body">
+        <div class="pipp-instruction">${icon('i-info')}<div>در ۳۰ ثانیه پس از اقدام، <strong>بیشترین HR</strong>، <strong>کمترین SpO₂</strong> و درصد زمان بروز نشانه‌های چهره را ثبت کنید. امتیاز HR و SpO₂ به‌صورت خودکار نسبت به خط پایه محاسبه می‌شود.</div></div>
+        <div class="pipp-timer-panel"><div><div class="field-label">زمان مشاهده پس از اقدام</div><div class="pipp-timer-copy">بلافاصله پس از اقدام شروع شود.</div></div><div class="timer-box"><span class="pipp-timer-display" data-pipp-display="pipp-post-timer">00:30</span><button class="btn btn-secondary" type="button" data-pipp-timer="pipp-post-timer">شروع مجدد ۳۰ ثانیه</button></div></div>
+        <div class="pipp-metric-grid">
+          <div class="pipp-metric"><label for="${mode}-pipp-post-max-hr">حداکثر HR طی ۳۰ ثانیه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-post-max-hr" data-pipp-field="pipp-post-max-hr" type="number" inputmode="decimal" min="0" step="1" placeholder="مثلاً ۱۶۸"><span class="pipp-unit">bpm</span></div></div>
+          <div class="pipp-metric"><label for="${mode}-pipp-post-min-spo2">حداقل SpO₂ طی ۳۰ ثانیه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-post-min-spo2" data-pipp-field="pipp-post-min-spo2" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="مثلاً ۹۱"><span class="pipp-unit">%</span></div></div>
+        </div>
+        <div class="pipp-computed-grid">
+          <div class="pipp-computed"><span>افزایش HR نسبت به خط پایه</span><strong data-pipp-hr-delta>—</strong><div class="pipp-score-chip">امتیاز: <span data-pipp-hr-score>—</span></div></div>
+          <div class="pipp-computed"><span>کاهش SpO₂ نسبت به خط پایه</span><strong data-pipp-spo2-drop>—</strong><div class="pipp-score-chip">امتیاز: <span data-pipp-spo2-score>—</span></div></div>
+        </div>
+        ${faceItems.map(item=>pippOptionCards(mode,item)).join('')}
+      </div>
+    </section>
+    <div class="assessment-result" aria-live="polite"><div class="result-top"><div><div class="field-label">وضعیت ارزیابی</div><div class="result-score"><span data-score>0</span> / ${scale.max} <small>نمره فعلی</small></div></div><div data-level><span class="level-badge level-observe">ابتدا خط پایه را تکمیل کنید</span></div></div><div class="linear-progress"><span data-progress-bar></span></div><div class="progress-copy" data-progress-copy>۰ از ۷ شاخص تکمیل شده</div><div data-mode-actions></div></div>`;
+
+  const relevantInputs=$$('input',host);
+  relevantInputs.forEach(input=>input.addEventListener('change',()=>{refreshPippGates(host,mode);calculatePippAssessment(mode,hostId)}));
+  relevantInputs.forEach(input=>input.addEventListener('input',()=>{refreshPippGates(host,mode);calculatePippAssessment(mode,hostId)}));
+  $('[data-pipp-timer="pipp-baseline-timer"]',host).addEventListener('click',()=>runPippObservationTimer(host,'baseline',15,mode,hostId));
+  $('[data-pipp-timer="pipp-post-timer"]',host).addEventListener('click',()=>runPippObservationTimer(host,'post',30,mode,hostId));
+  $('[data-pipp-confirm-baseline]',host).addEventListener('click',()=>{
+    host.dataset.pippBaselineConfirmed='true';
+    const baseline=$('[data-pipp-stage="baseline"]',host),procedure=$('[data-pipp-stage="procedure"]',host);
+    baseline.classList.add('pipp-stage-complete');$('[data-pipp-stage-status="baseline"]',host).textContent='خط پایه ثبت شد';
+    procedure.classList.remove('locked');procedure.setAttribute('aria-disabled','false');$('[data-pipp-stage-status="procedure"]',host).textContent='آماده ثبت اقدام';
+    procedure.scrollIntoView({behavior:'smooth',block:'center'});
+    refreshPippGates(host,mode);calculatePippAssessment(mode,hostId);
+  });
+  $('[data-pipp-procedure-confirm]',host).addEventListener('change',()=>refreshPippGates(host,mode));
+  $('[data-pipp-start-post]',host).addEventListener('click',()=>{
+    const procedure=$('[data-pipp-stage="procedure"]',host),post=$('[data-pipp-stage="post"]',host);
+    procedure.classList.add('pipp-stage-complete');$('[data-pipp-stage-status="procedure"]',host).textContent='اقدام ثبت شد';
+    post.classList.remove('locked');post.setAttribute('aria-disabled','false');$('[data-pipp-stage-status="post"]',host).textContent='مشاهده در حال انجام';
+    runPippObservationTimer(host,'post',30,mode,hostId);
+    post.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  refreshPippGates(host,mode);calculatePippAssessment(mode,hostId);
+}
+function pippValue(host,field){const el=$(`[data-pipp-field="${field}"]`,host);return el&&el.value!==''?Number(el.value):NaN;}
+function pippSelectedValue(host,mode,id){const el=$(`input[name="${mode}-PIPP-${id}"]:checked`,host);return el?Number(el.value):null;}
+function refreshPippGates(host,mode){
+  const baselineHr=pippValue(host,'pipp-baseline-hr'),baselineSpo2=pippValue(host,'pipp-baseline-spo2');
+  const ga=pippSelectedValue(host,mode,'ga'),behavior=pippSelectedValue(host,mode,'behavior');
+  const validVitals=Number.isFinite(baselineHr)&&baselineHr>0&&Number.isFinite(baselineSpo2)&&baselineSpo2>=0&&baselineSpo2<=100;
+  const baselineReady=host.dataset.pippBaselineDone==='true'&&validVitals&&ga!==null&&behavior!==null;
+  $('[data-pipp-confirm-baseline]',host).disabled=!baselineReady||host.dataset.pippBaselineConfirmed==='true';
+  const procedureConfirmed=$('[data-pipp-procedure-confirm]',host)?.checked===true;
+  $('[data-pipp-start-post]',host).disabled=host.dataset.pippBaselineConfirmed!=='true'||!procedureConfirmed;
+}
+function runPippObservationTimer(host,stage,seconds,mode,hostId){
+  const key=stage==='baseline'?'pipp-baseline-timer':'pipp-post-timer';
+  const button=$(`[data-pipp-timer="${key}"]`,host),display=$(`[data-pipp-display="${key}"]`,host);
+  if(button.dataset.running==='true')return;
+  let remaining=seconds;
+  button.dataset.running='true';button.disabled=true;display.textContent=`00:${String(remaining).padStart(2,'0')}`;
+  const interval=setInterval(()=>{
+    remaining-=1;display.textContent=`00:${String(Math.max(remaining,0)).padStart(2,'0')}`;
+    if(remaining<=0){
+      clearInterval(interval);button.dataset.running='false';button.disabled=false;button.textContent=stage==='baseline'?'تکرار ۱۵ ثانیه':'تکرار ۳۰ ثانیه';
+      if(stage==='baseline'){host.dataset.pippBaselineDone='true';$('[data-pipp-stage-status="baseline"]',host).textContent='۱۵ ثانیه کامل شد';}
+      else{host.dataset.pippPostDone='true';const post=$('[data-pipp-stage="post"]',host);post.classList.add('pipp-stage-complete');$('[data-pipp-stage-status="post"]',host).textContent='۳۰ ثانیه کامل شد';}
+      refreshPippGates(host,mode);calculatePippAssessment(mode,hostId);
+    }
+  },1000);
+  host._pippIntervals=host._pippIntervals||[];host._pippIntervals.push(interval);
+}
+function calculatePippAssessment(mode,hostId){
+  const host=document.getElementById(hostId),scale=SCALES.PIPP;
+  const ga=pippSelectedValue(host,mode,'ga'),behavior=pippSelectedValue(host,mode,'behavior');
+  const baselineHr=pippValue(host,'pipp-baseline-hr'),baselineSpo2=pippValue(host,'pipp-baseline-spo2');
+  const maxHr=pippValue(host,'pipp-post-max-hr'),minSpo2=pippValue(host,'pipp-post-min-spo2');
+  const hrReady=Number.isFinite(baselineHr)&&Number.isFinite(maxHr),spo2Ready=Number.isFinite(baselineSpo2)&&Number.isFinite(minSpo2);
+  const hrDelta=hrReady?Math.max(0,maxHr - baselineHr):null;
+  const spo2Drop=spo2Ready?Math.max(0,baselineSpo2 - minSpo2):null;
+  const hrScore=hrReady?pippHrScore(baselineHr,maxHr):null,spo2Score=spo2Ready?pippSpo2Score(baselineSpo2,minSpo2):null;
+  $('[data-pipp-hr-delta]',host).textContent=hrDelta===null?'—':`${hrDelta.toFixed(0)} bpm`;
+  $('[data-pipp-spo2-drop]',host).textContent=spo2Drop===null?'—':`${spo2Drop.toFixed(1).replace('.0','')}%`;
+  $('[data-pipp-hr-score]',host).textContent=hrScore===null?'—':hrScore;
+  $('[data-pipp-spo2-score]',host).textContent=spo2Score===null?'—':spo2Score;
+  const facial=['brow','eye','nasolabial'].map(id=>pippSelectedValue(host,mode,id));
+  const values=[ga,behavior,hrScore,spo2Score,...facial];
+  const completed=values.filter(v=>v!==null).length,score=values.reduce((sum,v)=>sum+(v===null?0:v),0);
+  $('[data-score]',host).textContent=score;$('[data-progress-bar]',host).style.width=`${(completed/7)*100}%`;$('[data-progress-copy]',host).textContent=`${completed} از ۷ شاخص تکمیل شده`;
+  const stageReady=host.dataset.pippBaselineConfirmed==='true'&&$('[data-pipp-procedure-confirm]',host)?.checked===true&&host.dataset.pippPostDone==='true';
+  const complete=completed===7&&stageReady;
+  const levelHost=$('[data-level]',host),actions=$('[data-mode-actions]',host);
+  if(!complete){
+    let message='ارزیابی هنوز نهایی نشده است';
+    if(host.dataset.pippBaselineConfirmed!=='true')message='ابتدا خط پایه ۱۵ ثانیه‌ای را تکمیل و تأیید کنید';
+    else if(!$('[data-pipp-procedure-confirm]',host)?.checked)message='انجام اقدام را ثبت کنید';
+    else if(host.dataset.pippPostDone!=='true')message='مشاهده ۳۰ ثانیه‌ای پس از اقدام باید کامل شود';
+    levelHost.innerHTML=`<span class="level-badge level-observe">${message}</span>`;actions.innerHTML='';
+    if(mode==='clinical'){state.clinicalResult={scale:'PIPP',score,completed,total:7,complete:false};updateSummary();}
+    if(mode==='reassess'){state.reassessmentResult=null;$('#to-documentation').disabled=true;}
+    return;
+  }
+  const level=classifyScore('PIPP',score);levelHost.innerHTML=`<span class="level-badge level-${level.key}">${level.label}</span>`;
+  const result={scale:'PIPP',score,completed:7,total:7,complete:true,level,measurements:{baselineHr,baselineSpo2,maxHr,minSpo2,hrDelta,spo2Drop,hrScore,spo2Score}};
+  if(mode==='clinical'){
+    state.clinicalResult=result;updateSummary();
+    actions.innerHTML='<div class="actions"><button class="btn btn-secondary" type="button" data-reset-current>پاک کردن پاسخ‌ها</button><button class="btn btn-primary" type="button" data-to-intervention>ادامه به مداخله<svg class="icon"><use href="#i-chevron"></use></svg></button></div>';
+    $('[data-to-intervention]',host).addEventListener('click',()=>{renderIntervention();setStep(3)});$('[data-reset-current]',host).addEventListener('click',()=>{renderPippAssessment(hostId,mode);state.clinicalResult=null;updateSummary();});
+  }else if(mode==='quick'){
+    const rec=recommendationFor(level.key);actions.innerHTML=`<div class="info-strip" style="margin-top:13px">${icon('i-info')}<div><strong>${rec.title}</strong><br>${rec.short}</div></div><div class="actions"><button class="btn btn-secondary" type="button" data-reset-current>پاک کردن پاسخ‌ها</button><button class="btn btn-primary" type="button" data-print-quick>${icon('i-print')}چاپ نتیجه</button></div>`;
+    $('[data-reset-current]',host).addEventListener('click',()=>renderPippAssessment(hostId,mode));$('[data-print-quick]',host).addEventListener('click',()=>window.print());
+  }else if(mode==='reassess'){
+    state.reassessmentResult=result;$('#to-documentation').disabled=false;const baseline=state.clinicalResult?.score??score;const direction=score<baseline?'کاهش یافته':score===baseline?'بدون تغییر':'افزایش یافته';actions.innerHTML=`<div class="${score<baseline?'info-strip':'warning-strip'}" style="margin-top:13px">${icon(score<baseline?'i-check':'i-alert')}<div>نمره نسبت به ارزیابی اولیه <strong>${direction}</strong> است (${baseline} ← ${score}). ${score>=baseline?'در صورت عدم بهبود، نتیجه به پزشک اطلاع داده شود و مداخله مطابق دستور بازبینی گردد.':'در صورت بهبود، مداخله مؤثر را طبق برنامه ادامه دهید و نتیجه را ثبت کنید.'}</div></div>`;
+  }
+}
+
+function renderAssessment(scaleKey,hostId,mode){
+  if(scaleKey==='PIPP'){renderPippAssessment(hostId,mode);return;}
+  const scale=SCALES[scaleKey];
+  const host=document.getElementById(hostId);
+  host.classList.remove('quick-host-empty');
+  const items=scale.items.map((item,index)=>{
+    const name=`${mode}-${scaleKey}-${item.id}`;
+    const options=item.options.map(opt=>`<label class="option-card"><input type="radio" name="${name}" value="${opt.value}"><span class="option-copy"><span>${opt.label}</span><span class="option-score">${opt.value}</span></span></label>`).join('');
+    return `<fieldset class="assessment-item" data-assessment-item="${item.id}"><legend class="sr-only">${item.label}</legend><div class="item-title-row"><div><div class="item-title">${item.label}</div>${item.help?`<div class="item-help">${item.help}</div>`:''}</div><span class="item-number">${index+1}</span></div><div class="option-grid">${options}</div></fieldset>`;
+  }).join('');
+  host.innerHTML=`<div class="assessment-head"><div><h3>${scale.title}</h3><p>${scale.context}</p></div><span class="scale-tag">${scale.items.length} شاخص · حداکثر ${scale.max}</span></div>${items}<div class="assessment-result" aria-live="polite"><div class="result-top"><div><div class="field-label">وضعیت ارزیابی</div><div class="result-score"><span data-score>0</span> / ${scale.max} <small>نمره فعلی</small></div></div><div data-level><span class="level-badge level-observe">در انتظار تکمیل همه شاخص‌ها</span></div></div><div class="linear-progress"><span data-progress-bar></span></div><div class="progress-copy" data-progress-copy>۰ از ${scale.items.length} شاخص تکمیل شده</div><div data-mode-actions></div></div>`;
+  host.dataset.mode=mode;host.dataset.scale=scaleKey;
+  $$('input[type="radio"]',host).forEach(input=>input.addEventListener('change',()=>calculateAssessment(mode,scaleKey,hostId)));
+}
+
+function calculateAssessment(mode,scaleKey,hostId){
+  const scale=SCALES[scaleKey];
+  const host=document.getElementById(hostId);
+  let score=0,completed=0;
+  scale.items.forEach(item=>{
+    const selected=$(`input[name="${mode}-${scaleKey}-${item.id}"]:checked`,host);
+    const field=$(`[data-assessment-item="${item.id}"]`,host);
+    field.classList.toggle('answered',!!selected);
+    if(selected){score+=Number(selected.value);completed++;}
+  });
+  $('[data-score]',host).textContent=score;
+  $('[data-progress-bar]',host).style.width=`${(completed/scale.items.length)*100}%`;
+  $('[data-progress-copy]',host).textContent=`${completed} از ${scale.items.length} شاخص تکمیل شده`;
+  const levelHost=$('[data-level]',host),actions=$('[data-mode-actions]',host);
+  if(completed<scale.items.length){
+    levelHost.innerHTML='<span class="level-badge level-observe">ارزیابی هنوز نهایی نشده است</span>';
+    actions.innerHTML='';
+    if(mode==='clinical'){state.clinicalResult={scale:scaleKey,score,completed,total:scale.items.length,complete:false};updateSummary();}
+    if(mode==='reassess'){state.reassessmentResult=null;$('#to-documentation').disabled=true;}
+    return;
+  }
+  const level=classifyScore(scaleKey,score);
+  levelHost.innerHTML=`<span class="level-badge level-${level.key}">${level.label}</span>`;
+  const result={scale:scaleKey,score,completed,total:scale.items.length,complete:true,level};
+  if(mode==='clinical'){
+    state.clinicalResult=result;updateSummary();
+    actions.innerHTML='<div class="actions"><button class="btn btn-secondary" type="button" data-reset-current>پاک کردن پاسخ‌ها</button><button class="btn btn-primary" type="button" data-to-intervention>ادامه به مداخله<svg class="icon"><use href="#i-chevron"></use></svg></button></div>';
+    $('[data-to-intervention]',host).addEventListener('click',()=>{renderIntervention();setStep(3)});
+    $('[data-reset-current]',host).addEventListener('click',()=>{renderAssessment(scaleKey,hostId,mode);state.clinicalResult=null;updateSummary();});
+  } else if(mode==='quick'){
+    const rec=recommendationFor(level.key);
+    actions.innerHTML=`<div class="info-strip" style="margin-top:13px">${icon('i-info')}<div><strong>${rec.title}</strong><br>${rec.short}</div></div><div class="actions"><button class="btn btn-secondary" type="button" data-reset-current>پاک کردن پاسخ‌ها</button><button class="btn btn-primary" type="button" data-print-quick>${icon('i-print')}چاپ نتیجه</button></div>`;
+    $('[data-reset-current]',host).addEventListener('click',()=>renderAssessment(scaleKey,hostId,mode));
+    $('[data-print-quick]',host).addEventListener('click',()=>window.print());
+  } else if(mode==='reassess'){
+    state.reassessmentResult=result;$('#to-documentation').disabled=false;
+    const baseline=state.clinicalResult?.score ?? score;
+    const direction=score<baseline?'کاهش یافته':score===baseline?'بدون تغییر':'افزایش یافته';
+    actions.innerHTML=`<div class="${score<baseline?'info-strip':'warning-strip'}" style="margin-top:13px">${icon(score<baseline?'i-check':'i-alert')}<div>نمره نسبت به ارزیابی اولیه <strong>${direction}</strong> است (${baseline} ← ${score}). ${score>=baseline?'در صورت عدم بهبود، نتیجه به پزشک اطلاع داده شود و مداخله مطابق دستور بازبینی گردد.':'در صورت بهبود، مداخله مؤثر را طبق برنامه ادامه دهید و نتیجه را ثبت کنید.'}</div></div>`;
+  }
+}
+
+function recommendationFor(levelKey){
+  const common='مکیدن غیرمغذی، شیر مادر/شیردهی، سوکروز در صورت نداشتن منع خوراکی، مراقبت آغوشی، قنداق، پوزیشن، کاهش نور و صدا و کاهش دستکاری.';
+  if(levelKey==='none') return {title:'مراقبت معمول و مستندسازی',short:'مراقبت معمول ادامه یابد؛ ارزیابی دوره‌ای درد همراه علائم حیاتی انجام شود.',interval:'هر ۴ ساعت',minutes:240,med:''};
+  if(levelKey==='observe') return {title:'پایش و بررسی بالینی',short:`امتیاز زیر آستانه درد خفیف است؛ شرایط نوزاد را پایش و در صورت نیاز از اقدامات غیردارویی استفاده کنید. ${common}`,interval:'۲ تا ۴ ساعت',minutes:120,med:''};
+  if(levelKey==='mild') return {title:'مداخلات غیردارویی',short:`روش‌های غیردارویی را به‌کار ببرید: ${common}`,interval:'حدود هر ۲ ساعت',minutes:120,med:''};
+  if(levelKey==='moderate') return {title:'مداخلات ترکیبی و پایش نزدیک',short:`روش‌های غیردارویی: ${common}`,interval:'۳۰ دقیقه تا ۴ ساعت',minutes:30,med:'در صورت تجویز پزشک، پاراستامول ۱۰–۱۵ mg/kg مطابق گایدلاین می‌تواند در برنامه درمان قرار گیرد.'};
+  return {title:'درد شدید — اقدام و اطلاع‌رسانی',short:`روش‌های غیردارویی همزمان انجام شوند: ${common}`,interval:'۳۰ دقیقه تا ۴ ساعت',minutes:30,med:'در درد شدید/مزمن، گایدلاین مورفین ۱۰ mcg/kg/hr و فنتانیل ۱–۴ mcg/kg را ذکر می‌کند؛ اجرا فقط طبق تجویز پزشک است.'};
+}
+
+function renderIntervention(){
+  if(!state.clinicalResult?.complete)return;
+  const rec=recommendationFor(state.clinicalResult.level.key);
+  const commonOptions=[
+    ['مکیدن غیرمغذی','nns'],['سوکروز','sucrose'],['شیر مادر / شیردهی','milk'],['مراقبت آغوشی مادرانه','kmc'],
+    ['قنداق کردن','swaddle'],['ماساژ / لمس‌درمانی','massage'],['پوزیشن مناسب','position'],['کاهش نور و سر و صدا / کاهش دستکاری','environment']
+  ];
+  const checks=commonOptions.map(([label,val])=>`<label class="check-row"><input type="checkbox" name="intervention" value="${val}" data-label="${label}"><span>${label}</span></label>`).join('');
+  $('#intervention-host').innerHTML=`<div class="result-top" style="margin-bottom:15px"><div><div class="field-label">نتیجه ارزیابی</div><div class="result-score">${state.clinicalResult.score} / ${SCALES[state.clinicalScale].max}</div></div><span class="level-badge level-${state.clinicalResult.level.key}">${state.clinicalResult.level.label}</span></div><div class="info-strip" style="margin:0 0 14px">${icon('i-info')}<div><strong>${rec.title}</strong><br>${rec.short}</div></div><div class="intervention-grid"><div class="intervention-card"><h4>مداخلات غیردارویی انجام‌شده</h4><div class="intervention-list">${checks}</div><details style="margin-top:10px"><summary class="text-btn" style="display:inline-flex;align-items:center;cursor:pointer">سایر روش‌های ذکرشده در گایدلاین</summary><div class="mini-next">تکان دادن گهواره‌ای، مدیریت دوره‌های خواب و بیداری و لمس‌درمانی نیز بر اساس وضعیت قابل استفاده‌اند. برای رگ‌گیری/خونگیری، ماساژ ملایم محل به مدت حداقل ۵ دقیقه پیش از رویه ذکر شده است.</div></details></div><div class="intervention-card med-card"><h4>مداخله دارویی</h4>${rec.med?`<div class="med-dose">${rec.med}</div>`:'<div class="med-dose">در این سطح، گایدلاین بر مراقبت/روش‌های غیردارویی و پایش تأکید دارد.</div>'}<div class="physician-strip" style="margin-top:12px">${icon('i-alert')}<div><strong>فقط طبق تجویز پزشک.</strong> این سامانه دستور دارویی صادر نمی‌کند.</div></div><label class="check-row" style="margin-top:10px"><input type="checkbox" name="intervention" value="physician-med" data-label="مداخله دارویی طبق تجویز پزشک"><span>مداخله دارویی طبق تجویز پزشک انجام شد.</span></label></div></div><div class="reassess-banner" style="margin-top:14px"><div><div class="field-label">فاصله پیشنهادی ارزیابی مجدد</div><strong>${rec.interval}</strong><div class="mini-next">در صورت تداوم یا تشدید درد، پزشک مربوطه مطلع شود.</div></div><div class="time-value">${rec.minutes===30?'00:30':'—'}</div></div>`;
+}
+
+$('#save-intervention').addEventListener('click',()=>{
+  state.interventions=$$('input[name="intervention"]:checked',$('#intervention-host')).map(i=>i.dataset.label);
+  renderReassessmentBanner();setStep(4);
 });
 
-/* ---------- Initial calculation ---------- */
-calcPIPP();
-calcNIPS();
-calcCRIES();
-calcMPAT();
-
- 
-/* ---------- ذخیره به صورت PDF (از طریق چاپ) ---------- */
-function saveResultAsPDF() {
-
-  const printHeader = document.createElement('div');
-  printHeader.id = 'print-header';
-  printHeader.style.cssText = `
-    text-align: center;
-    font-family: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
-    padding: 20px 0 15px;
-    border-bottom: 2px solid var(--primary-dark, #0d47a1);
-    margin-bottom: 20px;
-  `;
-  printHeader.innerHTML = `
-    <h1 style="margin:0;font-size:1.8rem;color:var(--primary-dark, #0d47a1);">ابزارهای ارزیابی و مدیریت درد نوزادان</h1>
-    <p style="margin:5px 0 0;font-size:1rem;color:var(--muted, #555);">محاسبه‌گر شاخص‌محور + تصمیم‌یار بالینی</p>
-    <p style="margin:5px 0 0;font-size:0.9rem;color:var(--muted, #777);">
-      تاریخ: ${new Date().toLocaleDateString('fa-IR')} - ${new Date().toLocaleTimeString('fa-IR')}
-    </p>
-  `;
-
-  const activePanel = document.querySelector('.tool-panel.active');
-  if (activePanel) {
-    activePanel.insertBefore(printHeader, activePanel.firstChild);
-  }
-
-
-  document.body.classList.add('printing');
-
-  window.print();
-
-  setTimeout(() => {
-    document.body.classList.remove('printing');
-    if (printHeader.parentNode) {
-      printHeader.remove();
-    }
-  }, 500);
+function renderReassessmentBanner(){
+  const rec=recommendationFor(state.clinicalResult?.level.key||'none');
+  $('#reassess-banner').innerHTML=`<div class="reassess-banner"><div><div class="field-label">زمان / فاصله ارزیابی مجدد</div><div class="time-value">${rec.interval}</div><div class="mini-next">علائم حیاتی نیز همزمان کنترل شود.</div></div><div class="timer-box"><span class="timer-display" id="timer-display">${formatTime(rec.minutes*60)}</span>${rec.minutes<=30?`<button class="btn btn-secondary" type="button" id="timer-toggle">شروع تایمر</button>`:''}</div></div>`;
+  state.timerSeconds=rec.minutes*60;
+  if($('#timer-toggle')) $('#timer-toggle').addEventListener('click',toggleTimer);
 }
+function formatTime(seconds){const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');}
+function toggleTimer(){
+  const btn=$('#timer-toggle');
+  if(state.timer){clearInterval(state.timer);state.timer=null;btn.textContent='ادامه تایمر';return;}
+  btn.textContent='توقف';
+  state.timer=setInterval(()=>{state.timerSeconds=Math.max(0,state.timerSeconds-1);if($('#timer-display'))$('#timer-display').textContent=formatTime(state.timerSeconds);if(state.timerSeconds===0){clearInterval(state.timer);state.timer=null;btn.textContent='پایان';btn.disabled=true;}},1000);
+}
+$('#start-reassessment').addEventListener('click',()=>{renderAssessment(state.clinicalScale,'reassessment-host','reassess');$('#reassessment-host').scrollIntoView({behavior:'smooth',block:'start'});});
+$('#to-documentation').addEventListener('click',()=>{renderDocumentation();setStep(5)});
+
+function renderDocumentation(){
+  const sex=state.context.sex==='male'?'پسر':state.context.sex==='female'?'دختر':'ثبت نشده';
+  const reass=state.reassessmentResult;
+  $('#documentation-summary').innerHTML=`<div class="doc-summary"><div class="doc-tile"><span>شماره پرونده</span><strong>${state.context.recordId||'ثبت نشده'}</strong></div><div class="doc-tile"><span>مشخصات</span><strong>${state.context.ageDays?state.context.ageDays+' روز':'سن ثبت نشده'} · ${state.context.weightGrams?state.context.weightGrams+' گرم':'وزن ثبت نشده'} · ${sex}</strong></div><div class="doc-tile"><span>ارزیابی اولیه</span><strong>${state.clinicalScale} · ${state.clinicalResult.score}/${SCALES[state.clinicalScale].max} · ${state.clinicalResult.level.label}</strong></div><div class="doc-tile"><span>ارزیابی مجدد</span><strong>${reass?`${reass.score}/${SCALES[reass.scale].max} · ${reass.level.label}`:'ثبت نشده'}</strong></div></div><div class="section-card" style="box-shadow:none;margin-bottom:12px"><div class="field-label">مداخلات ثبت‌شده</div><div style="margin-top:6px">${state.interventions.length?state.interventions.map(x=>`<span class="rec-pill" style="margin:3px">${x}</span>`).join(''):'مداخله‌ای انتخاب نشده است.'}</div></div><div class="info-strip">${icon('i-info')}<div>تاریخ و ساعت چاپ: <span id="doc-date">${new Date().toLocaleString('fa-IR')}</span></div></div>`;
+}
+
+function updateSummary(){
+  const scale=state.clinicalScale||state.recommendedScale||'—';
+  $('#summary-tool').textContent=state.clinicalScale||'—';
+  const result=state.clinicalResult;
+  if(result){
+    $('#summary-score').textContent=`${result.score} / ${SCALES[result.scale].max}`;
+    $('#summary-progress-copy').textContent=`${result.completed}/${result.total}`;
+    $('#summary-progress').style.setProperty('--progress',`${(result.completed/result.total)*360}deg`);
+    $('#summary-level').innerHTML=result.complete?`<span class="level-badge level-${result.level.key}">${result.level.label}</span>`:'<span class="level-badge level-observe">در انتظار تکمیل ارزیابی</span>';
+  } else {
+    $('#summary-score').textContent='—';$('#summary-progress-copy').textContent='0/0';$('#summary-progress').style.setProperty('--progress','0deg');$('#summary-level').innerHTML='<span class="level-badge level-observe">در انتظار تکمیل ارزیابی</span>';
+  }
+  const nextMap={1:'ثبت زمینه بالینی',2:'تکمیل تمام شاخص‌های ابزار',3:'ثبت مداخله انجام‌شده',4:'انجام ارزیابی مجدد',5:'مرور و چاپ گزارش'};
+  $('#summary-next').textContent=nextMap[state.step];
+  if(result?.complete) $('#summary-reassess').textContent=`ارزیابی مجدد: ${recommendationFor(result.level.key).interval}`; else $('#summary-reassess').textContent='—';
+  $('#mobile-summary-value').textContent=state.step===1?`ابزار پیشنهادی: ${state.recommendedScale}`:nextMap[state.step];
+  $('#mobile-summary-score').textContent=result?`${result.score}/${SCALES[result.scale].max}`:'—';
+}
+
+$$('.quick-start').forEach(btn=>btn.addEventListener('click',()=>{state.quickScale=btn.dataset.scale;renderAssessment(state.quickScale,'quick-assessment-host','quick');$('#quick-assessment-host').scrollIntoView({behavior:'smooth',block:'start'});}));
+
+function renderProcedures(){
+  const select=$('#procedure-select'),body=$('#procedure-table-body');
+  PROCEDURES.forEach((p,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=p.name;select.appendChild(opt);});
+  const mark=v=>v?'<span class="table-check" aria-label="توصیه شده">✓</span>':'<span class="table-dash" aria-label="ثبت نشده">—</span>';
+  body.innerHTML=PROCEDURES.map((p,i)=>`<tr data-procedure-row="${i}"><td>${p.name}</td><td>${mark(p.milk)}</td><td>${mark(p.sucrose)}</td><td>${mark(p.drug)}</td><td>${mark(p.kmc)}</td></tr>`).join('');
+  select.addEventListener('change',()=>{
+    $$('[data-procedure-row]').forEach(r=>r.style.outline='');
+    if(select.value===''){ $('#procedure-summary').innerHTML='<span class="mini-next">پس از انتخاب رویه، روش‌های علامت‌گذاری‌شده نمایش داده می‌شوند.</span>';return;}
+    const p=PROCEDURES[Number(select.value)];
+    const entries=[['شیر مادر / مکیدن',p.milk],['سوکروز',p.sucrose],['روش دارویی',p.drug],['مراقبت کانگورویی',p.kmc]];
+    $('#procedure-summary').innerHTML=entries.map(([name,val])=>`<span class="rec-pill ${val?'':'no'}">${val?'✓':'—'} ${name}</span>`).join('');
+    const row=$(`[data-procedure-row="${select.value}"]`);row.style.outline='2px solid #0b9891';row.style.outlineOffset='-2px';row.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+}
+
+function resetClinical(){
+  if(state.timer){clearInterval(state.timer);state.timer=null;}
+  $('#clinicalContextForm').reset();
+  $('input[name="assessmentType"][value="acute"]').checked=true;
+  state.step=1;state.context={};state.recommendedScale='NIPS';state.clinicalScale=null;state.clinicalResult=null;state.reassessmentResult=null;state.interventions=[];
+  $('#clinical-assessment-host').innerHTML='';$('#intervention-host').innerHTML='';$('#reassessment-host').className='quick-host-empty';$('#reassessment-host').innerHTML='برای شروع ارزیابی مجدد، دکمه زیر را انتخاب کنید.';$('#documentation-summary').innerHTML='';$('#to-documentation').disabled=true;
+  updateRecommendation();setStep(1);
+}
+$('#reset-clinical').addEventListener('click',resetClinical);
+$('#print-document').addEventListener('click',()=>window.print());
+$('#print-btn').addEventListener('click',()=>window.print());
+$('#print-document').addEventListener('click',()=>{if($('#doc-date'))$('#doc-date').textContent=new Date().toLocaleString('fa-IR');});
+
+renderProcedures();
+updateRecommendation();
+updateSummary();
 </script>
-
-<script>
-  let lastPipp2Value = 0;  
-
-  function updatePipp2(event) {
-    const changedCheckbox = event.target;
-    const changedValue = parseInt(changedCheckbox.value, 10);
-    const isChecked = changedCheckbox.checked;
-
-    const allCheckboxes = document.querySelectorAll('#pipp .indicator:nth-of-type(2) input[type="checkbox"]');
-
-    if (isChecked) {
-       allCheckboxes.forEach(cb => {
-        if (parseInt(cb.value, 10) !== changedValue) {
-          cb.checked = false;
-        }
-      });
-      lastPipp2Value = changedValue;
-    } else {
-       const anySameValueChecked = Array.from(allCheckboxes).some(
-        cb => parseInt(cb.value, 10) === changedValue && cb.checked
-      );
-      if (!anySameValueChecked) {
-         allCheckboxes.forEach(cb => cb.checked = false);
-        lastPipp2Value = 0;
-      } else {
-         const checkedValues = new Set();
-        allCheckboxes.forEach(cb => { if (cb.checked) checkedValues.add(parseInt(cb.value, 10)); });
-        if (checkedValues.size === 1) {
-          lastPipp2Value = Array.from(checkedValues)[0];
-        } else {
-           lastPipp2Value = 0;
-        }
-      }
-    }
-
-     const hiddenRadios = document.querySelectorAll('#pipp .indicator:nth-of-type(2) input[type="radio"][name="pipp2"]');
-    hiddenRadios.forEach(radio => {
-      if (parseInt(radio.value, 10) === lastPipp2Value) {
-        radio.checked = true;
-      } else {
-        radio.checked = false;
-      }
-    });
-
-     if (typeof calcPIPP === 'function') {
-      calcPIPP();
-    }
-  }
-</script>
-<script>
-   function clearMpat8Checkboxes() {
-     document.querySelectorAll('#mpat .indicator:nth-of-type(8) input[type="checkbox"]').forEach(cb => cb.checked = false);
-     document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="2"]').checked = false;
-     if (typeof calcMPAT === 'function') calcMPAT();
-  }
-
-   function updateMpat8FromCheckbox(event) {
-    const checkboxes = document.querySelectorAll('#mpat .indicator:nth-of-type(8) input[type="checkbox"]');
-    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-    if (anyChecked) {
-       document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="0"]').checked = false;
-      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="1"]').checked = false;
-      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="2"]').checked = true;
-    } else {
-       document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="0"]').checked = true;
-      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="1"]').checked = false;
-      document.querySelector('#mpat .indicator:nth-of-type(8) input[type="radio"][value="2"]').checked = false;
-    }
-     if (typeof calcMPAT === 'function') calcMPAT();
-  }
-</script>
-<script>
-   function clearNips5Checkboxes() {
-     document.querySelectorAll('#nips .indicator:nth-of-type(5) input[type="checkbox"]').forEach(cb => cb.checked = false);
-     document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="1"]').checked = false;
-     if (typeof calcNIPS === 'function') calcNIPS();
-  }
-
-  
-  function updateNips5FromCheckbox(event) {
-    const checkboxes = document.querySelectorAll('#nips .indicator:nth-of-type(5) input[type="checkbox"]');
-    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-    if (anyChecked) {
-       
-      document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="0"]').checked = false;
-      document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="1"]').checked = true;
-    } else {
-       document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="0"]').checked = true;
-      document.querySelector('#nips .indicator:nth-of-type(5) input[type="radio"][value="1"]').checked = false;
-    }
-     if (typeof calcNIPS === 'function') calcNIPS();
-  }
-</script>
-<script>
-   function clearNips2Checkboxes() {
-     document.querySelectorAll('#nips .indicator:nth-of-type(2) input[type="checkbox"]').forEach(cb => cb.checked = false);
-     document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="2"]').checked = false;
-     if (typeof calcNIPS === 'function') calcNIPS();
-  }
-
-   function updateNips2FromCheckbox(event) {
-    const checkboxes = document.querySelectorAll('#nips .indicator:nth-of-type(2) input[type="checkbox"]');
-    const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
-    if (anyChecked) {
-       document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="0"]').checked = false;
-      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="1"]').checked = false;
-      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="2"]').checked = true;
-    } else {
-       document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="0"]').checked = true;
-      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="1"]').checked = false;
-      document.querySelector('#nips .indicator:nth-of-type(2) input[type="radio"][value="2"]').checked = false;
-    }
-     if (typeof calcNIPS === 'function') calcNIPS();
-  }
-</script>
-
 </body>
 </html>

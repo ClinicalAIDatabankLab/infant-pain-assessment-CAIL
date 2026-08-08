@@ -1,35 +1,58 @@
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square\&logo=html5\&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square\&logo=css3\&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square\&logo=javascript\&logoColor=black)
-![Static](https://img.shields.io/badge/Static-No%20Dependencies-brightgreen?style=flat-square)
-![CDSS](https://img.shields.io/badge/CDSS-Clinical%20Decision%20Support-0056b3?style=flat-square)
+# Neonatal Pain Management UI — PIPP Baseline Update
 
-# Infant pain assessment
+This package contains the redesigned neonatal pain-management decision-support interface.
 
-# مدیریت درد نوزادان
+## Files
 
-A responsive, static web application for neonatal pain assessment and clinical decision support.
+- `index.html` — main application
+- `README.md` — setup and usage notes
+- `README.txt` — plain-text copy of the setup notes
 
-وب‌اپلیکیشنی استاتیک و واکنش‌گرا برای ارزیابی درد نوزادان و کمک به تصمیم‌گیری بالینی.
+## Font setup
 
-## Features | ویژگی‌ها
+The interface expects the local Vazir font file to be placed in the same folder as `index.html` with this exact filename:
 
-* Pain assessment using official pain metrics
+`Vazir-Regular(1).ttf`
 
-* Pharmacological and non-pharmacological intervention suggestions
+The font file is intentionally not bundled in this ZIP. Place your provided font beside the HTML file before opening the page.
 
-* Built with HTML, CSS, and JavaScript
+Recommended folder structure:
 
-* Optimized for mobile and tablet use
+```text
+project/
+├── index.html
+├── README.md
+├── README.txt
+└── Vazir-Regular(1).ttf
+```
 
-## Intended Users | کاربران هدف
+## Updated PIPP workflow
 
-Healthcare professionals, students, and researchers involved in neonatal care.
+The PIPP assessment now follows a staged workflow:
 
-کادر درمان، دانشجویان و پژوهشگران حوزه مراقبت از نوزادان.
+1. **15-second baseline observation before the painful procedure**
+   - Record baseline heart rate (HR).
+   - Record baseline oxygen saturation (SpO₂).
+   - Record behavioral state.
+   - The workflow cannot continue until the required baseline information is entered.
 
-## Disclaimer | سلب مسئولیت
+2. **Painful procedure confirmation**
+   - Confirm that the procedure has been performed before moving to the post-procedure observation.
 
-This application is intended only for education and clinical decision support. It does not replace professional clinical judgment.
+3. **30-second post-procedure observation**
+   - Record the maximum observed HR.
+   - Record the minimum observed SpO₂.
+   - Complete the facial-expression indicators.
 
-این سامانه صرفاً برای آموزش و کمک به تصمیم‌گیری بالینی است و جایگزین قضاوت تخصصی کادر درمان نیست.
+4. **Automatic PIPP calculations**
+   - HR increase = maximum post-procedure HR − baseline HR.
+   - SpO₂ decrease = baseline SpO₂ − minimum post-procedure SpO₂.
+   - The interface automatically converts these changes into the appropriate PIPP item scores.
+
+## Important clinical note
+
+This interface is a clinical decision-support prototype based on the supplied neonatal pain-management guideline. It does not replace bedside assessment, clinician judgment, patient monitoring, or physician orders. Pharmacologic interventions shown in the interface must only be performed according to a physician's prescription and the applicable institutional protocol.
+
+## Opening the application
+
+No server is required for basic use. Put the files in one folder and open `index.html` in a modern browser such as Chrome, Edge, or Firefox.
