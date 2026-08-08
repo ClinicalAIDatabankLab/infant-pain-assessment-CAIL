@@ -33,7 +33,7 @@
   --mild:#b98500;
   --mild-soft:#fff7dc;
   --moderate:#d06400;
-  --moderate-soft:#fff0df;
+  --moderate-soft:#fff;
   --severe:#c9362b;
   --severe-soft:#fff0ef;
   --purple:#7251b5;
@@ -208,9 +208,9 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
   font-size:.82rem;
 }
 .info-strip{background:var(--blue-soft);border:1px solid #c8e0f5;color:#28536f}
-.warning-strip{background:#fff9e8;border:1px solid #f0ddb0;color:#755c16}
+.warning-strip{background:#f4f9fc;border:1px solid #c8dce7;color:var(--navy)}
 .physician-strip{background:var(--purple-soft);border:1px solid #d7c9fa;color:#51388a}
-.actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}
+.actions{display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin-top:20px;direction:rtl}
 .btn{
   border:1px solid transparent;
   border-radius:10px;
@@ -245,7 +245,7 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
 .level-none{color:var(--success);background:var(--success-soft);border-color:#ccebdc}
 .level-observe{color:var(--blue);background:var(--blue-soft);border-color:#c9dff3}
 .level-mild{color:var(--mild);background:var(--mild-soft);border-color:#f1dfa6}
-.level-moderate{color:var(--moderate);background:var(--moderate-soft);border-color:#f3cfab}
+.level-moderate{color:var(--moderate);background:#fff;border-color:#d8e4eb}
 .level-severe{color:var(--severe);background:var(--severe-soft);border-color:#efc2bf}
 .mini-next{font-size:.8rem;color:var(--muted);margin-top:4px}
 .assessment-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:15px}
@@ -310,10 +310,25 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
 .check-row input{margin-top:5px;accent-color:var(--teal)}
 .med-card{border-right:4px solid var(--purple);background:var(--purple-soft)}
 .med-dose{font-size:.82rem;color:#59458c;margin:7px 0}
-.reassess-banner{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;border:1px solid #c6dde9;background:#f4fbff;border-radius:14px;padding:18px;margin-bottom:16px}
-.time-value{font-size:1.75rem;line-height:1;font-weight:900;color:var(--teal);direction:ltr;white-space:nowrap}
-.timer-box{display:flex;align-items:center;gap:10px}
-.timer-display{font-size:1.55rem;font-weight:900;color:var(--navy);direction:ltr;font-variant-numeric:tabular-nums}
+.reassess-banner{display:flex;flex-direction:column;align-items:stretch;gap:16px;border:1px solid #c6dde9;background:#f4fbff;border-radius:14px;padding:18px;margin-bottom:16px;direction:rtl}
+.reassess-guidance{text-align:right;direction:rtl}
+.reassess-guidance strong{display:block;margin-top:4px;color:var(--navy);font-size:1rem}
+.reassess-timer-panel{display:grid;grid-template-columns:minmax(220px,280px) minmax(180px,220px) minmax(220px,1fr);align-items:end;gap:14px;padding-top:16px;border-top:1px solid #d7e8f0;direction:rtl}
+.timer-config-group{display:flex;flex-direction:column;gap:7px;min-width:0;text-align:right}
+.timer-config-field{display:flex;flex-direction:column;gap:6px;max-width:none;text-align:right}
+.timer-config-field span{font-size:.78rem;color:var(--navy);font-weight:800}
+.timer-duration-input{width:100%;min-height:48px;border:1px solid var(--border);border-radius:11px;background:#fff;color:var(--navy);font-family:inherit;font-size:1.08rem;font-weight:900;padding:9px 12px;text-align:center;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.timer-duration-input:focus{outline:3px solid rgba(0,137,145,.16);border-color:var(--teal)}
+.timer-helper{font-size:.75rem;color:var(--muted);line-height:1.7;max-width:320px}
+.timer-display-group{display:flex;flex-direction:column;gap:6px;min-width:0}
+.timer-display-label{font-size:.78rem;color:var(--navy);font-weight:800;text-align:right}
+.timer-actions-group{display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap;direction:rtl}
+.timer-display-wrap{display:flex;align-items:center;justify-content:center;width:100%;min-width:176px;min-height:58px;padding:10px 18px;border:1px solid #b8d4e2;border-radius:13px;background:#fff;direction:ltr;box-shadow:0 3px 10px rgba(23,72,99,.05)}
+.time-value{font-size:1.75rem;line-height:1;font-weight:900;color:var(--teal);direction:ltr;white-space:nowrap;unicode-bidi:isolate}
+.timer-box{display:flex;align-items:center;gap:10px;direction:rtl;flex-wrap:wrap}
+.timer-display{font-size:1.72rem;font-weight:950;color:var(--navy);direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.timer-error{display:none;margin-top:4px;color:var(--severe);font-size:.76rem;font-weight:750}
+.timer-error.visible{display:block}
 .doc-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}
 .doc-tile{border:1px solid var(--border);background:var(--surface-2);border-radius:11px;padding:12px}
 .doc-tile span{display:block;font-size:.72rem;color:var(--muted)}
@@ -325,7 +340,7 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
 .quick-card p{font-size:.79rem;color:var(--muted);margin:4px 0 14px;min-height:44px}
 .quick-card[data-scale="PIPP"] .quick-icon{background:#f2ecff;color:#7251b5}.quick-card[data-scale="PIPP"] h3{color:#7251b5}
 .quick-card[data-scale="NIPS"] .quick-icon{background:#e8f9f1;color:#18855b}.quick-card[data-scale="NIPS"] h3{color:#18855b}
-.quick-card[data-scale="CRIES"] .quick-icon{background:#fff1e5;color:#d06400}.quick-card[data-scale="CRIES"] h3{color:#d06400}
+.quick-card[data-scale="CRIES"] .quick-icon{background:#f4f9fc;color:var(--navy)}.quick-card[data-scale="CRIES"] h3{color:var(--navy)}
 .quick-card[data-scale="MPAT"] .quick-icon{background:#edf6ff;color:#1769aa}.quick-card[data-scale="MPAT"] h3{color:#1769aa}
 .quick-host-empty{padding:32px;text-align:center;color:var(--muted)}
 .procedure-controls{display:grid;grid-template-columns:minmax(260px,520px) 1fr;gap:16px;align-items:end;margin-bottom:18px}
@@ -377,7 +392,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
   .section-card{padding:17px}.form-grid,.form-grid.two,.choice-grid,.option-grid,.doc-summary{grid-template-columns:1fr}
   .quick-grid,.scale-guide-grid{grid-template-columns:1fr}
   .quick-card{min-height:178px}.quick-card p{min-height:0}
-  .recommend-main,.assessment-head,.result-top,.reassess-banner{display:block}.recommend-tool{margin-top:6px}.scale-tag{display:inline-block;margin-top:8px}.time-value{margin-top:8px}.timer-box{margin-top:12px;flex-wrap:wrap}
+  .recommend-main,.assessment-head,.result-top{display:block}.recommend-tool{margin-top:6px}.scale-tag{display:inline-block;margin-top:8px}.time-value{margin-top:8px}.timer-box{margin-top:12px;flex-wrap:wrap}.reassess-timer-panel{display:block}.timer-config-group,.timer-display-group,.timer-actions-group{margin-top:12px}.timer-config-field{max-width:none}.timer-duration-input{width:100%}.timer-actions-group{align-items:stretch}.timer-display-wrap{width:100%;margin-bottom:4px}.timer-actions-group .btn{flex:1 1 140px}
   .actions{justify-content:stretch}.actions .btn{flex:1 1 150px}
 }
 @media (prefers-reduced-motion: reduce){
@@ -518,7 +533,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
         <section class="workflow-step" data-workflow-step="4" id="step-reassessment">
           <div class="section-card">
             <h3 class="section-title"><svg class="icon"><use href="#i-clock"></use></svg>ارزیابی مجدد</h3>
-            <p class="section-subtitle">فاصله ارزیابی مجدد بر اساس شدت درد کوتاه‌تر می‌شود. در درد متوسط تا شدید، پایش مطابق الگوریتم هر ۳۰ دقیقه تا ۴ ساعت ادامه یابد.</p>
+            <p class="section-subtitle">فاصله ارزیابی مجدد بر اساس وضعیت بالینی و شدت درد تعیین شود. برای درد متوسط تا شدید، پایش در فواصل کوتاه‌تر انجام شود؛ تایمر زیر قابل تنظیم است و ۳۰ دقیقه فقط مقدار پیشنهادی اولیه است.</p>
             <div id="reassess-banner"></div>
             <div id="reassessment-host" class="quick-host-empty">برای شروع ارزیابی مجدد، دکمه زیر را انتخاب کنید.</div>
             <div class="actions"><button class="btn btn-secondary" type="button" data-back-step="3">بازگشت</button><button class="btn btn-primary" type="button" id="start-reassessment">شروع ارزیابی مجدد</button><button class="btn btn-primary" type="button" id="to-documentation" disabled>ادامه به ثبت و گزارش<svg class="icon"><use href="#i-chevron"></use></svg></button></div>
@@ -716,7 +731,7 @@ window.AppCore = { SCALES, recommendScale, classifyScore, pippHrScore, pippSpo2S
 const { SCALES, recommendScale, classifyScore, pippHrScore, pippSpo2Score } = window.AppCore;
 const state = {
   view:'clinical', step:1, context:{}, recommendedScale:'NIPS', clinicalScale:null,
-  clinicalResult:null, reassessmentResult:null, interventions:[], quickScale:null, timer:null, timerSeconds:0
+  clinicalResult:null, reassessmentResult:null, interventions:[], quickScale:null, timer:null, timerSeconds:0, timerConfiguredSeconds:1800
 };
 const $ = (sel,root=document)=>root.querySelector(sel);
 const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
@@ -1016,7 +1031,7 @@ function renderIntervention(){
     ['قنداق کردن','swaddle'],['ماساژ / لمس‌درمانی','massage'],['پوزیشن مناسب','position'],['کاهش نور و سر و صدا / کاهش دستکاری','environment']
   ];
   const checks=commonOptions.map(([label,val])=>`<label class="check-row"><input type="checkbox" name="intervention" value="${val}" data-label="${label}"><span>${label}</span></label>`).join('');
-  $('#intervention-host').innerHTML=`<div class="result-top" style="margin-bottom:15px"><div><div class="field-label">نتیجه ارزیابی</div><div class="result-score">${state.clinicalResult.score} / ${SCALES[state.clinicalScale].max}</div></div><span class="level-badge level-${state.clinicalResult.level.key}">${state.clinicalResult.level.label}</span></div><div class="info-strip" style="margin:0 0 14px">${icon('i-info')}<div><strong>${rec.title}</strong><br>${rec.short}</div></div><div class="intervention-grid"><div class="intervention-card"><h4>مداخلات غیردارویی انجام‌شده</h4><div class="intervention-list">${checks}</div><details style="margin-top:10px"><summary class="text-btn" style="display:inline-flex;align-items:center;cursor:pointer">سایر روش‌های ذکرشده در گایدلاین</summary><div class="mini-next">تکان دادن گهواره‌ای، مدیریت دوره‌های خواب و بیداری و لمس‌درمانی نیز بر اساس وضعیت قابل استفاده‌اند. برای رگ‌گیری/خونگیری، ماساژ ملایم محل به مدت حداقل ۵ دقیقه پیش از رویه ذکر شده است.</div></details></div><div class="intervention-card med-card"><h4>مداخله دارویی</h4>${rec.med?`<div class="med-dose">${rec.med}</div>`:'<div class="med-dose">در این سطح، گایدلاین بر مراقبت/روش‌های غیردارویی و پایش تأکید دارد.</div>'}<div class="physician-strip" style="margin-top:12px">${icon('i-alert')}<div><strong>فقط طبق تجویز پزشک.</strong> این سامانه دستور دارویی صادر نمی‌کند.</div></div><label class="check-row" style="margin-top:10px"><input type="checkbox" name="intervention" value="physician-med" data-label="مداخله دارویی طبق تجویز پزشک"><span>مداخله دارویی طبق تجویز پزشک انجام شد.</span></label></div></div><div class="reassess-banner" style="margin-top:14px"><div><div class="field-label">فاصله پیشنهادی ارزیابی مجدد</div><strong>${rec.interval}</strong><div class="mini-next">در صورت تداوم یا تشدید درد، پزشک مربوطه مطلع شود.</div></div><div class="time-value">${rec.minutes===30?'00:30':'—'}</div></div>`;
+  $('#intervention-host').innerHTML=`<div class="result-top" style="margin-bottom:15px"><div><div class="field-label">نتیجه ارزیابی</div><div class="result-score">${state.clinicalResult.score} / ${SCALES[state.clinicalScale].max}</div></div><span class="level-badge level-${state.clinicalResult.level.key}">${state.clinicalResult.level.label}</span></div><div class="info-strip" style="margin:0 0 14px">${icon('i-info')}<div><strong>${rec.title}</strong><br>${rec.short}</div></div><div class="intervention-grid"><div class="intervention-card"><h4>مداخلات غیردارویی انجام‌شده</h4><div class="intervention-list">${checks}</div><details style="margin-top:10px"><summary class="text-btn" style="display:inline-flex;align-items:center;cursor:pointer">سایر روش‌های ذکرشده در گایدلاین</summary><div class="mini-next">تکان دادن گهواره‌ای، مدیریت دوره‌های خواب و بیداری و لمس‌درمانی نیز بر اساس وضعیت قابل استفاده‌اند. برای رگ‌گیری/خونگیری، ماساژ ملایم محل به مدت حداقل ۵ دقیقه پیش از رویه ذکر شده است.</div></details></div><div class="intervention-card med-card"><h4>مداخله دارویی</h4>${rec.med?`<div class="med-dose">${rec.med}</div>`:'<div class="med-dose">در این سطح، گایدلاین بر مراقبت/روش‌های غیردارویی و پایش تأکید دارد.</div>'}<div class="physician-strip" style="margin-top:12px">${icon('i-alert')}<div><strong>فقط طبق تجویز پزشک.</strong> این سامانه دستور دارویی صادر نمی‌کند.</div></div><label class="check-row" style="margin-top:10px"><input type="checkbox" name="intervention" value="physician-med" data-label="مداخله دارویی طبق تجویز پزشک"><span>مداخله دارویی طبق تجویز پزشک انجام شد.</span></label></div></div><div class="reassess-banner" style="margin-top:14px"><div class="reassess-guidance"><div class="field-label">تایمر پیشنهادی برای ارزیابی مجدد</div><strong>۳۰ دقیقه</strong><div class="mini-next">۳۰ دقیقه فقط مقدار پیشنهادی است و در مرحله «ارزیابی مجدد» می‌توانید زمان دلخواه را تنظیم کنید. در صورت تداوم یا تشدید درد، پزشک مربوطه مطلع شود.</div></div></div>`;
 }
 
 $('#save-intervention').addEventListener('click',()=>{
@@ -1025,15 +1040,83 @@ $('#save-intervention').addEventListener('click',()=>{
 });
 
 function renderReassessmentBanner(){
-  const rec=recommendationFor(state.clinicalResult?.level.key||'none');
-  $('#reassess-banner').innerHTML=`<div class="reassess-banner"><div><div class="field-label">زمان / فاصله ارزیابی مجدد</div><div class="time-value">${rec.interval}</div><div class="mini-next">علائم حیاتی نیز همزمان کنترل شود.</div></div><div class="timer-box"><span class="timer-display" id="timer-display">${formatTime(rec.minutes*60)}</span>${rec.minutes<=30?`<button class="btn btn-secondary" type="button" id="timer-toggle">شروع تایمر</button>`:''}</div></div>`;
-  state.timerSeconds=rec.minutes*60;
-  if($('#timer-toggle')) $('#timer-toggle').addEventListener('click',toggleTimer);
+  if(state.timer){clearInterval(state.timer);state.timer=null;}
+  const assignedSeconds=(Number.isFinite(state.timerConfiguredSeconds)&&state.timerConfiguredSeconds>0)?state.timerConfiguredSeconds:1800;
+  state.timerConfiguredSeconds=assignedSeconds;
+  state.timerSeconds=assignedSeconds;
+  const assignedMinutes=Math.max(1,Math.round(assignedSeconds/60));
+  $('#reassess-banner').innerHTML=`<div class="reassess-banner">
+    <div class="reassess-guidance">
+      <div class="field-label">زمان ارزیابی مجدد</div>
+      <strong>مدت تایمر را متناسب با وضعیت نوزاد تعیین کنید.</strong>
+      <div class="mini-next" id="reassess-timer-hint">۳۰ دقیقه فقط مقدار پیشنهادی است؛ در صورت نیاز می‌توانید مدت را تغییر دهید. علائم حیاتی نیز همزمان کنترل شود.</div>
+      <div class="timer-error" id="reassess-timer-error" role="alert">مدت زمان باید بین ۱ تا ۲۴۰ دقیقه باشد.</div>
+    </div>
+    <div class="reassess-timer-panel">
+      <div class="timer-config-group">
+        <label class="timer-config-field" for="reassess-duration-minutes"><span>مدت ارزیابی مجدد (دقیقه)</span><input class="timer-duration-input" id="reassess-duration-minutes" type="number" min="1" max="240" step="1" inputmode="numeric" value="${assignedMinutes}" dir="ltr" aria-describedby="reassess-timer-helper"></label>
+        <div class="timer-helper" id="reassess-timer-helper">مقدار تعیین‌شده حفظ می‌شود و «بازنشانی» شمارش‌معکوس را به همین مدت برمی‌گرداند.</div>
+      </div>
+      <div class="timer-display-group">
+        <div class="timer-display-label">زمان باقی‌مانده</div>
+        <div class="timer-display-wrap" aria-live="polite" aria-label="زمان باقی‌مانده"><span class="timer-display" id="timer-display">${formatTime(state.timerSeconds)}</span></div>
+      </div>
+      <div class="timer-actions-group">
+        <button class="btn btn-primary" type="button" id="timer-toggle">شروع تایمر</button>
+        <button class="btn btn-secondary" type="button" id="timer-reset" aria-label="بازنشانی تایمر به مدت تعیین‌شده">بازنشانی</button>
+      </div>
+    </div>
+  </div>`;
+  const durationInput=$('#reassess-duration-minutes');
+  durationInput.addEventListener('change',applyReassessmentTime);
+  durationInput.addEventListener('blur',applyReassessmentTime);
+  $('#timer-toggle').addEventListener('click',toggleTimer);
+  $('#timer-reset').addEventListener('click',resetReassessmentTimer);
+}
+function readReassessmentDuration(){
+  const minutes=Number.parseInt($('#reassess-duration-minutes')?.value??'30',10);
+  if(!Number.isFinite(minutes)||minutes<1||minutes>240)return null;
+  return minutes*60;
+}
+function applyReassessmentTime(){
+  const seconds=readReassessmentDuration();
+  const error=$('#reassess-timer-error');
+  if(seconds===null){
+    error?.classList.add('visible');
+    $('#reassess-duration-minutes')?.setAttribute('aria-invalid','true');
+    return false;
+  }
+  error?.classList.remove('visible');
+  $('#reassess-duration-minutes')?.removeAttribute('aria-invalid');
+  if(state.timer){clearInterval(state.timer);state.timer=null;}
+  state.timerConfiguredSeconds=seconds;
+  state.timerSeconds=seconds;
+  if($('#timer-display'))$('#timer-display').textContent=formatTime(seconds);
+  const btn=$('#timer-toggle');if(btn){btn.disabled=false;btn.textContent='شروع تایمر';}
+  updateSummary();
+  return true;
+}
+function resetReassessmentTimer(){
+  if(state.timer){clearInterval(state.timer);state.timer=null;}
+  const assignedSeconds=(Number.isFinite(state.timerConfiguredSeconds)&&state.timerConfiguredSeconds>0)?state.timerConfiguredSeconds:1800;
+  state.timerConfiguredSeconds=assignedSeconds;
+  state.timerSeconds=assignedSeconds;
+  const durationInput=$('#reassess-duration-minutes');
+  if(durationInput){
+    durationInput.value=Math.max(1,Math.round(assignedSeconds/60));
+    durationInput.removeAttribute('aria-invalid');
+  }
+  $('#reassess-timer-error')?.classList.remove('visible');
+  if($('#timer-display'))$('#timer-display').textContent=formatTime(state.timerSeconds);
+  const btn=$('#timer-toggle');if(btn){btn.disabled=false;btn.textContent='شروع تایمر';}
+  updateSummary();
 }
 function formatTime(seconds){const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');}
 function toggleTimer(){
   const btn=$('#timer-toggle');
+  if(!btn)return;
   if(state.timer){clearInterval(state.timer);state.timer=null;btn.textContent='ادامه تایمر';return;}
+  if(state.timerSeconds<=0){resetReassessmentTimer();}
   btn.textContent='توقف';
   state.timer=setInterval(()=>{state.timerSeconds=Math.max(0,state.timerSeconds-1);if($('#timer-display'))$('#timer-display').textContent=formatTime(state.timerSeconds);if(state.timerSeconds===0){clearInterval(state.timer);state.timer=null;btn.textContent='پایان';btn.disabled=true;}},1000);
 }
@@ -1060,7 +1143,7 @@ function updateSummary(){
   }
   const nextMap={1:'ثبت زمینه بالینی',2:'تکمیل تمام شاخص‌های ابزار',3:'ثبت مداخله انجام‌شده',4:'انجام ارزیابی مجدد',5:'مرور و چاپ گزارش'};
   $('#summary-next').textContent=nextMap[state.step];
-  if(result?.complete) $('#summary-reassess').textContent=`ارزیابی مجدد: ${recommendationFor(result.level.key).interval}`; else $('#summary-reassess').textContent='—';
+  if(result?.complete) $('#summary-reassess').textContent=`تایمر پیشنهادی/تنظیم‌شده: ${formatTime(state.timerConfiguredSeconds||1800)}`; else $('#summary-reassess').textContent='—';
   $('#mobile-summary-value').textContent=state.step===1?`ابزار پیشنهادی: ${state.recommendedScale}`:nextMap[state.step];
   $('#mobile-summary-score').textContent=result?`${result.score}/${SCALES[result.scale].max}`:'—';
 }
@@ -1086,7 +1169,7 @@ function resetClinical(){
   if(state.timer){clearInterval(state.timer);state.timer=null;}
   $('#clinicalContextForm').reset();
   $('input[name="assessmentType"][value="acute"]').checked=true;
-  state.step=1;state.context={};state.recommendedScale='NIPS';state.clinicalScale=null;state.clinicalResult=null;state.reassessmentResult=null;state.interventions=[];
+  state.step=1;state.context={};state.recommendedScale='NIPS';state.clinicalScale=null;state.clinicalResult=null;state.reassessmentResult=null;state.interventions=[];state.timerSeconds=0;state.timerConfiguredSeconds=1800;
   $('#clinical-assessment-host').innerHTML='';$('#intervention-host').innerHTML='';$('#reassessment-host').className='quick-host-empty';$('#reassessment-host').innerHTML='برای شروع ارزیابی مجدد، دکمه زیر را انتخاب کنید.';$('#documentation-summary').innerHTML='';$('#to-documentation').disabled=true;
   updateRecommendation();setStep(1);
 }
