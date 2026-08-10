@@ -1,5 +1,5 @@
-const fs=require('fs');const path=require('path');const cp=require('child_process');const assert=require('assert/strict');
-const globalRoot=cp.execSync('npm root -g',{encoding:'utf8'}).trim();const ts=require(path.join(globalRoot,'typescript'));
+const fs=require('fs');const path=require('path');const assert=require('assert/strict');
+const ts=require('typescript');
 function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(ent=>ent.isDirectory()?walk(path.join(dir,ent.name)):[path.join(dir,ent.name)]);}
 const files=walk('.').filter(file=>/\.(ts|tsx)$/.test(file)&&!file.endsWith('.d.ts')&&!file.includes('node_modules'));
 let errors=[];
