@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {"module":"commonjs","moduleResolution":"node","types":["node"]},
+  "include": ["./*.ts", "../packages/clinical-domain/src/**/*.ts", "../apps/api/src/clinical/**/*.ts", "../apps/api/src/persistence/**/*.ts", "../apps/api/src/assessments/assessments.service.ts"]
+}

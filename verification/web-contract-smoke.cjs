@@ -1,0 +1,18 @@
+const fs = require('fs');
+const assert = require('assert/strict');
+const read = p => fs.readFileSync(p,'utf8');
+const button = read('apps/web/src/components/ClinicalButton.tsx');
+assert.match(button,/motion\.button/);
+assert.match(button,/useReducedMotion/);
+assert.match(button,/min-height:\s*48px|clinical-button/);
+const panel = read('apps/web/src/components/RecommendationPanel.tsx');
+assert.match(panel,/اقدامات غیردارویی پیشنهادی/);
+assert.ok(panel.indexOf('اقدامات غیردارویی پیشنهادی') < panel.indexOf('اقدام پزشکی'), 'non-medication must render first');
+assert.doesNotMatch(panel,/<details/i);
+const pipp = read('apps/web/src/features/assessment/PippAssessment.tsx');
+assert.match(pipp,/type="range"/);
+assert.match(pipp,/aria-valuetext/);
+assert.match(pipp,/PIPP_GESTATIONAL_AGE_MISMATCH|هشدار/);
+const html = read('apps/web/index.html');
+assert.match(html,/lang="fa" dir="rtl"/);
+console.log('web contract smoke checks passed');

@@ -1,0 +1,6 @@
+import { render,screen } from '@testing-library/react';
+import { describe,expect,it } from 'vitest';
+import type { AssessmentResult } from '@neonatal/clinical-domain';
+import { RecommendationPanel } from '../src/components/RecommendationPanel';
+const result={id:'1',scale:'NIPS',score:3,severity:'moderate',severityLabelFa:'درد متوسط',completedCriteria:6,totalCriteria:6,measurements:{},warnings:[],createdAt:new Date().toISOString(),recommendation:{scale:'NIPS',severity:'moderate',titleFa:'درد متوسط',nonMedication:[{id:'nns',labelFa:'مکیدن غیرمغذی'}],medicalActionFa:'بررسی پزشکی',escalationFa:'اطلاع پزشک',reassessment:{labelFa:'۳۰ دقیقه'},sourceRefs:[{id:'s',label:'source',reviewStatus:'source-transcribed'}]}} satisfies AssessmentResult;
+describe('RecommendationPanel',()=>{it('renders non-medication actions visibly before medical guidance',()=>{const {container}=render(<RecommendationPanel result={result}/>);const nonMed=screen.getByRole('heading',{name:'اقدامات غیردارویی پیشنهادی'});const medical=screen.getByRole('heading',{name:'اقدام پزشکی / درمان دارویی'});expect(nonMed.compareDocumentPosition(medical)&Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();expect(screen.getByText('مکیدن غیرمغذی')).toBeVisible();expect(container.querySelector('details')).toBeNull()})});

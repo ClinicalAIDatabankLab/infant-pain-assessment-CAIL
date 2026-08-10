@@ -1,0 +1,31 @@
+{
+  "name": "neonatal-pain-cdss",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w @neonatal/api",
+    "dev:web": "npm run dev -w @neonatal/web",
+    "build": "npm run build -w @neonatal/clinical-domain && npm run build -w @neonatal/api && npm run build -w @neonatal/web",
+    "test:domain": "ts-node -P verification/tsconfig.json verification/domain-smoke.ts",
+    "test:api-core": "ts-node -P verification/tsconfig.json verification/api-service-smoke.ts",
+    "test:static": "node verification/static-check.cjs",
+    "verify": "npm run prepare:verify && npm run test:domain && npm run test:api-core && npm run test:web-contract && npm run test:static",
+    "test": "npm run verify && npm run test -w @neonatal/api && npm run test -w @neonatal/web",
+    "test:e2e": "playwright test",
+    "prepare:verify": "node verification/prepare-workspace.cjs",
+    "test:web-contract": "node verification/web-contract-smoke.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.0",
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.0"
+  }
+}
