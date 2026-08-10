@@ -139,26 +139,65 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
 .page-heading p{margin:5px 0 0;color:var(--muted);font-size:.92rem}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
 .card-pad{padding:22px}
+.workflow-command-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 16px;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,#f8fcfd,#eef8f7);
+  border:1px solid #cfe2e5;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+.workflow-command-main{display:grid;gap:2px;min-width:0}
+.workflow-kicker{font-size:.7rem;font-weight:850;color:var(--teal);letter-spacing:.02em}
+.workflow-command-main strong{color:var(--navy);font-size:1rem}
+.workflow-hint{font-size:.76rem;color:var(--muted)}
+.workflow-back-btn{flex:0 0 auto;white-space:nowrap}
+.workflow-back-btn[hidden]{display:none!important}
 .clinical-stepper{
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
-  padding:18px 22px;
+  padding:10px 14px;
   margin-bottom:18px;
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   gap:0;
+  overflow-x:auto;
 }
-.step-chip{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;color:var(--muted);min-width:0}
-.step-chip:not(:last-child)::after{content:"";position:absolute;top:17px;left:0;width:calc(50% - 17px);height:2px;background:var(--border-strong)}
-.step-chip:not(:first-child)::before{content:"";position:absolute;top:17px;right:0;width:calc(50% - 17px);height:2px;background:var(--border-strong)}
+.step-chip{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  text-align:center;
+  color:var(--muted);
+  min-width:0;
+  min-height:72px;
+  padding:7px 5px;
+  border:0;
+  background:transparent;
+  cursor:default;
+  border-radius:10px;
+}
+.step-chip.available{cursor:pointer}
+.step-chip.available:hover{background:#f5fbfb;color:var(--navy)}
+.step-chip:disabled{opacity:.62;cursor:not-allowed}
+.step-chip:not(:last-child)::after{content:"";position:absolute;top:24px;left:0;width:calc(50% - 17px);height:2px;background:var(--border-strong)}
+.step-chip:not(:first-child)::before{content:"";position:absolute;top:24px;right:0;width:calc(50% - 17px);height:2px;background:var(--border-strong)}
 .step-chip.done::after,.step-chip.done::before,.step-chip.current::before{background:var(--teal)}
 .step-dot{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#e7edf1;color:#435667;font-weight:850;z-index:2;border:2px solid #fff;box-shadow:0 0 0 1px var(--border)}
 .step-chip.current .step-dot,.step-chip.done .step-dot{background:var(--teal);color:#fff;box-shadow:0 0 0 1px var(--teal)}
-.step-chip.current{color:var(--navy);font-weight:800}
-.step-label{margin-top:7px;font-size:.83rem;line-height:1.45}
-.step-label small{display:block;font-size:.64rem;font-weight:500;direction:ltr;color:var(--muted)}
+.step-chip.done .step-dot::after{content:"✓";font-size:.72rem;margin-right:2px}
+.step-chip.done .step-dot{font-size:0}
+.step-chip.current{color:var(--navy);font-weight:850;background:#f7fcfb}
+.step-label{margin-top:7px;font-size:.81rem;line-height:1.4}
+.step-label small{display:block;font-size:.62rem;font-weight:500;direction:ltr;color:var(--muted)}
 .clinical-layout{direction:ltr;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
 .clinical-main{min-width:0;direction:rtl}
 .summary-card{direction:rtl}
@@ -288,9 +327,6 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
 .pipp-input-wrap{display:flex;align-items:center;gap:8px;direction:ltr}
 .pipp-input-wrap .input{text-align:center;font-weight:850;font-variant-numeric:tabular-nums}
 .pipp-unit{font-size:.75rem;font-weight:800;color:var(--muted);white-space:nowrap}
-.pipp-timer-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px dashed #a9c9d8;background:#f8fcfe;border-radius:12px;padding:12px;margin:12px 0}
-.pipp-timer-copy{font-size:.79rem;color:var(--muted)}
-.pipp-timer-display{font-size:1.45rem;font-weight:950;color:var(--navy);font-variant-numeric:tabular-nums;direction:ltr}
 .pipp-computed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:13px 0}
 .pipp-computed{border:1px solid var(--border);border-radius:11px;padding:11px;background:#fff}
 .pipp-computed span{display:block;font-size:.72rem;color:var(--muted)}
@@ -299,7 +335,7 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
 .pipp-gate-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:13px;flex-wrap:wrap}
 .pipp-stage-complete{border-color:#9bcfc5}
 .pipp-stage-complete .pipp-stage-status{color:var(--success);border-color:#ccebdc;background:var(--success-soft)}
-@media (max-width:700px){.pipp-metric-grid,.pipp-computed-grid{grid-template-columns:1fr}.pipp-stage-head,.pipp-timer-panel{align-items:flex-start;flex-direction:column}.pipp-gate-actions .btn{width:100%}}
+@media (max-width:700px){.pipp-metric-grid,.pipp-computed-grid{grid-template-columns:1fr}.pipp-stage-head{align-items:flex-start;flex-direction:column}.pipp-gate-actions .btn{width:100%}}
 
 .intervention-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .intervention-card{border:1px solid var(--border);border-radius:13px;padding:16px;background:var(--surface-2)}
@@ -310,25 +346,51 @@ svg.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;s
 .check-row input{margin-top:5px;accent-color:var(--teal)}
 .med-card{border-right:4px solid var(--purple);background:var(--purple-soft)}
 .med-dose{font-size:.82rem;color:#59458c;margin:7px 0}
+.treatment-ladder{display:grid;gap:12px;margin-top:14px}
+.treatment-step{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--border);border-radius:13px;padding:15px;background:#fff}
+.treatment-step:not(:last-child)::after{content:"";position:absolute;right:32px;bottom:-13px;width:2px;height:13px;background:var(--border-strong);z-index:2}
+.treatment-step.current{border-color:#cdbdf0;background:linear-gradient(135deg,#fbf9ff,#f5f1ff)}
+.treatment-step.escalation{border-color:#efc2bf;background:#fff8f7}
+.treatment-step.support{border-color:#b9ddcd;background:#f7fcfa}
+.treatment-step-num{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--navy);color:#fff;font-weight:900}
+.treatment-step.current .treatment-step-num{background:var(--purple)}
+.treatment-step.escalation .treatment-step-num{background:var(--severe)}
+.treatment-step.support .treatment-step-num{background:var(--success)}
+.treatment-step h4{margin:0 0 5px;color:var(--navy);font-size:.95rem}
+.treatment-step p{margin:0;color:#4e6372;font-size:.82rem}
+.treatment-step .intervention-list{margin-top:10px}
+.support-details{margin-top:10px;border-top:1px solid #d7e8e1;padding-top:8px}
+.support-details summary{cursor:pointer;color:var(--teal);font-weight:850;font-size:.82rem;min-height:44px;display:flex;align-items:center}
+.support-details[open] summary{margin-bottom:8px}
+.recommended-time-note{display:flex;align-items:flex-start;gap:10px;border:1px solid #c6dde9;background:#f4fbff;border-radius:12px;padding:13px;margin-top:14px;color:#365b77;font-size:.82rem}
+.pipp-observation-note{display:flex;align-items:flex-start;gap:9px;background:#f8fcfe;border:1px dashed #a9c9d8;border-radius:11px;padding:10px 12px;margin:12px 0;color:#466174;font-size:.8rem}
+
+.pipp-ga-mismatch{margin-top:10px}
+.pipp-ga-mismatch[hidden]{display:none!important}
+.pipp-ga-mismatch strong{color:#725300}
+.range-assessment{border:1px solid var(--border);border-radius:13px;padding:16px;margin-bottom:12px;background:#fff;transition:border-color .18s ease,box-shadow .18s ease}
+.range-assessment.answered{border-color:#a8d6cf;box-shadow:0 0 0 1px rgba(8,127,131,.08)}
+.range-control{--range-pct:0%;margin-top:8px}
+.range-control-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}
+.range-live{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.range-category{font-size:.74rem;color:var(--muted);font-weight:750}
+.range-shell{position:relative;padding:34px 2px 10px;direction:ltr}
+.range-value-bubble{position:absolute;top:0;left:clamp(20px,var(--range-pct),calc(100% - 20px));transform:translateX(-50%);min-width:44px;padding:3px 8px;border-radius:7px;background:var(--navy);color:#fff;text-align:center;font-size:.72rem;font-weight:900;line-height:1.35;direction:rtl;pointer-events:none;transition:left .12s ease-out}
+.range-value-bubble::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--navy);border-bottom:0}
+.pipp-percent-range{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:999px;outline:none;background:linear-gradient(to right,var(--teal) 0 var(--range-pct),#dce7ed var(--range-pct) 100%);cursor:pointer;direction:ltr}
+.pipp-percent-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--teal);box-shadow:0 2px 7px rgba(7,54,79,.20);cursor:grab}
+.pipp-percent-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--teal);box-shadow:0 2px 7px rgba(7,54,79,.20);cursor:grab}
+.pipp-percent-range:active::-webkit-slider-thumb{cursor:grabbing;transform:scale(1.05)}
+.pipp-percent-range:focus-visible{outline:3px solid rgba(23,105,170,.25);outline-offset:5px}
+.range-markers{position:relative;height:20px;margin-top:5px;color:var(--muted);font-size:.66rem;direction:ltr}
+.range-marker{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.range-marker:first-child{transform:none}.range-marker:last-child{transform:translateX(-100%)}
+.range-help{margin-top:3px;font-size:.72rem;color:var(--muted);line-height:1.6}
+@media (max-width:560px){.range-control-top{display:block}.range-live{justify-content:flex-start;margin-top:5px}.range-marker{font-size:.62rem}}
+.page-back-btn{white-space:nowrap}
 .reassess-banner{display:flex;flex-direction:column;align-items:stretch;gap:16px;border:1px solid #c6dde9;background:#f4fbff;border-radius:14px;padding:18px;margin-bottom:16px;direction:rtl}
 .reassess-guidance{text-align:right;direction:rtl}
 .reassess-guidance strong{display:block;margin-top:4px;color:var(--navy);font-size:1rem}
-.reassess-timer-panel{display:grid;grid-template-columns:minmax(220px,280px) minmax(180px,220px) minmax(220px,1fr);align-items:end;gap:14px;padding-top:16px;border-top:1px solid #d7e8f0;direction:rtl}
-.timer-config-group{display:flex;flex-direction:column;gap:7px;min-width:0;text-align:right}
-.timer-config-field{display:flex;flex-direction:column;gap:6px;max-width:none;text-align:right}
-.timer-config-field span{font-size:.78rem;color:var(--navy);font-weight:800}
-.timer-duration-input{width:100%;min-height:48px;border:1px solid var(--border);border-radius:11px;background:#fff;color:var(--navy);font-family:inherit;font-size:1.08rem;font-weight:900;padding:9px 12px;text-align:center;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
-.timer-duration-input:focus{outline:3px solid rgba(0,137,145,.16);border-color:var(--teal)}
-.timer-helper{font-size:.75rem;color:var(--muted);line-height:1.7;max-width:320px}
-.timer-display-group{display:flex;flex-direction:column;gap:6px;min-width:0}
-.timer-display-label{font-size:.78rem;color:var(--navy);font-weight:800;text-align:right}
-.timer-actions-group{display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap;direction:rtl}
-.timer-display-wrap{display:flex;align-items:center;justify-content:center;width:100%;min-width:176px;min-height:58px;padding:10px 18px;border:1px solid #b8d4e2;border-radius:13px;background:#fff;direction:ltr;box-shadow:0 3px 10px rgba(23,72,99,.05)}
-.time-value{font-size:1.75rem;line-height:1;font-weight:900;color:var(--teal);direction:ltr;white-space:nowrap;unicode-bidi:isolate}
-.timer-box{display:flex;align-items:center;gap:10px;direction:rtl;flex-wrap:wrap}
-.timer-display{font-size:1.72rem;font-weight:950;color:var(--navy);direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;letter-spacing:.02em}
-.timer-error{display:none;margin-top:4px;color:var(--severe);font-size:.76rem;font-weight:750}
-.timer-error.visible{display:block}
 .doc-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}
 .doc-tile{border:1px solid var(--border);background:var(--surface-2);border-radius:11px;padding:12px}
 .doc-tile span{display:block;font-size:.72rem;color:var(--muted)}
@@ -376,7 +438,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
   .header-inner{padding:14px 16px}.header-actions .header-btn span{display:none}.header-btn{padding:8px 11px}
   .primary-nav{padding:0 10px;grid-template-columns:repeat(4,minmax(0,1fr))}.nav-btn{min-height:62px;padding:8px 4px;gap:4px;flex-direction:column}.nav-copy{align-items:center}.nav-copy small{display:none}.nav-btn .icon{width:19px;height:19px}
   .app-shell{padding:18px 14px 100px}
-  .clinical-stepper{padding:14px 7px}.step-label{font-size:.7rem}.step-label small{display:none}.step-dot{width:31px;height:31px}.step-chip:not(:last-child)::after,.step-chip:not(:first-child)::before{top:15px}
+  .workflow-command-bar{padding:12px 13px}.clinical-stepper{padding:8px;grid-template-columns:repeat(5,minmax(118px,1fr));scroll-snap-type:x proximity}.step-chip{scroll-snap-align:center}.step-label{font-size:.72rem}.step-label small{display:none}.step-dot{width:31px;height:31px}.step-chip:not(:last-child)::after,.step-chip:not(:first-child)::before{top:22px}
   .clinical-layout{display:block}.summary-card{display:none}
   .mobile-summary-bar{position:fixed;display:flex;bottom:0;right:0;left:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--border);box-shadow:0 -8px 24px rgba(7,54,79,.10);padding:9px 14px calc(9px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:10px}
   .mobile-summary-main{min-width:0}.mobile-summary-label{font-size:.68rem;color:var(--muted)}.mobile-summary-value{font-size:.88rem;font-weight:850;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mobile-summary-score{font-weight:900;color:var(--teal);direction:ltr;white-space:nowrap}
@@ -387,12 +449,12 @@ tbody tr:nth-child(even){background:#f8fbfd}
 @media (max-width:560px){
   .brand-mark{width:42px;height:42px}.brand-copy h1{font-size:1rem}.brand-copy p{font-size:.66rem}
   .primary-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 4px}.nav-btn{min-height:54px;flex-direction:row}.nav-copy{align-items:flex-start}.nav-btn.active{background:#f4fbfb}
-  .page-heading{display:block}.page-heading h2{font-size:1.18rem}
-  .clinical-stepper{overflow:hidden}.step-label{font-size:.62rem}.step-dot{width:29px;height:29px;font-size:.72rem}
+  .page-heading{display:block}.page-heading h2{font-size:1.18rem}.page-heading .page-back-btn{margin-top:10px;width:100%}
+  .workflow-command-bar{align-items:stretch;flex-direction:column}.workflow-back-btn{width:100%}.clinical-stepper{margin-left:-2px;margin-right:-2px}.step-label{font-size:.68rem}.step-dot{width:29px;height:29px;font-size:.72rem}
   .section-card{padding:17px}.form-grid,.form-grid.two,.choice-grid,.option-grid,.doc-summary{grid-template-columns:1fr}
   .quick-grid,.scale-guide-grid{grid-template-columns:1fr}
   .quick-card{min-height:178px}.quick-card p{min-height:0}
-  .recommend-main,.assessment-head,.result-top{display:block}.recommend-tool{margin-top:6px}.scale-tag{display:inline-block;margin-top:8px}.time-value{margin-top:8px}.timer-box{margin-top:12px;flex-wrap:wrap}.reassess-timer-panel{display:block}.timer-config-group,.timer-display-group,.timer-actions-group{margin-top:12px}.timer-config-field{max-width:none}.timer-duration-input{width:100%}.timer-actions-group{align-items:stretch}.timer-display-wrap{width:100%;margin-bottom:4px}.timer-actions-group .btn{flex:1 1 140px}
+  .recommend-main,.assessment-head,.result-top{display:block}.recommend-tool{margin-top:6px}.scale-tag{display:inline-block;margin-top:8px}
   .actions{justify-content:stretch}.actions .btn{flex:1 1 150px}
 }
 @media (prefers-reduced-motion: reduce){
@@ -454,15 +516,26 @@ tbody tr:nth-child(even){background:#f8fbfd}
 <main class="app-shell">
   <section class="view active" data-view-panel="clinical" id="view-clinical">
     <div class="page-heading">
-      <div><h2>مسیر بالینی مدیریت درد</h2><p>زمینه بالینی را ثبت کنید؛ سامانه ابزار مناسب را پیشنهاد می‌کند و سپس مسیر ارزیابی، مداخله، ارزیابی مجدد و مستندسازی را هدایت می‌کند.</p></div>
+      <div><h2>مسیر بالینی مدیریت درد</h2><p>یک مسیر پنج‌مرحله‌ای از ثبت زمینه تا گزارش نهایی؛ مراحل تکمیل‌شده در هر زمان قابل مرور هستند.</p></div>
+    </div>
+
+    <div class="workflow-command-bar" aria-live="polite">
+      <div class="workflow-command-main">
+        <span class="workflow-kicker">مسیر فعال</span>
+        <strong id="workflow-current-label">مرحله ۱ از ۵ · زمینه بالینی</strong>
+        <span class="workflow-hint">ابتدا وضعیت نوزاد را ثبت کنید.</span>
+      </div>
+      <button class="btn btn-secondary workflow-back-btn" type="button" data-clinical-back hidden>
+        <svg class="icon"><use href="#i-chevron"></use></svg><span id="workflow-back-label">بازگشت</span>
+      </button>
     </div>
 
     <div class="clinical-stepper" aria-label="مراحل مسیر بالینی">
-      <div class="step-chip current" data-step-chip="1"><span class="step-dot">۱</span><span class="step-label">زمینه بالینی<small>Patient Context</small></span></div>
-      <div class="step-chip" data-step-chip="2"><span class="step-dot">۲</span><span class="step-label">ارزیابی درد<small>Pain Assessment</small></span></div>
-      <div class="step-chip" data-step-chip="3"><span class="step-dot">۳</span><span class="step-label">مداخله<small>Intervention</small></span></div>
-      <div class="step-chip" data-step-chip="4"><span class="step-dot">۴</span><span class="step-label">ارزیابی مجدد<small>Reassessment</small></span></div>
-      <div class="step-chip" data-step-chip="5"><span class="step-dot">۵</span><span class="step-label">ثبت و گزارش<small>Documentation</small></span></div>
+      <button class="step-chip current available" type="button" data-step-chip="1" aria-current="step"><span class="step-dot">۱</span><span class="step-label">زمینه بالینی<small>Patient Context</small></span></button>
+      <button class="step-chip" type="button" data-step-chip="2" disabled><span class="step-dot">۲</span><span class="step-label">ارزیابی درد<small>Pain Assessment</small></span></button>
+      <button class="step-chip" type="button" data-step-chip="3" disabled><span class="step-dot">۳</span><span class="step-label">مداخله<small>Intervention</small></span></button>
+      <button class="step-chip" type="button" data-step-chip="4" disabled><span class="step-dot">۴</span><span class="step-label">ارزیابی مجدد<small>Reassessment</small></span></button>
+      <button class="step-chip" type="button" data-step-chip="5" disabled><span class="step-dot">۵</span><span class="step-label">ثبت و گزارش<small>Documentation</small></span></button>
     </div>
 
     <div class="clinical-layout">
@@ -474,6 +547,8 @@ tbody tr:nth-child(even){background:#f8fbfd}
               <p class="section-subtitle">اطلاعات شناسایی اختیاری است و فقط در همین صفحه برای گزارش چاپی نگه داشته می‌شود.</p>
               <div class="form-grid">
                 <div class="field"><label for="record-id">شماره پرونده</label><input class="input" id="record-id" name="recordId" type="text" autocomplete="off" placeholder="اختیاری"></div>
+                <div class="field"><label for="mother-national-id">کدملی مادر</label><input class="input" id="mother-national-id" name="motherNationalId" type="text" inputmode="numeric" maxlength="10" pattern="[0-9۰-۹]{10}" autocomplete="off" placeholder="۱۰ رقم"></div>
+                <div class="field"><label for="gestational-weeks">هفته بارداری</label><input class="input" id="gestational-weeks" name="gestationalWeeks" type="number" min="20" max="45" step="1" inputmode="numeric" placeholder="مثلاً ۳۰"><span class="mini-next">هفته کامل؛ برای مقایسه با انتخاب سن حاملگی در PIPP استفاده می‌شود و در صورت اختلاف هشدار نمایش داده می‌شود.</span></div>
                 <div class="field"><label for="age-days">سن (روز)</label><input class="input" id="age-days" name="ageDays" type="number" min="0" max="180" inputmode="numeric" placeholder="مثلاً 5"></div>
                 <div class="field"><label for="weight-grams">وزن (گرم)</label><input class="input" id="weight-grams" name="weightGrams" type="number" min="300" max="10000" inputmode="numeric" placeholder="مثلاً 2850"></div>
                 <div class="field"><span class="field-label">جنسیت</span><div class="segmented"><label class="choice-card"><input type="radio" name="sex" value="female"><span>دختر</span></label><label class="choice-card"><input type="radio" name="sex" value="male"><span>پسر</span></label></div></div>
@@ -497,7 +572,6 @@ tbody tr:nth-child(even){background:#f8fbfd}
                   <span class="field-label">نوع ارزیابی</span>
                   <div class="choice-grid" style="margin-top:8px">
                     <label class="choice-card"><input type="radio" name="assessmentType" value="acute" checked><span>درد حاد ناشی از اقدام تشخیصی / درمانی</span></label>
-                    <label class="choice-card"><input type="radio" name="assessmentType" value="postop"><span>درد پس از جراحی</span></label>
                     <label class="choice-card"><input type="radio" name="assessmentType" value="routine"><span>پایش عمومی / دوره‌ای</span></label>
                   </div>
                 </div>
@@ -518,6 +592,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
         <section class="workflow-step" data-workflow-step="2" id="step-assessment">
           <div class="section-card">
             <div id="clinical-assessment-host"></div>
+            <div class="actions"><button class="btn btn-secondary" type="button" data-back-step="1">بازگشت به زمینه بالینی</button></div>
           </div>
         </section>
 
@@ -533,7 +608,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
         <section class="workflow-step" data-workflow-step="4" id="step-reassessment">
           <div class="section-card">
             <h3 class="section-title"><svg class="icon"><use href="#i-clock"></use></svg>ارزیابی مجدد</h3>
-            <p class="section-subtitle">فاصله ارزیابی مجدد بر اساس وضعیت بالینی و شدت درد تعیین شود. برای درد متوسط تا شدید، پایش در فواصل کوتاه‌تر انجام شود؛ تایمر زیر قابل تنظیم است و ۳۰ دقیقه فقط مقدار پیشنهادی اولیه است.</p>
+            <p class="section-subtitle">فاصله ارزیابی مجدد بر اساس وضعیت بالینی و شدت درد تعیین شود. پس از گذشت زمان توصیه‌شده، ارزیابی درد با همان ابزار تکرار و نتیجه ثبت شود.</p>
             <div id="reassess-banner"></div>
             <div id="reassessment-host" class="quick-host-empty">برای شروع ارزیابی مجدد، دکمه زیر را انتخاب کنید.</div>
             <div class="actions"><button class="btn btn-secondary" type="button" data-back-step="3">بازگشت</button><button class="btn btn-primary" type="button" id="start-reassessment">شروع ارزیابی مجدد</button><button class="btn btn-primary" type="button" id="to-documentation" disabled>ادامه به ثبت و گزارش<svg class="icon"><use href="#i-chevron"></use></svg></button></div>
@@ -566,7 +641,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
   </section>
 
   <section class="view" data-view-panel="quick" id="view-quick">
-    <div class="page-heading"><div><h2>ارزیابی سریع</h2><p>اگر ابزار مناسب را از قبل می‌دانید، مستقیماً یکی از چهار مقیاس را شروع کنید. همان موتور امتیازدهی مسیر بالینی استفاده می‌شود.</p></div></div>
+    <div class="page-heading"><div><h2>ارزیابی سریع</h2><p>اگر ابزار مناسب را از قبل می‌دانید، مستقیماً یکی از چهار مقیاس را شروع کنید. همان موتور امتیازدهی مسیر بالینی استفاده می‌شود.</p></div><button class="btn btn-secondary page-back-btn" type="button" data-page-back><svg class="icon"><use href="#i-chevron"></use></svg>بازگشت</button></div>
     <div class="quick-grid" id="quick-scale-grid">
       <article class="card quick-card" data-scale="PIPP"><div><div class="quick-icon"><svg class="icon" style="width:30px;height:30px"><use href="#i-baby"></use></svg></div><h3>PIPP</h3><p>پروفایل درد شیرخواران پره‌ترم؛ برای درد حاد و نوزادان نارس.</p></div><button class="btn btn-secondary quick-start" type="button" data-scale="PIPP">شروع</button></article>
       <article class="card quick-card" data-scale="NIPS"><div><div class="quick-icon"><svg class="icon" style="width:30px;height:30px"><use href="#i-heart"></use></svg></div><h3>NIPS</h3><p>ارزیابی درد حاد ناشی از اقدامات تشخیصی و درمانی در نوزادان.</p></div><button class="btn btn-secondary quick-start" type="button" data-scale="NIPS">شروع</button></article>
@@ -577,7 +652,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
   </section>
 
   <section class="view" data-view-panel="procedures" id="view-procedures">
-    <div class="page-heading"><div><h2>رویه‌های دردناک و روش‌های تسکین</h2><p>این جدول از جدول ۱ گایدلاین ارسالی بازسازی شده است. یک رویه را انتخاب کنید تا توصیه‌های همان ردیف برجسته شود.</p></div></div>
+    <div class="page-heading"><div><h2>رویه‌های دردناک و روش‌های تسکین</h2><p>این جدول از جدول ۱ گایدلاین ارسالی بازسازی شده است. یک رویه را انتخاب کنید تا توصیه‌های همان ردیف برجسته شود.</p></div><button class="btn btn-secondary page-back-btn" type="button" data-page-back><svg class="icon"><use href="#i-chevron"></use></svg>بازگشت</button></div>
     <div class="card card-pad">
       <div class="procedure-controls">
         <div class="field"><label for="procedure-select">جستجو / انتخاب رویه</label><select class="select" id="procedure-select"><option value="">یک رویه را انتخاب کنید</option></select></div>
@@ -589,7 +664,7 @@ tbody tr:nth-child(even){background:#f8fbfd}
   </section>
 
   <section class="view" data-view-panel="guide" id="view-guide">
-    <div class="page-heading"><div><h2>راهنمای بالینی فشرده</h2><p>خلاصه ساختاریافته از فرایند اجرایی و ابزارهای ذکرشده در گایدلاین «مراقبت‌های پرستاری در مدیریت درد نوزادان بستری در بیمارستان».</p></div></div>
+    <div class="page-heading"><div><h2>راهنمای بالینی فشرده</h2><p>خلاصه ساختاریافته از فرایند اجرایی و ابزارهای ذکرشده در گایدلاین «مراقبت‌های پرستاری در مدیریت درد نوزادان بستری در بیمارستان».</p></div><button class="btn btn-secondary page-back-btn" type="button" data-page-back><svg class="icon"><use href="#i-chevron"></use></svg>بازگشت</button></div>
     <div class="guide-grid">
       <article class="card phase-card"><div class="phase-num">۱</div><h3>تشخیص و اندازه‌گیری شدت درد</h3><ul><li>درد همراه علائم حیاتی و به عنوان علامت حیاتی پنجم ارزیابی شود.</li><li>ابزار متناسب با سن، وضعیت نوزاد و نوع درد انتخاب شود.</li><li>شدت درد بر اساس امتیاز ابزار ارزیابی و ثبت شود.</li></ul></article>
       <article class="card phase-card"><div class="phase-num">۲</div><h3>درمان یا تسکین درد</h3><ul><li>رویکرد چندرشته‌ای با مشارکت تیم درمان و خانواده.</li><li>استفاده از روش‌های غیردارویی متناسب با وضعیت.</li><li>تمام روش‌های دارویی صرفاً طبق تجویز پزشک.</li></ul></article>
@@ -619,12 +694,12 @@ tbody tr:nth-child(even){background:#f8fbfd}
 const SCALES = {
   PIPP: {
     key:'PIPP', title:'PIPP — Premature Infant Pain Profile', max:21,
-    context:'مناسب برای ارزیابی درد حاد، به‌ویژه در نوزادان پره‌ترم. پیش از اقدام ۱۵ ثانیه خط پایه و پس از اقدام ۳۰ ثانیه ارزیابی شود.',
+    context:'برای درد حاد، به‌ویژه در نوزادان پره‌ترم؛ خط پایه پیش از اقدام و ارزیابی بلافاصله پس از اقدام ثبت شود.',
     items:[
       {id:'ga',label:'سن حاملگی',options:[{value:0,label:'۳۶ هفته یا بیشتر'},{value:1,label:'۳۲ تا ۳۵ هفته و ۶ روز'},{value:2,label:'۲۸ تا ۳۱ هفته و ۶ روز'},{value:3,label:'کمتر از ۲۸ هفته'}]},
-      {id:'behavior',label:'وضعیت رفتاری',help:'مشاهده ۱۵ ثانیه‌ای خط پایه',options:[{value:0,label:'فعال یا بیدار؛ چشم باز؛ حرکات صورت'},{value:1,label:'آرام یا بیدار؛ چشم باز؛ بدون حرکات صورت'},{value:2,label:'فعال یا خواب؛ چشم بسته؛ حرکات صورت'},{value:3,label:'خواب یا آرام؛ چشم بسته؛ بدون حرکات صورت'}]},
-      {id:'hr',label:'افزایش ضربان قلب',help:'حداکثر تغییر طی مشاهده ۳۰ ثانیه‌ای',options:[{value:0,label:'۰–۴ ضربه در دقیقه'},{value:1,label:'۵–۱۴ ضربه در دقیقه'},{value:2,label:'۱۵–۲۴ ضربه در دقیقه'},{value:3,label:'۲۵ ضربه یا بیشتر در دقیقه'}]},
-      {id:'spo2',label:'کاهش اشباع اکسیژن',help:'حداقل اشباع طی مشاهده ۳۰ ثانیه‌ای',options:[{value:0,label:'۰–۲.۴٪ کاهش'},{value:1,label:'۲.۵–۴.۹٪ کاهش'},{value:2,label:'۵–۷.۴٪ کاهش'},{value:3,label:'۷.۵٪ یا بیشتر کاهش'}]},
+      {id:'behavior',label:'وضعیت رفتاری',help:'خط پایه (۱۵ ثانیه)',options:[{value:0,label:'بیدار/فعال، چشم باز، حرکت صورت'},{value:1,label:'بیدار/آرام، چشم باز، بدون حرکت صورت'},{value:2,label:'خواب/فعال، چشم بسته، حرکت صورت'},{value:3,label:'خواب/آرام، چشم بسته، بدون حرکت صورت'}]},
+      {id:'hr',label:'افزایش ضربان قلب',help:'بیشترین تغییر پس از اقدام',options:[{value:0,label:'۰–۴ ضربه در دقیقه'},{value:1,label:'۵–۱۴ ضربه در دقیقه'},{value:2,label:'۱۵–۲۴ ضربه در دقیقه'},{value:3,label:'۲۵ ضربه یا بیشتر در دقیقه'}]},
+      {id:'spo2',label:'کاهش اشباع اکسیژن',help:'کمترین اشباع پس از اقدام',options:[{value:0,label:'۰–۲.۴٪ کاهش'},{value:1,label:'۲.۵–۴.۹٪ کاهش'},{value:2,label:'۵–۷.۴٪ کاهش'},{value:3,label:'۷.۵٪ یا بیشتر کاهش'}]},
       {id:'brow',label:'درهم کشیدن ابروها',options:[{value:0,label:'۰–۹٪ زمان'},{value:1,label:'۱۰–۳۹٪ زمان'},{value:2,label:'۴۰–۶۹٪ زمان'},{value:3,label:'۷۰٪ یا بیشتر از زمان'}]},
       {id:'eye',label:'فشردن چشم‌ها',options:[{value:0,label:'۰–۹٪ زمان'},{value:1,label:'۱۰–۳۹٪ زمان'},{value:2,label:'۴۰–۶۹٪ زمان'},{value:3,label:'۷۰٪ یا بیشتر از زمان'}]},
       {id:'nasolabial',label:'خط کنار پره‌های بینی',options:[{value:0,label:'۰–۹٪ زمان'},{value:1,label:'۱۰–۳۹٪ زمان'},{value:2,label:'۴۰–۶۹٪ زمان'},{value:3,label:'۷۰٪ یا بیشتر از زمان'}]}
@@ -672,7 +747,7 @@ const SCALES = {
 };
 
 function recommendScale(context={}){
-  if(context.postoperative || context.assessmentType === 'postop') return 'CRIES';
+  if(context.postoperative) return 'CRIES';
   if(context.ventilated || context.chronicPain) return 'MPAT';
   if(context.preterm && context.assessmentType === 'acute') return 'PIPP';
   if(context.assessmentType === 'acute') return 'NIPS';
@@ -680,6 +755,22 @@ function recommendScale(context={}){
 }
 
 
+function pippGestationalAgeScore(weeks){
+  const value=Number(weeks);
+  if(!Number.isFinite(value)||value<20||value>45)return null;
+  if(value>=36)return 0;
+  if(value>=32)return 1;
+  if(value>=28)return 2;
+  return 3;
+}
+function pippPercentScore(percent){
+  const value=Number(percent);
+  if(!Number.isFinite(value)||value<0||value>100)return null;
+  if(value<=9)return 0;
+  if(value<=39)return 1;
+  if(value<=69)return 2;
+  return 3;
+}
 function pippHrScore(baselineHr,maxHr){
   const delta=Math.max(0,Number(maxHr)-Number(baselineHr));
   if(delta<=4)return 0;
@@ -723,22 +814,22 @@ function classifyScore(scaleKey, score){
   return {key:'observe',label:'نیازمند بررسی'};
 }
 
-window.AppCore = { SCALES, recommendScale, classifyScore, pippHrScore, pippSpo2Score };
+window.AppCore = { SCALES, recommendScale, classifyScore, pippGestationalAgeScore, pippPercentScore, pippHrScore, pippSpo2Score };
 })();
 </script>
 
 <script>
-const { SCALES, recommendScale, classifyScore, pippHrScore, pippSpo2Score } = window.AppCore;
+const { SCALES, recommendScale, classifyScore, pippGestationalAgeScore, pippPercentScore, pippHrScore, pippSpo2Score } = window.AppCore;
 const state = {
-  view:'clinical', step:1, context:{}, recommendedScale:'NIPS', clinicalScale:null,
-  clinicalResult:null, reassessmentResult:null, interventions:[], quickScale:null, timer:null, timerSeconds:0, timerConfiguredSeconds:1800
+  view:'clinical', viewHistory:[], step:1, maxStepReached:1, context:{}, recommendedScale:'NIPS', clinicalScale:null,
+  clinicalResult:null, reassessmentResult:null, interventions:[], quickScale:null
 };
 const $ = (sel,root=document)=>root.querySelector(sel);
 const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
 const icon = id => `<svg class="icon"><use href="#${id}"></use></svg>`;
 
 const SCALE_DESCRIPTIONS = {
-  PIPP:'پروفایل درد شیرخواران پره‌ترم؛ مناسب درد حاد و نوزادان نارس.',
+  PIPP:'برای درد حاد، به‌ویژه در نوزادان نارس.',
   NIPS:'مقیاس درد نوزاد؛ مناسب درد حاد ناشی از اقدامات تشخیصی/درمانی.',
   CRIES:'ابزار ارزیابی درد پس از عمل جراحی.',
   MPAT:'ابزار چندبعدی؛ مناسب تهویه مکانیکی، درد مزمن یا پایش بستری.'
@@ -759,20 +850,51 @@ const PROCEDURES = [
   {name:'وارد کردن کاتتر مثانه یا انجام سوپراپوبیک',milk:true,sucrose:true,drug:false,kmc:false}
 ];
 
-function setView(view){
+const WORKFLOW_LABELS={1:'زمینه بالینی',2:'ارزیابی درد',3:'مداخله',4:'ارزیابی مجدد',5:'ثبت و گزارش'};
+const VIEW_LABELS={clinical:'مسیر بالینی',quick:'ارزیابی سریع',procedures:'جدول رویه‌ها',guide:'راهنما و منابع'};
+const WORKFLOW_HINTS={1:'وضعیت نوزاد را ثبت و ابزار را انتخاب کنید.',2:'تمام شاخص‌های ابزار را تکمیل کنید.',3:'درمان متناسب با شدت را ثبت کنید.',4:'پس از فاصله توصیه‌شده، درد را دوباره بسنجید.',5:'نتیجه و مداخلات را مرور و ثبت کنید.'};
+
+function updateNavigationControls(){
+  const clinicalBack=$('[data-clinical-back]');
+  if(clinicalBack){
+    const hasPreviousView=state.viewHistory.length>0;
+    const canGoBack=state.view==='clinical'&&(state.step>1||hasPreviousView);
+    clinicalBack.hidden=!canGoBack;
+    if(state.step>1) $('#workflow-back-label').textContent=`بازگشت به ${WORKFLOW_LABELS[state.step-1]}`;
+    else if(hasPreviousView) $('#workflow-back-label').textContent=`بازگشت به ${VIEW_LABELS[state.viewHistory[state.viewHistory.length-1]]||'بخش قبلی'}`;
+  }
+  const currentLabel=$('#workflow-current-label');
+  const hint=$('.workflow-hint');
+  if(currentLabel) currentLabel.textContent=`مرحله ${state.step} از ۵ · ${WORKFLOW_LABELS[state.step]}`;
+  if(hint) hint.textContent=WORKFLOW_HINTS[state.step];
+}
+function setView(view,recordHistory=true){
+  if(view===state.view){updateNavigationControls();return;}
+  if(recordHistory) state.viewHistory.push(state.view);
   state.view = view;
   $$('.nav-btn').forEach(btn=>{const active=btn.dataset.view===view;btn.classList.toggle('active',active);btn.setAttribute('aria-selected',String(active));});
   $$('[data-view-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.viewPanel===view));
+  updateNavigationControls();
   window.scrollTo({top:0,behavior:'smooth'});
+}
+function navigateBack(){
+  if(state.view==='clinical' && state.step>1){setStep(state.step-1);return;}
+  const previous=state.viewHistory.pop();
+  if(previous){setView(previous,false);return;}
+  if(state.view!=='clinical'){setView('clinical',false);return;}
+  updateNavigationControls();
 }
 $$('.nav-btn').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.view)));
 $$('[data-go-view]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.goView)));
+$$('[data-page-back]').forEach(btn=>btn.addEventListener('click',navigateBack));
+$$('[data-clinical-back]').forEach(btn=>btn.addEventListener('click',navigateBack));
 
 function readContext(){
   const form = $('#clinicalContextForm');
   const fd = new FormData(form);
   return {
-    recordId:(fd.get('recordId')||'').trim(), ageDays:fd.get('ageDays')||'', weightGrams:fd.get('weightGrams')||'', sex:fd.get('sex')||'',
+    recordId:(fd.get('recordId')||'').trim(), motherNationalId:(fd.get('motherNationalId')||'').trim(), gestationalWeeks:fd.get('gestationalWeeks')||'',
+    ageDays:fd.get('ageDays')||'', weightGrams:fd.get('weightGrams')||'', sex:fd.get('sex')||'',
     preterm:fd.has('preterm'), ventilated:fd.has('ventilated'), chronicPain:fd.has('chronicPain'), postoperative:fd.has('postoperative'),
     assessmentType:fd.get('assessmentType')||'acute'
   };
@@ -786,17 +908,33 @@ function updateRecommendation(){
   updateSummary();
 }
 $('#clinicalContextForm').addEventListener('change',updateRecommendation);
-$('#clinicalContextForm').addEventListener('input',e=>{if(['recordId','ageDays','weightGrams'].includes(e.target.name)){state.context=readContext();}});
+$('#clinicalContextForm').addEventListener('input',e=>{
+  if(['recordId','motherNationalId','gestationalWeeks','ageDays','weightGrams'].includes(e.target.name)){
+    state.context=readContext();
+    if(e.target.name==='gestationalWeeks') $$('[data-scale="PIPP"]').forEach(host=>{if(host.id&&host.querySelector('[data-pipp-ga-mismatch]'))updatePippGestationalMismatch(host,host.dataset.mode);});
+  }
+});
 $('#start-recommended').addEventListener('click',()=>startClinicalAssessment(state.recommendedScale));
 $$('.scale-override').forEach(btn=>btn.addEventListener('click',()=>startClinicalAssessment(btn.dataset.scale)));
 
 function setStep(step){
-  state.step = step;
-  $$('[data-workflow-step]').forEach(el=>el.classList.toggle('active',Number(el.dataset.workflowStep)===step));
-  $$('[data-step-chip]').forEach(el=>{const n=Number(el.dataset.stepChip);el.classList.toggle('current',n===step);el.classList.toggle('done',n<step);});
+  const target=Math.max(1,Math.min(5,Number(step)||1));
+  state.step=target;
+  state.maxStepReached=Math.max(state.maxStepReached,target);
+  $$('[data-workflow-step]').forEach(el=>el.classList.toggle('active',Number(el.dataset.workflowStep)===target));
+  $$('[data-step-chip]').forEach(el=>{
+    const n=Number(el.dataset.stepChip),current=n===target,done=n<state.maxStepReached,available=n<=state.maxStepReached;
+    el.classList.toggle('current',current);
+    el.classList.toggle('done',done&&!current);
+    el.classList.toggle('available',available);
+    el.disabled=!available;
+    if(current) el.setAttribute('aria-current','step'); else el.removeAttribute('aria-current');
+  });
+  updateNavigationControls();
   updateSummary();
   window.scrollTo({top:0,behavior:'smooth'});
 }
+$$('[data-step-chip]').forEach(btn=>btn.addEventListener('click',()=>{const target=Number(btn.dataset.stepChip);if(target<=state.maxStepReached)setStep(target);}));
 $$('[data-back-step]').forEach(btn=>btn.addEventListener('click',()=>setStep(Number(btn.dataset.backStep))));
 
 function startClinicalAssessment(scaleKey){
@@ -808,65 +946,74 @@ function startClinicalAssessment(scaleKey){
   setStep(2);
 }
 
-function clearPippTimers(host){
-  (host._pippIntervals||[]).forEach(clearInterval);
-  host._pippIntervals=[];
-}
 function pippOptionCards(mode,item){
   const name=`${mode}-PIPP-${item.id}`;
   return `<fieldset class="assessment-item" data-assessment-item="${item.id}"><legend class="sr-only">${item.label}</legend><div class="item-title-row"><div><div class="item-title">${item.label}</div>${item.help?`<div class="item-help">${item.help}</div>`:''}</div></div><div class="option-grid">${item.options.map(opt=>`<label class="option-card"><input type="radio" name="${name}" value="${opt.value}"><span class="option-copy"><span>${opt.label}</span><span class="option-score">${opt.value}</span></span></label>`).join('')}</div></fieldset>`;
 }
+function pippPercentCategory(percent){
+  const score=pippPercentScore(percent);
+  return score===0?'۰–۹٪ زمان':score===1?'۱۰–۳۹٪ زمان':score===2?'۴۰–۶۹٪ زمان':'۷۰–۱۰۰٪ زمان';
+}
+function pippPercentSlider(mode,item){
+  const id=`${mode}-PIPP-${item.id}-percent`;
+  return `<fieldset class="range-assessment" data-assessment-item="${item.id}"><legend class="sr-only">${item.label}</legend><div class="range-control" data-range-control style="--range-pct:0%"><div class="range-control-top"><div><div class="item-title">${item.label}</div><div class="range-help">درصد زمانی را که این حالت در بازه مشاهده دیده شده انتخاب کنید.</div></div><div class="range-live"><span class="range-category" data-range-category>۰–۹٪ زمان</span><span class="pipp-score-chip">امتیاز: <span data-range-score>۰</span></span></div></div><div class="range-shell"><output class="range-value-bubble" for="${id}" data-range-output>۰٪</output><input class="pipp-percent-range" id="${id}" type="range" min="0" max="100" step="1" value="0" data-pipp-percent="${item.id}" data-touched="false" aria-label="${item.label}؛ درصد زمان"><div class="range-markers" aria-hidden="true"><span class="range-marker" style="left:0%">۰</span><span class="range-marker" style="left:10%">۱۰</span><span class="range-marker" style="left:40%">۴۰</span><span class="range-marker" style="left:70%">۷۰</span><span class="range-marker" style="left:100%">۱۰۰٪</span></div></div></div></fieldset>`;
+}
 function renderPippAssessment(hostId,mode){
   const scale=SCALES.PIPP;
   const host=document.getElementById(hostId);
-  clearPippTimers(host);
   host.classList.remove('quick-host-empty');
-  host.dataset.mode=mode;host.dataset.scale='PIPP';host.dataset.pippBaselineDone='false';host.dataset.pippPostDone='false';host.dataset.pippBaselineConfirmed='false';
+  host.dataset.mode=mode;host.dataset.scale='PIPP';host.dataset.pippBaselineConfirmed='false';
   const ga=scale.items.find(i=>i.id==='ga'),behavior=scale.items.find(i=>i.id==='behavior');
   const faceItems=['brow','eye','nasolabial'].map(id=>scale.items.find(i=>i.id===id));
   host.innerHTML=`
-    <div class="assessment-head"><div><h3>${scale.title}</h3><p>${scale.context}</p></div><span class="scale-tag">۳ مرحله · ۷ شاخص · حداکثر ${scale.max}</span></div>
+    <div class="assessment-head"><div><h3>${scale.title}</h3><p>ثبت خط پایه، اقدام و پاسخ پس از اقدام.</p></div><span class="scale-tag">۷ شاخص · حداکثر ${scale.max}</span></div>
     <section class="pipp-stage" data-pipp-stage="baseline">
-      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۱</span><span>ساخت خط پایه — ۱۵ ثانیه قبل از اقدام</span></div><span class="pipp-stage-status" data-pipp-stage-status="baseline">در انتظار مشاهده</span></div>
+      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۱</span><span>خط پایه پیش از اقدام</span></div><span class="pipp-stage-status" data-pipp-stage-status="baseline">در انتظار ثبت</span></div>
       <div class="pipp-stage-body">
-        <div class="pipp-instruction">${icon('i-info')}<div><strong>طبق گایدلاین:</strong> پیش از اقدام درمانی/دردناک، نوزاد ۱۵ ثانیه مشاهده شود و ضربان قلب و اشباع اکسیژن به‌عنوان خط پایه ثبت شوند. وضعیت رفتاری نیز در همین مشاهده ثبت می‌شود.</div></div>
+        <div class="pipp-observation-note">${icon('i-info')}<div><strong>۱۵ ثانیه:</strong> HR، SpO₂ و رفتار را ثبت کنید.</div></div>
         ${pippOptionCards(mode,ga)}
+        <div class="warning-strip pipp-ga-mismatch" data-pipp-ga-mismatch hidden role="status" aria-live="polite">${icon('i-alert')}<div data-pipp-ga-mismatch-copy></div></div>
         ${pippOptionCards(mode,behavior)}
         <div class="pipp-metric-grid">
-          <div class="pipp-metric"><label for="${mode}-pipp-baseline-hr">ضربان قلب خط پایه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-baseline-hr" data-pipp-field="pipp-baseline-hr" type="number" inputmode="decimal" min="0" step="1" placeholder="مثلاً ۱۴۲"><span class="pipp-unit">bpm</span></div></div>
+          <div class="pipp-metric"><label for="${mode}-pipp-baseline-hr">HR خط پایه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-baseline-hr" data-pipp-field="pipp-baseline-hr" type="number" inputmode="decimal" min="0" step="1" placeholder="مثلاً ۱۴۲"><span class="pipp-unit">bpm</span></div></div>
           <div class="pipp-metric"><label for="${mode}-pipp-baseline-spo2">SpO₂ خط پایه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-baseline-spo2" data-pipp-field="pipp-baseline-spo2" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="مثلاً ۹۸"><span class="pipp-unit">%</span></div></div>
         </div>
-        <div class="pipp-timer-panel"><div><div class="field-label">زمان مشاهده خط پایه</div><div class="pipp-timer-copy">HR، SpO₂ و وضعیت رفتاری را در این بازه مشاهده و ثبت کنید.</div></div><div class="timer-box"><span class="pipp-timer-display" data-pipp-display="pipp-baseline-timer">00:15</span><button class="btn btn-secondary" type="button" data-pipp-timer="pipp-baseline-timer">شروع ۱۵ ثانیه</button></div></div>
-        <div class="pipp-gate-actions"><button class="btn btn-primary" type="button" data-pipp-confirm-baseline disabled>تأیید خط پایه و ادامه${icon('i-chevron')}</button></div>
+        <div class="pipp-gate-actions"><button class="btn btn-primary" type="button" data-pipp-confirm-baseline disabled>ثبت خط پایه و ادامه${icon('i-chevron')}</button></div>
       </div>
     </section>
     <section class="pipp-stage locked" data-pipp-stage="procedure" aria-disabled="true">
-      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۲</span><span>ثبت انجام اقدام دردناک / درمانی</span></div><span class="pipp-stage-status" data-pipp-stage-status="procedure">قفل تا ثبت خط پایه</span></div>
-      <div class="pipp-stage-body"><div class="pipp-instruction">${icon('i-alert')}<div>مرحله ۳۰ ثانیه‌ای باید بلافاصله پس از اقدام آغاز شود. انجام اقدام را تأیید کنید و سپس مشاهده پس از اقدام را شروع کنید.</div></div><label class="check-row"><input type="checkbox" data-pipp-procedure-confirm><span>اقدام دردناک / درمانی انجام شد.</span></label><div class="pipp-gate-actions"><button class="btn btn-primary" type="button" data-pipp-start-post disabled>شروع مشاهده ۳۰ ثانیه‌ای${icon('i-chevron')}</button></div></div>
+      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۲</span><span>ثبت اقدام</span></div><span class="pipp-stage-status" data-pipp-stage-status="procedure">قفل تا ثبت خط پایه</span></div>
+      <div class="pipp-stage-body"><label class="check-row"><input type="checkbox" data-pipp-procedure-confirm><span>اقدام دردناک / درمانی انجام شد.</span></label><div class="pipp-gate-actions"><button class="btn btn-primary" type="button" data-pipp-start-post disabled>ادامه به ارزیابی پس از اقدام${icon('i-chevron')}</button></div></div>
     </section>
     <section class="pipp-stage locked" data-pipp-stage="post" aria-disabled="true">
-      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۳</span><span>مشاهده ۳۰ ثانیه‌ای بلافاصله پس از اقدام</span></div><span class="pipp-stage-status" data-pipp-stage-status="post">در انتظار اقدام</span></div>
+      <div class="pipp-stage-head"><div class="pipp-stage-title"><span class="pipp-stage-num">۳</span><span>ارزیابی بلافاصله پس از اقدام</span></div><span class="pipp-stage-status" data-pipp-stage-status="post">در انتظار اقدام</span></div>
       <div class="pipp-stage-body">
-        <div class="pipp-instruction">${icon('i-info')}<div>در ۳۰ ثانیه پس از اقدام، <strong>بیشترین HR</strong>، <strong>کمترین SpO₂</strong> و درصد زمان بروز نشانه‌های چهره را ثبت کنید. امتیاز HR و SpO₂ به‌صورت خودکار نسبت به خط پایه محاسبه می‌شود.</div></div>
-        <div class="pipp-timer-panel"><div><div class="field-label">زمان مشاهده پس از اقدام</div><div class="pipp-timer-copy">بلافاصله پس از اقدام شروع شود.</div></div><div class="timer-box"><span class="pipp-timer-display" data-pipp-display="pipp-post-timer">00:30</span><button class="btn btn-secondary" type="button" data-pipp-timer="pipp-post-timer">شروع مجدد ۳۰ ثانیه</button></div></div>
+        <div class="pipp-observation-note">${icon('i-info')}<div><strong>۳۰ ثانیه:</strong> بیشترین HR، کمترین SpO₂ و چهره را ثبت کنید.</div></div>
         <div class="pipp-metric-grid">
-          <div class="pipp-metric"><label for="${mode}-pipp-post-max-hr">حداکثر HR طی ۳۰ ثانیه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-post-max-hr" data-pipp-field="pipp-post-max-hr" type="number" inputmode="decimal" min="0" step="1" placeholder="مثلاً ۱۶۸"><span class="pipp-unit">bpm</span></div></div>
-          <div class="pipp-metric"><label for="${mode}-pipp-post-min-spo2">حداقل SpO₂ طی ۳۰ ثانیه</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-post-min-spo2" data-pipp-field="pipp-post-min-spo2" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="مثلاً ۹۱"><span class="pipp-unit">%</span></div></div>
+          <div class="pipp-metric"><label for="${mode}-pipp-post-max-hr">بیشترین HR</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-post-max-hr" data-pipp-field="pipp-post-max-hr" type="number" inputmode="decimal" min="0" step="1" placeholder="مثلاً ۱۶۸"><span class="pipp-unit">bpm</span></div></div>
+          <div class="pipp-metric"><label for="${mode}-pipp-post-min-spo2">کمترین SpO₂</label><div class="pipp-input-wrap"><input class="input" id="${mode}-pipp-post-min-spo2" data-pipp-field="pipp-post-min-spo2" type="number" inputmode="decimal" min="0" max="100" step="0.1" placeholder="مثلاً ۹۱"><span class="pipp-unit">%</span></div></div>
         </div>
         <div class="pipp-computed-grid">
-          <div class="pipp-computed"><span>افزایش HR نسبت به خط پایه</span><strong data-pipp-hr-delta>—</strong><div class="pipp-score-chip">امتیاز: <span data-pipp-hr-score>—</span></div></div>
-          <div class="pipp-computed"><span>کاهش SpO₂ نسبت به خط پایه</span><strong data-pipp-spo2-drop>—</strong><div class="pipp-score-chip">امتیاز: <span data-pipp-spo2-score>—</span></div></div>
+          <div class="pipp-computed"><span>افزایش HR</span><strong data-pipp-hr-delta>—</strong><div class="pipp-score-chip">امتیاز: <span data-pipp-hr-score>—</span></div></div>
+          <div class="pipp-computed"><span>کاهش SpO₂</span><strong data-pipp-spo2-drop>—</strong><div class="pipp-score-chip">امتیاز: <span data-pipp-spo2-score>—</span></div></div>
         </div>
-        ${faceItems.map(item=>pippOptionCards(mode,item)).join('')}
+        ${faceItems.map(item=>pippPercentSlider(mode,item)).join('')}
       </div>
     </section>
-    <div class="assessment-result" aria-live="polite"><div class="result-top"><div><div class="field-label">وضعیت ارزیابی</div><div class="result-score"><span data-score>0</span> / ${scale.max} <small>نمره فعلی</small></div></div><div data-level><span class="level-badge level-observe">ابتدا خط پایه را تکمیل کنید</span></div></div><div class="linear-progress"><span data-progress-bar></span></div><div class="progress-copy" data-progress-copy>۰ از ۷ شاخص تکمیل شده</div><div data-mode-actions></div></div>`;
+    <div class="assessment-result" aria-live="polite"><div class="result-top"><div><div class="field-label">وضعیت ارزیابی</div><div class="result-score"><span data-score>0</span> / ${scale.max} <small>نمره فعلی</small></div></div><div data-level><span class="level-badge level-observe">ابتدا خط پایه را ثبت کنید</span></div></div><div class="linear-progress"><span data-progress-bar></span></div><div class="progress-copy" data-progress-copy>۰ از ۷ شاخص تکمیل شده</div><div data-mode-actions></div></div>`;
 
-  const relevantInputs=$$('input',host);
+  updatePippGestationalMismatch(host,mode);
+  $$('[data-pipp-percent]',host).forEach(range=>{
+    const commit=()=>{range.dataset.touched='true';updatePippRangeVisual(range);calculatePippAssessment(mode,hostId);};
+    range.addEventListener('input',commit);
+    range.addEventListener('change',commit);
+    range.addEventListener('pointerup',commit);
+    range.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End','PageUp','PageDown'].includes(e.key)){range.dataset.touched='true';setTimeout(()=>{updatePippRangeVisual(range);calculatePippAssessment(mode,hostId)},0);}});
+    updatePippRangeVisual(range);
+  });
+  const relevantInputs=$$('input:not([data-pipp-percent])',host);
   relevantInputs.forEach(input=>input.addEventListener('change',()=>{refreshPippGates(host,mode);calculatePippAssessment(mode,hostId)}));
   relevantInputs.forEach(input=>input.addEventListener('input',()=>{refreshPippGates(host,mode);calculatePippAssessment(mode,hostId)}));
-  $('[data-pipp-timer="pipp-baseline-timer"]',host).addEventListener('click',()=>runPippObservationTimer(host,'baseline',15,mode,hostId));
-  $('[data-pipp-timer="pipp-post-timer"]',host).addEventListener('click',()=>runPippObservationTimer(host,'post',30,mode,hostId));
   $('[data-pipp-confirm-baseline]',host).addEventListener('click',()=>{
     host.dataset.pippBaselineConfirmed='true';
     const baseline=$('[data-pipp-stage="baseline"]',host),procedure=$('[data-pipp-stage="procedure"]',host);
@@ -879,43 +1026,55 @@ function renderPippAssessment(hostId,mode){
   $('[data-pipp-start-post]',host).addEventListener('click',()=>{
     const procedure=$('[data-pipp-stage="procedure"]',host),post=$('[data-pipp-stage="post"]',host);
     procedure.classList.add('pipp-stage-complete');$('[data-pipp-stage-status="procedure"]',host).textContent='اقدام ثبت شد';
-    post.classList.remove('locked');post.setAttribute('aria-disabled','false');$('[data-pipp-stage-status="post"]',host).textContent='مشاهده در حال انجام';
-    runPippObservationTimer(host,'post',30,mode,hostId);
+    post.classList.remove('locked');post.setAttribute('aria-disabled','false');$('[data-pipp-stage-status="post"]',host).textContent='آماده ثبت مقادیر';
     post.scrollIntoView({behavior:'smooth',block:'start'});
   });
   refreshPippGates(host,mode);calculatePippAssessment(mode,hostId);
+}
+function updatePippGestationalMismatch(host,mode){
+  const warning=$('[data-pipp-ga-mismatch]',host);
+  if(!warning)return false;
+  const copy=$('[data-pipp-ga-mismatch-copy]',warning);
+  const initialWeeksRaw=state.context.gestationalWeeks;
+  const initialScore=pippGestationalAgeScore(initialWeeksRaw);
+  const selectedScore=pippSelectedValue(host,mode,'ga');
+  const mismatch=initialScore!==null&&selectedScore!==null&&initialScore!==selectedScore;
+  warning.hidden=!mismatch;
+  if(mismatch&&copy){
+    const gaItem=SCALES.PIPP.items.find(item=>item.id==='ga');
+    const selectedLabel=gaItem?.options.find(opt=>Number(opt.value)===selectedScore)?.label||`امتیاز ${selectedScore}`;
+    const expectedLabel=gaItem?.options.find(opt=>Number(opt.value)===initialScore)?.label||`امتیاز ${initialScore}`;
+    copy.innerHTML=`<strong>هشدار ناسازگاری سن حاملگی:</strong> در اطلاعات اولیه <strong>${initialWeeksRaw} هفته</strong> ثبت شده که در PIPP با «${expectedLabel}» (امتیاز ${initialScore}) همخوان است، اما در این ارزیابی «${selectedLabel}» (امتیاز ${selectedScore}) انتخاب شده است. این هشدار مانع ادامه نیست؛ در صورت عمدی بودن انتخاب، ارزیابی را ادامه دهید.`;
+  }
+  return mismatch;
+}
+function updatePippRangeVisual(range){
+  const value=Math.max(0,Math.min(100,Number(range.value)||0));
+  const control=range.closest('[data-range-control]');
+  if(control){control.style.setProperty('--range-pct',`${value}%`);$('[data-range-output]',control).textContent=`${value}٪`;$('[data-range-score]',control).textContent=String(pippPercentScore(value));$('[data-range-category]',control).textContent=pippPercentCategory(value);}
+  range.closest('[data-assessment-item]')?.classList.toggle('answered',range.dataset.touched==='true');
+}
+function pippPercentSelectedScore(host,id){
+  const range=$(`[data-pipp-percent="${id}"]`,host);
+  return range&&range.dataset.touched==='true'?pippPercentScore(range.value):null;
 }
 function pippValue(host,field){const el=$(`[data-pipp-field="${field}"]`,host);return el&&el.value!==''?Number(el.value):NaN;}
 function pippSelectedValue(host,mode,id){const el=$(`input[name="${mode}-PIPP-${id}"]:checked`,host);return el?Number(el.value):null;}
 function refreshPippGates(host,mode){
   const baselineHr=pippValue(host,'pipp-baseline-hr'),baselineSpo2=pippValue(host,'pipp-baseline-spo2');
-  const ga=pippSelectedValue(host,mode,'ga'),behavior=pippSelectedValue(host,mode,'behavior');
+  const gaScore=pippSelectedValue(host,mode,'ga'),behavior=pippSelectedValue(host,mode,'behavior');
+  updatePippGestationalMismatch(host,mode);
   const validVitals=Number.isFinite(baselineHr)&&baselineHr>0&&Number.isFinite(baselineSpo2)&&baselineSpo2>=0&&baselineSpo2<=100;
-  const baselineReady=host.dataset.pippBaselineDone==='true'&&validVitals&&ga!==null&&behavior!==null;
+  const baselineReady=validVitals&&gaScore!==null&&behavior!==null;
   $('[data-pipp-confirm-baseline]',host).disabled=!baselineReady||host.dataset.pippBaselineConfirmed==='true';
   const procedureConfirmed=$('[data-pipp-procedure-confirm]',host)?.checked===true;
   $('[data-pipp-start-post]',host).disabled=host.dataset.pippBaselineConfirmed!=='true'||!procedureConfirmed;
 }
-function runPippObservationTimer(host,stage,seconds,mode,hostId){
-  const key=stage==='baseline'?'pipp-baseline-timer':'pipp-post-timer';
-  const button=$(`[data-pipp-timer="${key}"]`,host),display=$(`[data-pipp-display="${key}"]`,host);
-  if(button.dataset.running==='true')return;
-  let remaining=seconds;
-  button.dataset.running='true';button.disabled=true;display.textContent=`00:${String(remaining).padStart(2,'0')}`;
-  const interval=setInterval(()=>{
-    remaining-=1;display.textContent=`00:${String(Math.max(remaining,0)).padStart(2,'0')}`;
-    if(remaining<=0){
-      clearInterval(interval);button.dataset.running='false';button.disabled=false;button.textContent=stage==='baseline'?'تکرار ۱۵ ثانیه':'تکرار ۳۰ ثانیه';
-      if(stage==='baseline'){host.dataset.pippBaselineDone='true';$('[data-pipp-stage-status="baseline"]',host).textContent='۱۵ ثانیه کامل شد';}
-      else{host.dataset.pippPostDone='true';const post=$('[data-pipp-stage="post"]',host);post.classList.add('pipp-stage-complete');$('[data-pipp-stage-status="post"]',host).textContent='۳۰ ثانیه کامل شد';}
-      refreshPippGates(host,mode);calculatePippAssessment(mode,hostId);
-    }
-  },1000);
-  host._pippIntervals=host._pippIntervals||[];host._pippIntervals.push(interval);
-}
+
 function calculatePippAssessment(mode,hostId){
   const host=document.getElementById(hostId),scale=SCALES.PIPP;
-  const ga=pippSelectedValue(host,mode,'ga'),behavior=pippSelectedValue(host,mode,'behavior');
+  const gaScore=pippSelectedValue(host,mode,'ga'),behavior=pippSelectedValue(host,mode,'behavior');
+  updatePippGestationalMismatch(host,mode);
   const baselineHr=pippValue(host,'pipp-baseline-hr'),baselineSpo2=pippValue(host,'pipp-baseline-spo2');
   const maxHr=pippValue(host,'pipp-post-max-hr'),minSpo2=pippValue(host,'pipp-post-min-spo2');
   const hrReady=Number.isFinite(baselineHr)&&Number.isFinite(maxHr),spo2Ready=Number.isFinite(baselineSpo2)&&Number.isFinite(minSpo2);
@@ -926,25 +1085,26 @@ function calculatePippAssessment(mode,hostId){
   $('[data-pipp-spo2-drop]',host).textContent=spo2Drop===null?'—':`${spo2Drop.toFixed(1).replace('.0','')}%`;
   $('[data-pipp-hr-score]',host).textContent=hrScore===null?'—':hrScore;
   $('[data-pipp-spo2-score]',host).textContent=spo2Score===null?'—':spo2Score;
-  const facial=['brow','eye','nasolabial'].map(id=>pippSelectedValue(host,mode,id));
-  const values=[ga,behavior,hrScore,spo2Score,...facial];
+  const facial=['brow','eye','nasolabial'].map(id=>pippPercentSelectedScore(host,id));
+  const values=[gaScore,behavior,hrScore,spo2Score,...facial];
   const completed=values.filter(v=>v!==null).length,score=values.reduce((sum,v)=>sum+(v===null?0:v),0);
   $('[data-score]',host).textContent=score;$('[data-progress-bar]',host).style.width=`${(completed/7)*100}%`;$('[data-progress-copy]',host).textContent=`${completed} از ۷ شاخص تکمیل شده`;
-  const stageReady=host.dataset.pippBaselineConfirmed==='true'&&$('[data-pipp-procedure-confirm]',host)?.checked===true&&host.dataset.pippPostDone==='true';
+  const stageReady=host.dataset.pippBaselineConfirmed==='true'&&$('[data-pipp-procedure-confirm]',host)?.checked===true;
   const complete=completed===7&&stageReady;
   const levelHost=$('[data-level]',host),actions=$('[data-mode-actions]',host);
   if(!complete){
     let message='ارزیابی هنوز نهایی نشده است';
-    if(host.dataset.pippBaselineConfirmed!=='true')message='ابتدا خط پایه ۱۵ ثانیه‌ای را تکمیل و تأیید کنید';
+    if(host.dataset.pippBaselineConfirmed!=='true')message='ابتدا خط پایه را ثبت کنید';
     else if(!$('[data-pipp-procedure-confirm]',host)?.checked)message='انجام اقدام را ثبت کنید';
-    else if(host.dataset.pippPostDone!=='true')message='مشاهده ۳۰ ثانیه‌ای پس از اقدام باید کامل شود';
+    else if(completed<7)message='ارزیابی پس از اقدام را تکمیل کنید';
     levelHost.innerHTML=`<span class="level-badge level-observe">${message}</span>`;actions.innerHTML='';
     if(mode==='clinical'){state.clinicalResult={scale:'PIPP',score,completed,total:7,complete:false};updateSummary();}
     if(mode==='reassess'){state.reassessmentResult=null;$('#to-documentation').disabled=true;}
     return;
   }
+  const postStage=$('[data-pipp-stage="post"]',host);if(postStage){postStage.classList.add('pipp-stage-complete');$('[data-pipp-stage-status="post"]',host).textContent='تکمیل شد';}
   const level=classifyScore('PIPP',score);levelHost.innerHTML=`<span class="level-badge level-${level.key}">${level.label}</span>`;
-  const result={scale:'PIPP',score,completed:7,total:7,complete:true,level,measurements:{baselineHr,baselineSpo2,maxHr,minSpo2,hrDelta,spo2Drop,hrScore,spo2Score}};
+  const result={scale:'PIPP',score,completed:7,total:7,complete:true,level,measurements:{initialGestationalWeeks:state.context.gestationalWeeks,pippGaScore:gaScore,gestationalAgeMismatch:updatePippGestationalMismatch(host,mode),baselineHr,baselineSpo2,maxHr,minSpo2,hrDelta,spo2Drop,hrScore,spo2Score,facial}};
   if(mode==='clinical'){
     state.clinicalResult=result;updateSummary();
     actions.innerHTML='<div class="actions"><button class="btn btn-secondary" type="button" data-reset-current>پاک کردن پاسخ‌ها</button><button class="btn btn-primary" type="button" data-to-intervention>ادامه به مداخله<svg class="icon"><use href="#i-chevron"></use></svg></button></div>';
@@ -1025,13 +1185,44 @@ function recommendationFor(levelKey){
 
 function renderIntervention(){
   if(!state.clinicalResult?.complete)return;
-  const rec=recommendationFor(state.clinicalResult.level.key);
+  const levelKey=state.clinicalResult.level.key;
+  const rec=recommendationFor(levelKey);
+  const severeRec=recommendationFor('severe');
   const commonOptions=[
     ['مکیدن غیرمغذی','nns'],['سوکروز','sucrose'],['شیر مادر / شیردهی','milk'],['مراقبت آغوشی مادرانه','kmc'],
     ['قنداق کردن','swaddle'],['ماساژ / لمس‌درمانی','massage'],['پوزیشن مناسب','position'],['کاهش نور و سر و صدا / کاهش دستکاری','environment']
   ];
   const checks=commonOptions.map(([label,val])=>`<label class="check-row"><input type="checkbox" name="intervention" value="${val}" data-label="${label}"><span>${label}</span></label>`).join('');
-  $('#intervention-host').innerHTML=`<div class="result-top" style="margin-bottom:15px"><div><div class="field-label">نتیجه ارزیابی</div><div class="result-score">${state.clinicalResult.score} / ${SCALES[state.clinicalScale].max}</div></div><span class="level-badge level-${state.clinicalResult.level.key}">${state.clinicalResult.level.label}</span></div><div class="info-strip" style="margin:0 0 14px">${icon('i-info')}<div><strong>${rec.title}</strong><br>${rec.short}</div></div><div class="intervention-grid"><div class="intervention-card"><h4>مداخلات غیردارویی انجام‌شده</h4><div class="intervention-list">${checks}</div><details style="margin-top:10px"><summary class="text-btn" style="display:inline-flex;align-items:center;cursor:pointer">سایر روش‌های ذکرشده در گایدلاین</summary><div class="mini-next">تکان دادن گهواره‌ای، مدیریت دوره‌های خواب و بیداری و لمس‌درمانی نیز بر اساس وضعیت قابل استفاده‌اند. برای رگ‌گیری/خونگیری، ماساژ ملایم محل به مدت حداقل ۵ دقیقه پیش از رویه ذکر شده است.</div></details></div><div class="intervention-card med-card"><h4>مداخله دارویی</h4>${rec.med?`<div class="med-dose">${rec.med}</div>`:'<div class="med-dose">در این سطح، گایدلاین بر مراقبت/روش‌های غیردارویی و پایش تأکید دارد.</div>'}<div class="physician-strip" style="margin-top:12px">${icon('i-alert')}<div><strong>فقط طبق تجویز پزشک.</strong> این سامانه دستور دارویی صادر نمی‌کند.</div></div><label class="check-row" style="margin-top:10px"><input type="checkbox" name="intervention" value="physician-med" data-label="مداخله دارویی طبق تجویز پزشک"><span>مداخله دارویی طبق تجویز پزشک انجام شد.</span></label></div></div><div class="reassess-banner" style="margin-top:14px"><div class="reassess-guidance"><div class="field-label">تایمر پیشنهادی برای ارزیابی مجدد</div><strong>۳۰ دقیقه</strong><div class="mini-next">۳۰ دقیقه فقط مقدار پیشنهادی است و در مرحله «ارزیابی مجدد» می‌توانید زمان دلخواه را تنظیم کنید. در صورت تداوم یا تشدید درد، پزشک مربوطه مطلع شود.</div></div></div>`;
+
+  let currentTitle='مراقبت و اقدام متناسب با شدت فعلی';
+  let currentBody=rec.med?rec.med:rec.short;
+  let escalationBody='در صورت تداوم یا افزایش درد، شدت دوباره ارزیابی و پزشک مربوطه مطلع شود.';
+  if(levelKey==='moderate'){
+    currentTitle='درد متوسط — گزینه دارویی ذکرشده در گایدلاین';
+    currentBody=rec.med;
+    escalationBody=`اگر درد شدید یا رو به تشدید شد، گایدلاین گزینه‌های زیر را ذکر می‌کند: ${severeRec.med}`;
+  }else if(levelKey==='severe'){
+    currentTitle='درد شدید — درمان دارویی و اطلاع پزشک';
+    currentBody=severeRec.med;
+    escalationBody='اگر درد کنترل نشد، ارزیابی مجدد و بازبینی مداخله باید بر اساس دستور پزشک انجام شود.';
+  }else if(levelKey==='mild'||levelKey==='observe'){
+    currentTitle='مرحله اول — مداخلات غیردارویی و پایش';
+    currentBody=rec.short;
+    escalationBody='اگر درد ادامه یافت یا به سطح متوسط/شدید رسید، ارزیابی را تکرار و درمان دارویی را فقط با نظر پزشک بررسی کنید.';
+  }else{
+    currentTitle='مراقبت معمول';
+    currentBody=rec.short;
+    escalationBody='در صورت ایجاد یا افزایش درد، شدت را دوباره ارزیابی و مسیر درمان متناسب با سطح جدید را دنبال کنید.';
+  }
+
+  $('#intervention-host').innerHTML=`
+    <div class="result-top" style="margin-bottom:15px"><div><div class="field-label">نتیجه ارزیابی</div><div class="result-score">${state.clinicalResult.score} / ${SCALES[state.clinicalScale].max}</div></div><span class="level-badge level-${levelKey}">${state.clinicalResult.level.label}</span></div>
+    <div class="treatment-ladder">
+      <div class="treatment-step current"><div class="treatment-step-num">۱</div><div><h4>${currentTitle}</h4><p>${currentBody}</p>${rec.med?`<div class="physician-strip" style="margin-top:10px">${icon('i-alert')}<div><strong>فقط طبق تجویز پزشک.</strong> این سامانه دستور دارویی صادر نمی‌کند.</div></div><label class="check-row" style="margin-top:10px"><input type="checkbox" name="intervention" value="physician-med" data-label="مداخله دارویی طبق تجویز پزشک"><span>مداخله دارویی طبق تجویز پزشک انجام شد.</span></label>`:''}</div></div>
+      <div class="treatment-step escalation"><div class="treatment-step-num">۲</div><div><h4>${levelKey==='moderate'?'اگر درد شدید/تشدید شد':'اگر درد کنترل نشد یا افزایش یافت'}</h4><p>${escalationBody}</p></div></div>
+      <div class="treatment-step support"><div class="treatment-step-num">۳</div><div><h4>در صورت نیاز: درمان غیردارویی</h4><p>این مرحله مکمل درمان اصلی است و بر اساس وضعیت نوزاد اضافه می‌شود.</p><details class="support-details"><summary>انتخاب و ثبت روش‌های غیردارویی</summary><div class="intervention-list">${checks}</div><div class="mini-next">تکان گهواره‌ای، مدیریت خواب و بیداری و لمس‌درمانی نیز در گایدلاین ذکر شده‌اند.</div></details></div></div>
+    </div>
+    <div class="recommended-time-note">${icon('i-clock')}<div><strong>زمان ارزیابی مجدد: ${rec.interval}.</strong> پس از گذشت فاصله توصیه‌شده، درد را دوباره با همان ابزار ارزیابی کنید. در صورت تداوم یا تشدید درد، پزشک مربوطه مطلع شود.</div></div>`;
 }
 
 $('#save-intervention').addEventListener('click',()=>{
@@ -1040,93 +1231,23 @@ $('#save-intervention').addEventListener('click',()=>{
 });
 
 function renderReassessmentBanner(){
-  if(state.timer){clearInterval(state.timer);state.timer=null;}
-  const assignedSeconds=(Number.isFinite(state.timerConfiguredSeconds)&&state.timerConfiguredSeconds>0)?state.timerConfiguredSeconds:1800;
-  state.timerConfiguredSeconds=assignedSeconds;
-  state.timerSeconds=assignedSeconds;
-  const assignedMinutes=Math.max(1,Math.round(assignedSeconds/60));
+  const rec=recommendationFor(state.clinicalResult?.level?.key||'moderate');
   $('#reassess-banner').innerHTML=`<div class="reassess-banner">
     <div class="reassess-guidance">
-      <div class="field-label">زمان ارزیابی مجدد</div>
-      <strong>مدت تایمر را متناسب با وضعیت نوزاد تعیین کنید.</strong>
-      <div class="mini-next" id="reassess-timer-hint">۳۰ دقیقه فقط مقدار پیشنهادی است؛ در صورت نیاز می‌توانید مدت را تغییر دهید. علائم حیاتی نیز همزمان کنترل شود.</div>
-      <div class="timer-error" id="reassess-timer-error" role="alert">مدت زمان باید بین ۱ تا ۲۴۰ دقیقه باشد.</div>
-    </div>
-    <div class="reassess-timer-panel">
-      <div class="timer-config-group">
-        <label class="timer-config-field" for="reassess-duration-minutes"><span>مدت ارزیابی مجدد (دقیقه)</span><input class="timer-duration-input" id="reassess-duration-minutes" type="number" min="1" max="240" step="1" inputmode="numeric" value="${assignedMinutes}" dir="ltr" aria-describedby="reassess-timer-helper"></label>
-        <div class="timer-helper" id="reassess-timer-helper">مقدار تعیین‌شده حفظ می‌شود و «بازنشانی» شمارش‌معکوس را به همین مدت برمی‌گرداند.</div>
-      </div>
-      <div class="timer-display-group">
-        <div class="timer-display-label">زمان باقی‌مانده</div>
-        <div class="timer-display-wrap" aria-live="polite" aria-label="زمان باقی‌مانده"><span class="timer-display" id="timer-display">${formatTime(state.timerSeconds)}</span></div>
-      </div>
-      <div class="timer-actions-group">
-        <button class="btn btn-primary" type="button" id="timer-toggle">شروع تایمر</button>
-        <button class="btn btn-secondary" type="button" id="timer-reset" aria-label="بازنشانی تایمر به مدت تعیین‌شده">بازنشانی</button>
-      </div>
+      <div class="field-label">زمان توصیه‌شده برای ارزیابی مجدد</div>
+      <strong>${rec.interval}</strong>
+      <div class="mini-next">پس از گذشت این فاصله و متناسب با وضعیت بالینی نوزاد، ارزیابی درد را با همان ابزار تکرار کنید. علائم حیاتی نیز همزمان کنترل شود.</div>
     </div>
   </div>`;
-  const durationInput=$('#reassess-duration-minutes');
-  durationInput.addEventListener('change',applyReassessmentTime);
-  durationInput.addEventListener('blur',applyReassessmentTime);
-  $('#timer-toggle').addEventListener('click',toggleTimer);
-  $('#timer-reset').addEventListener('click',resetReassessmentTimer);
 }
-function readReassessmentDuration(){
-  const minutes=Number.parseInt($('#reassess-duration-minutes')?.value??'30',10);
-  if(!Number.isFinite(minutes)||minutes<1||minutes>240)return null;
-  return minutes*60;
-}
-function applyReassessmentTime(){
-  const seconds=readReassessmentDuration();
-  const error=$('#reassess-timer-error');
-  if(seconds===null){
-    error?.classList.add('visible');
-    $('#reassess-duration-minutes')?.setAttribute('aria-invalid','true');
-    return false;
-  }
-  error?.classList.remove('visible');
-  $('#reassess-duration-minutes')?.removeAttribute('aria-invalid');
-  if(state.timer){clearInterval(state.timer);state.timer=null;}
-  state.timerConfiguredSeconds=seconds;
-  state.timerSeconds=seconds;
-  if($('#timer-display'))$('#timer-display').textContent=formatTime(seconds);
-  const btn=$('#timer-toggle');if(btn){btn.disabled=false;btn.textContent='شروع تایمر';}
-  updateSummary();
-  return true;
-}
-function resetReassessmentTimer(){
-  if(state.timer){clearInterval(state.timer);state.timer=null;}
-  const assignedSeconds=(Number.isFinite(state.timerConfiguredSeconds)&&state.timerConfiguredSeconds>0)?state.timerConfiguredSeconds:1800;
-  state.timerConfiguredSeconds=assignedSeconds;
-  state.timerSeconds=assignedSeconds;
-  const durationInput=$('#reassess-duration-minutes');
-  if(durationInput){
-    durationInput.value=Math.max(1,Math.round(assignedSeconds/60));
-    durationInput.removeAttribute('aria-invalid');
-  }
-  $('#reassess-timer-error')?.classList.remove('visible');
-  if($('#timer-display'))$('#timer-display').textContent=formatTime(state.timerSeconds);
-  const btn=$('#timer-toggle');if(btn){btn.disabled=false;btn.textContent='شروع تایمر';}
-  updateSummary();
-}
-function formatTime(seconds){const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');}
-function toggleTimer(){
-  const btn=$('#timer-toggle');
-  if(!btn)return;
-  if(state.timer){clearInterval(state.timer);state.timer=null;btn.textContent='ادامه تایمر';return;}
-  if(state.timerSeconds<=0){resetReassessmentTimer();}
-  btn.textContent='توقف';
-  state.timer=setInterval(()=>{state.timerSeconds=Math.max(0,state.timerSeconds-1);if($('#timer-display'))$('#timer-display').textContent=formatTime(state.timerSeconds);if(state.timerSeconds===0){clearInterval(state.timer);state.timer=null;btn.textContent='پایان';btn.disabled=true;}},1000);
-}
+
 $('#start-reassessment').addEventListener('click',()=>{renderAssessment(state.clinicalScale,'reassessment-host','reassess');$('#reassessment-host').scrollIntoView({behavior:'smooth',block:'start'});});
 $('#to-documentation').addEventListener('click',()=>{renderDocumentation();setStep(5)});
 
 function renderDocumentation(){
   const sex=state.context.sex==='male'?'پسر':state.context.sex==='female'?'دختر':'ثبت نشده';
   const reass=state.reassessmentResult;
-  $('#documentation-summary').innerHTML=`<div class="doc-summary"><div class="doc-tile"><span>شماره پرونده</span><strong>${state.context.recordId||'ثبت نشده'}</strong></div><div class="doc-tile"><span>مشخصات</span><strong>${state.context.ageDays?state.context.ageDays+' روز':'سن ثبت نشده'} · ${state.context.weightGrams?state.context.weightGrams+' گرم':'وزن ثبت نشده'} · ${sex}</strong></div><div class="doc-tile"><span>ارزیابی اولیه</span><strong>${state.clinicalScale} · ${state.clinicalResult.score}/${SCALES[state.clinicalScale].max} · ${state.clinicalResult.level.label}</strong></div><div class="doc-tile"><span>ارزیابی مجدد</span><strong>${reass?`${reass.score}/${SCALES[reass.scale].max} · ${reass.level.label}`:'ثبت نشده'}</strong></div></div><div class="section-card" style="box-shadow:none;margin-bottom:12px"><div class="field-label">مداخلات ثبت‌شده</div><div style="margin-top:6px">${state.interventions.length?state.interventions.map(x=>`<span class="rec-pill" style="margin:3px">${x}</span>`).join(''):'مداخله‌ای انتخاب نشده است.'}</div></div><div class="info-strip">${icon('i-info')}<div>تاریخ و ساعت چاپ: <span id="doc-date">${new Date().toLocaleString('fa-IR')}</span></div></div>`;
+  $('#documentation-summary').innerHTML=`<div class="doc-summary"><div class="doc-tile"><span>شماره پرونده</span><strong>${state.context.recordId||'ثبت نشده'}</strong></div><div class="doc-tile"><span>کدملی مادر</span><strong>${state.context.motherNationalId||'ثبت نشده'}</strong></div><div class="doc-tile"><span>مشخصات نوزاد</span><strong>${state.context.ageDays?state.context.ageDays+' روز':'سن ثبت نشده'} · ${state.context.weightGrams?state.context.weightGrams+' گرم':'وزن ثبت نشده'} · ${sex}</strong></div><div class="doc-tile"><span>هفته بارداری</span><strong>${state.context.gestationalWeeks?state.context.gestationalWeeks+' هفته':'ثبت نشده'}</strong></div><div class="doc-tile"><span>ارزیابی اولیه</span><strong>${state.clinicalScale} · ${state.clinicalResult.score}/${SCALES[state.clinicalScale].max} · ${state.clinicalResult.level.label}</strong></div><div class="doc-tile"><span>ارزیابی مجدد</span><strong>${reass?`${reass.score}/${SCALES[reass.scale].max} · ${reass.level.label}`:'ثبت نشده'}</strong></div></div><div class="section-card" style="box-shadow:none;margin-bottom:12px"><div class="field-label">مداخلات ثبت‌شده</div><div style="margin-top:6px">${state.interventions.length?state.interventions.map(x=>`<span class="rec-pill" style="margin:3px">${x}</span>`).join(''):'مداخله‌ای انتخاب نشده است.'}</div></div><div class="info-strip">${icon('i-info')}<div>تاریخ و ساعت چاپ: <span id="doc-date">${new Date().toLocaleString('fa-IR')}</span></div></div>`;
 }
 
 function updateSummary(){
@@ -1143,7 +1264,7 @@ function updateSummary(){
   }
   const nextMap={1:'ثبت زمینه بالینی',2:'تکمیل تمام شاخص‌های ابزار',3:'ثبت مداخله انجام‌شده',4:'انجام ارزیابی مجدد',5:'مرور و چاپ گزارش'};
   $('#summary-next').textContent=nextMap[state.step];
-  if(result?.complete) $('#summary-reassess').textContent=`تایمر پیشنهادی/تنظیم‌شده: ${formatTime(state.timerConfiguredSeconds||1800)}`; else $('#summary-reassess').textContent='—';
+  if(result?.complete) $('#summary-reassess').textContent=`زمان پیشنهادی ارزیابی مجدد: ${recommendationFor(result.level.key).interval}`; else $('#summary-reassess').textContent='—';
   $('#mobile-summary-value').textContent=state.step===1?`ابزار پیشنهادی: ${state.recommendedScale}`:nextMap[state.step];
   $('#mobile-summary-score').textContent=result?`${result.score}/${SCALES[result.scale].max}`:'—';
 }
@@ -1166,10 +1287,9 @@ function renderProcedures(){
 }
 
 function resetClinical(){
-  if(state.timer){clearInterval(state.timer);state.timer=null;}
   $('#clinicalContextForm').reset();
   $('input[name="assessmentType"][value="acute"]').checked=true;
-  state.step=1;state.context={};state.recommendedScale='NIPS';state.clinicalScale=null;state.clinicalResult=null;state.reassessmentResult=null;state.interventions=[];state.timerSeconds=0;state.timerConfiguredSeconds=1800;
+  state.step=1;state.maxStepReached=1;state.context={};state.recommendedScale='NIPS';state.clinicalScale=null;state.clinicalResult=null;state.reassessmentResult=null;state.interventions=[];
   $('#clinical-assessment-host').innerHTML='';$('#intervention-host').innerHTML='';$('#reassessment-host').className='quick-host-empty';$('#reassessment-host').innerHTML='برای شروع ارزیابی مجدد، دکمه زیر را انتخاب کنید.';$('#documentation-summary').innerHTML='';$('#to-documentation').disabled=true;
   updateRecommendation();setStep(1);
 }
@@ -1181,6 +1301,7 @@ $('#print-document').addEventListener('click',()=>{if($('#doc-date'))$('#doc-dat
 renderProcedures();
 updateRecommendation();
 updateSummary();
+updateNavigationControls();
 </script>
 </body>
 </html>
