@@ -21,6 +21,11 @@ export const SUPPORTIVE_ACTIONS: NonMedicationAction[] = [
   { id:'reduce-stimulation', labelFa:'کاهش نور، صدا و دستکاری غیرضروری' },
 ];
 
+export const NON_MEDICATION_ACTION_CATALOG: NonMedicationAction[] = [
+  ...SUPPORTIVE_ACTIONS,
+  ...ENVIRONMENT_ACTIONS,
+].filter((action,index,actions)=>actions.findIndex(candidate=>candidate.id===action.id)===index);
+
 export function severityTitleFa(severity: SeverityKey): string {
   return ({none:'بدون درد',observe:'زیر آستانه درد خفیف',mild:'درد خفیف',moderate:'درد متوسط',severe:'درد شدید'})[severity];
 }

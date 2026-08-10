@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
+import { NON_MEDICATION_ACTION_CATALOG } from '../packages/clinical-domain/src/recommendations';
 import { SCALE_DEFINITIONS, VALID_SEVERITIES } from '../packages/clinical-domain/src/scales';
 import { ScoringService } from '../apps/api/src/clinical/scoring.service';
+import { RECOMMENDATION_MATRIX } from '../apps/api/src/clinical/recommendation.matrix';
 import { RecommendationService } from '../apps/api/src/clinical/recommendation.service';
 
 assert.deepEqual(Object.keys(SCALE_DEFINITIONS), ['PIPP','NIPS','CRIES','MPAT']);
@@ -49,6 +51,14 @@ for (const [scale, definition] of Object.entries(SCALE_DEFINITIONS)) {
     assert.ok(rec.escalationFa.length > 0);
     assert.ok(rec.reassessment.labelFa.length > 0);
     assert.ok(rec.sourceRefs.length > 0, `${scale}/${severity} lacks sourceRefs`);
+  }
+}
+
+const catalogIds = NON_MEDICATION_ACTION_CATALOG.map(action => action.id);
+assert.equal(new Set(catalogIds).size, catalogIds.length, 'non-medication catalog IDs must be unique');
+for (const recommendation of Object.values(RECOMMENDATION_MATRIX).flatMap(bySeverity => Object.values(bySeverity))) {
+  for (const action of recommendation?.nonMedication ?? []) {
+    assert.ok(catalogIds.includes(action.id), `catalog is missing ${action.id}`);
   }
 }
 
