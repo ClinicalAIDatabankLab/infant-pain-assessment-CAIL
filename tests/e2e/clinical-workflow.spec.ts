@@ -1,5 +1,18 @@
 import { expect,test } from '@playwright/test';
 
+test('clinical workflow uses the compact context sections and exposes every scale',async({page})=>{
+  await page.goto('/');
+  await expect(page.getByRole('heading',{name:'اطلاعات نوزاد'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'وضعیت و هدف ارزیابی'})).toBeVisible();
+  await page.getByRole('spinbutton',{name:'سن (روز)'}).fill('5');
+  await page.getByRole('spinbutton',{name:'وزن (گرم)'}).fill('2850');
+  await page.getByRole('button',{name:/دریافت ابزار پیشنهادی/}).click();
+  await expect(page.locator('.scale-choice')).toHaveCount(4);
+  await expect(page.getByText('پیشنهادشده')).toHaveCount(1);
+  await page.getByRole('button',{name:/NIPS/}).click();
+  await expect(page.getByRole('heading',{name:/NIPS/})).toBeVisible();
+});
+
 test('quick NIPS result exposes non-medication recommendations immediately',async({page})=>{
   await page.goto('/quick');
   await page.getByRole('button',{name:/NIPS/}).click();
